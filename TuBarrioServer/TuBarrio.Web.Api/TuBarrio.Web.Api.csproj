@@ -123,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -142,8 +143,25 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TuBarrio.BusinessLogic\TuBarrio.BusinessLogic.csproj">
+      <Project>{457a5595-5e1b-4827-b284-e7cde98a6ac9}</Project>
+      <Name>TuBarrio.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TuBarrio.Entities\TuBarrio.Entities.csproj">
+      <Project>{87416000-14e3-4204-9439-0ccac0d4c853}</Project>
+      <Name>TuBarrio.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TuBarrio.EntityModels\TuBarrio.EntityModels.csproj">
+      <Project>{926ae748-799c-4768-bb32-a315cde41344}</Project>
+      <Name>TuBarrio.EntityModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TuBarrio.Exceptions\TuBarrio.Exceptions.csproj">
+      <Project>{26ba745e-4cb8-40bd-b387-6ed7f8b127bf}</Project>
+      <Name>TuBarrio.Exceptions</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

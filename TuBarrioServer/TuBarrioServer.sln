@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuBarrio.Web.Api", "TuBarrio.Web.Api\TuBarrio.Web.Api.csproj", "{6AA473D7-E704-4D95-8F40-A6DB2BF247EF}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuBarrio.Data.Access", "TuBarrio.Data.Access\TuBarrio.Data.Access.csproj", "{64E32286-1B22-48A3-BC09-659441E021CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuBarrio.Repository", "TuBarrio.Repository\TuBarrio.Repository.csproj", "{15C28873-1992-4381-9F0D-C9CA959BB323}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuBarrio.EntityModels", "TuBarrio.EntityModels\TuBarrio.EntityModels.csproj", "{926AE748-799C-4768-BB32-A315CDE41344}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{15C28873-1992-4381-9F0D-C9CA959BB323}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15C28873-1992-4381-9F0D-C9CA959BB323}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15C28873-1992-4381-9F0D-C9CA959BB323}.Release|Any CPU.Build.0 = Release|Any CPU
+		{926AE748-799C-4768-BB32-A315CDE41344}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{926AE748-799C-4768-BB32-A315CDE41344}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{926AE748-799C-4768-BB32-A315CDE41344}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{926AE748-799C-4768-BB32-A315CDE41344}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
