@@ -19,7 +19,7 @@ namespace TuBarrio.Entities
         public string Email { get { return email; } set { if (IsValidEmail(value)) email = value; } }
         public string Password { get; set; }
         public string Token { get; set; }
-        public string DeviceNotificactionToken { get; set; }
+        public string DeviceNotificationToken { get; set; }
         public DateTime CreatedOn { get; set; }
         public File ProfileImage { get; set; }
 
@@ -35,7 +35,7 @@ namespace TuBarrio.Entities
             Email = email;
             Phone = phone;
             Token = "";
-            DeviceNotificactionToken = "";
+            DeviceNotificationToken = "";
             Password = password;
             ProfileImage = profileImage;
             CreatedOn = DateTime.Now;

@@ -18,10 +18,12 @@ namespace TuBarrio.Data.Access
         public DbSet<Comment> Comments { get; set; }
         public DbSet<File> Files { get; set; }
 
+      
+
 
 
     }
 
 
 }
-}
+
