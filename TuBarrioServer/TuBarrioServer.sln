@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuBarrio.Web.Api", "TuBarrio.Web.Api\TuBarrio.Web.Api.csproj", "{6AA473D7-E704-4D95-8F40-A6DB2BF247EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuBarrio.Entities", "TuBarrio.Entities\TuBarrio.Entities.csproj", "{87416000-14E3-4204-9439-0CCAC0D4C853}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuBarrio.Exceptions", "TuBarrio.Exceptions\TuBarrio.Exceptions.csproj", "{26BA745E-4CB8-40BD-B387-6ED7F8B127BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuBarrio.BusinessLogic", "TuBarrio.BusinessLogic\TuBarrio.BusinessLogic.csproj", "{457A5595-5E1B-4827-B284-E7CDE98A6AC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuBarrio.Data.Access", "TuBarrio.Data.Access\TuBarrio.Data.Access.csproj", "{64E32286-1B22-48A3-BC09-659441E021CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuBarrio.Repository", "TuBarrio.Repository\TuBarrio.Repository.csproj", "{15C28873-1992-4381-9F0D-C9CA959BB323}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6AA473D7-E704-4D95-8F40-A6DB2BF247EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AA473D7-E704-4D95-8F40-A6DB2BF247EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AA473D7-E704-4D95-8F40-A6DB2BF247EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AA473D7-E704-4D95-8F40-A6DB2BF247EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87416000-14E3-4204-9439-0CCAC0D4C853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87416000-14E3-4204-9439-0CCAC0D4C853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87416000-14E3-4204-9439-0CCAC0D4C853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87416000-14E3-4204-9439-0CCAC0D4C853}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26BA745E-4CB8-40BD-B387-6ED7F8B127BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26BA745E-4CB8-40BD-B387-6ED7F8B127BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26BA745E-4CB8-40BD-B387-6ED7F8B127BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26BA745E-4CB8-40BD-B387-6ED7F8B127BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{457A5595-5E1B-4827-B284-E7CDE98A6AC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{457A5595-5E1B-4827-B284-E7CDE98A6AC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{457A5595-5E1B-4827-B284-E7CDE98A6AC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{457A5595-5E1B-4827-B284-E7CDE98A6AC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64E32286-1B22-48A3-BC09-659441E021CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64E32286-1B22-48A3-BC09-659441E021CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64E32286-1B22-48A3-BC09-659441E021CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64E32286-1B22-48A3-BC09-659441E021CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15C28873-1992-4381-9F0D-C9CA959BB323}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15C28873-1992-4381-9F0D-C9CA959BB323}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15C28873-1992-4381-9F0D-C9CA959BB323}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15C28873-1992-4381-9F0D-C9CA959BB323}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C45A2BA6-099E-42E1-9FC8-A081F7A12789}
+	EndGlobalSection
+EndGlobal
