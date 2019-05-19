@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Comment.cs" />
+    <Compile Include="EncodedImage.cs" />
     <Compile Include="File.cs" />
     <Compile Include="ImageTag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
