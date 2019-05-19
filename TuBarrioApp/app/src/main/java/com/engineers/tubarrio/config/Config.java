@@ -3,6 +3,8 @@ package com.engineers.tubarrio.config;
 import android.app.Activity;
 import android.content.Context;
 
+import com.engineers.tubarrio.entities.User;
+
 import org.json.JSONObject;
 
 public class Config {
@@ -23,8 +25,8 @@ public class Config {
         return activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("token", "");
     }
 
-    public static void setUserInfo (Activity activity, JSONObject user){
-        assignSharedPreferences(activity, "userId", user.getString("id"));
+    public static void setUserInfo (Activity activity, User user){
+        //assignSharedPreferences(activity, "userId", user.getString("id"));
     }
 
 
