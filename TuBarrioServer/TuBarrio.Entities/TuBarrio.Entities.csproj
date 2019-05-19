@@ -58,6 +58,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TuBarrio.Exceptions\TuBarrio.Exceptions.csproj">
+      <Project>{26BA745E-4CB8-40BD-B387-6ED7F8B127BF}</Project>
+      <Name>TuBarrio.Exceptions</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
