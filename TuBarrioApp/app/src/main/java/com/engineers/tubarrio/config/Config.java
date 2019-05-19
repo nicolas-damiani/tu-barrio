@@ -25,8 +25,23 @@ public class Config {
         return activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("token", "");
     }
 
-    public static void setUserInfo (Activity activity, User user){
-        //assignSharedPreferences(activity, "userId", user.getString("id"));
+    public static void setLoggedUserInfo(Activity activity, User user){
+        assignSharedPreferences(activity, "userId", user.id+"");
+        assignSharedPreferences(activity, "userFirstName", user.firstName);
+        assignSharedPreferences(activity, "userLastName", user.lastName);
+        assignSharedPreferences(activity, "userEmail", user.email);
+    }
+
+
+
+    public static User getLoggedUserInfo (Activity activity){
+        User user = new User();
+        user.id = activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getInt("userId", 0);
+        user.firstName = activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userFirstName", "");
+        user.lastName= activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userFirstName", "");
+        user.email = activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userEmail", "");
+        return user;
+
     }
 
 
