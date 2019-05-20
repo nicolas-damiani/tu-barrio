@@ -84,7 +84,6 @@ namespace TuBarrio.Repository
                 User oldUser = context.Users.Find(user.Email);
                 oldUser.Name = user.Name;
                 oldUser.Password = user.Password;
-                oldUser.Phone = user.Phone;
                 oldUser.Surname = user.Surname;
                 oldUser.ProfileImage = user.ProfileImage;
                 context.SaveChanges();
