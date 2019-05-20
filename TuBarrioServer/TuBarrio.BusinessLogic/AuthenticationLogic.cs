@@ -15,7 +15,15 @@ namespace TuBarrio.BusinessLogic
 
         public User GetUserByEmail(string email)
         {
-            throw new NotImplementedException();
+            User user = userRepository.GetUserByEmail(email);
+            if (user != null)
+            {
+                return user;
+            }
+            else
+            {
+                throw new InvalidCredentialException("No se encontro un usuario con ese email");
+            }
         }
 
         public User GetUserWithToken(string tokenRecieved)
