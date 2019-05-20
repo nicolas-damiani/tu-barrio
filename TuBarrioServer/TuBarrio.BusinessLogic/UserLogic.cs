@@ -23,14 +23,9 @@ namespace TuBarrio.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public List<User> GetFriends(string token)
-        {
-            throw new NotImplementedException();
-        }
-
         public User GetUserFromModel(UserModel user)
         {
-            User newUser = new User(user.Name, user.Surname, user.Email, user.Phone, user.Password, new EncodedImage(user.ProfileImage));
+            User newUser = new User(user.Name, user.Surname, user.Email, user.Password, new EncodedImage(user.ProfileImage));
             return newUser;
         }
 
@@ -41,7 +36,8 @@ namespace TuBarrio.BusinessLogic
 
         public void SetDeviceNotificationToken(string token, string deviceToken)
         {
-            throw new NotImplementedException();
+            User user = userRepository.GetUserWithToken(token);
+            userRepository.SetDeviceNotificationToken(user, deviceToken);
         }
 
         public void UpdateUser(User user)

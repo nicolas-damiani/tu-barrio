@@ -16,7 +16,6 @@ namespace TuBarrio.BusinessLogic
         void AddUserToFriends(string token, User friend);
         bool IsUserAlreadyExisting(User user);
         User GetUserFromModel(UserModel user);
-        List<User> GetFriends(string token);
         void SetDeviceNotificationToken(string token, string deviceToken);
     }
 }
