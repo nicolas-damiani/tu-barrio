@@ -20,7 +20,8 @@ namespace TuBarrio.Entities
         public List<User> Subsrcibers { get; set; }
         public User Author { get; set; }
         public List<Comment> Comments { get; set; }
-
+        public List<EncodedImage> Images { get; set; }
+        public EncodedImage PublicationImage { get; set; }
 
 
         public Publication()
