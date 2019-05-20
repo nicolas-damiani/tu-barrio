@@ -1,6 +1,8 @@
 package com.engineers.tubarrio.requests;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
@@ -19,16 +21,16 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class LoginRequest extends AsyncTask<String, Void, String> {
+public class SendUserInformation extends AsyncTask<String, Void, String> {
 
 
     private boolean success;
     private Activity mActivity;
-    private String token;
+    private User user;
 
-    public LoginRequest(Activity activity, String token) {
+    public SendUserInformation(Activity activity, User user) {
         mActivity = activity;
-        this.token = token;
+        this.user = user;
         success = false;
     }
 
@@ -65,18 +67,18 @@ public class LoginRequest extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String resultString) {
         if (success) {
-            try {
-                JSONObject jsonObject = new JSONObject(resultString);
-                User user = new User(jsonObject);
-                Config.setLoggedUserInfo(mActivity, user);
-                if (user.hasCompletedProfile){
-                    Intent loginIntent = new Intent(mActivity,EditProfileActivity.class);
-                    mActivity.startActivity(loginIntent);
-                    mActivity.finish();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            AlertDialog alertDialog = new AlertDialog.Builder(mActivity).create();
+            alertDialog.setTitle("Éxito!");
+            alertDialog.setMessage("Usuario guardado exitosamente");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+
+                        }
+                    });
+            alertDialog.show();
+
         } else {
 
         }
@@ -89,8 +91,7 @@ public class LoginRequest extends AsyncTask<String, Void, String> {
 
     @NonNull
     private String generateUrl() {
-        String urlString = Constants.URL + "LoginUserGoogle?googleToken=" + token;
+       String urlString = Constants.URL + "/users/";
         return urlString;
     }
-
 }
