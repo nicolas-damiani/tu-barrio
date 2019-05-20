@@ -18,7 +18,6 @@
         </activity>
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.EditProfileActivity" />
-        <activity android:name=".activities.MapActivity"></activity>
     </application>
 
 </manifest>
