@@ -9,6 +9,7 @@ import android.util.Log;
 import com.engineers.tubarrio.activities.EditProfileActivity;
 import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.config.Constants;
+import com.engineers.tubarrio.entities.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,9 +66,10 @@ public class LoginRequest extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String resultString) {
         if (success) {
             try {
-                JSONObject user = new JSONObject(resultString);
+                JSONObject jsonObject = new JSONObject(resultString);
+                User user = new User(jsonObject);
                 Config.setLoggedUserInfo(mActivity, user);
-                if (user.getString("hasCompletedProfile").equals("0")){
+                if (user.hasCompletedProfile){
                     Intent loginIntent = new Intent(mActivity,EditProfileActivity.class);
                     mActivity.startActivity(loginIntent);
                     mActivity.finish();

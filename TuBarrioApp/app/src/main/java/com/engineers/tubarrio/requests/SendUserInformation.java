@@ -91,7 +91,7 @@ public class SendUserInformation extends AsyncTask<String, Void, String> {
 
     @NonNull
     private String generateUrl() {
-        String urlString = Constants.URL + "/users/" + token;
+       String urlString = Constants.URL + "/users/";
         return urlString;
     }
 }

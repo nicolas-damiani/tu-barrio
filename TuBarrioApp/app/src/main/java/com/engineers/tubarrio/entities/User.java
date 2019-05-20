@@ -11,6 +11,7 @@ public class User {
     public String firstName;
     public String lastName;
     public String email;
+    public boolean hasCompletedProfile;
 
     public User (JSONObject userJson){
         try {
@@ -18,6 +19,7 @@ public class User {
             this.firstName = userJson.has("first_name") ? userJson.getString("first_name"): "";
             this.lastName= userJson.has("last_name") ? userJson.getString("last_name"): "";
             this.email = userJson.has("email") ? userJson.getString("email"): "";
+            this.hasCompletedProfile = userJson.has("has_completed_profile") && userJson.getInt("has_completed_profile") ==  1;
         } catch (JSONException e) {
             e.printStackTrace();
         }
