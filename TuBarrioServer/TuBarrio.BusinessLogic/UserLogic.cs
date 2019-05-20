@@ -13,16 +13,6 @@ namespace TuBarrio.BusinessLogic
     {
         private IUserRepository userRepository;
 
-        public void AddUser(User user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddUserToFriends(string token, User friend)
-        {
-            throw new NotImplementedException();
-        }
-
         public User GetUserFromModel(UserModel user)
         {
             User newUser = new User(user.Name, user.Surname, user.Email, user.Password, new EncodedImage(user.ProfileImage));
@@ -31,7 +21,7 @@ namespace TuBarrio.BusinessLogic
 
         public bool IsUserAlreadyExisting(User user)
         {
-            throw new NotImplementedException();
+            return userRepository.IsUserAlreadyExisting(user);
         }
 
         public void SetDeviceNotificationToken(string token, string deviceToken)
