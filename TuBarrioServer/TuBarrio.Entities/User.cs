@@ -22,14 +22,10 @@ namespace TuBarrio.Entities
         public string Token { get; set; }
         public string DeviceNotificationToken { get; set; }
         public DateTime CreatedOn { get; set; }
-        public File ProfileImage { get; set; }
+        public EncodedImage ProfileImage { get; set; }
 
-        public User()
-        {
 
-        }
-
-        public User (string name, string surname, string email, string phone, string password, File profileImage)
+        public User (string name, string surname, string email, string phone, string password, EncodedImage profileImage)
         {
             Name = name;
             Surname = surname;
