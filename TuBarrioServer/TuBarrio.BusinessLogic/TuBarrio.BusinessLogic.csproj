@@ -48,11 +48,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="IAuthenticationLogic.cs" />
+    <Compile Include="IUserLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TuBarrio.Entities\TuBarrio.Entities.csproj">
+      <Project>{87416000-14E3-4204-9439-0CCAC0D4C853}</Project>
+      <Name>TuBarrio.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TuBarrio.EntityModels\TuBarrio.EntityModels.csproj">
+      <Project>{926ae748-799c-4768-bb32-a315cde41344}</Project>
+      <Name>TuBarrio.EntityModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
