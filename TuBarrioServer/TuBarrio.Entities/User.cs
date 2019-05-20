@@ -16,25 +16,19 @@ namespace TuBarrio.Entities
         private string phone;
         public string Surname { get { return surname; } set { if (IsNotEmptySurname(value)) surname = value; } }
         public string Name { get { return name; } set { if (IsNotEmptyName(value)) name = value; } }
-        public string Phone { get { return phone; } set { if (IsValidPhone(value)) phone = value; } }
         public string Email { get { return email; } set { if (IsValidEmail(value)) email = value; } }
         public string Password { get; set; }
         public string Token { get; set; }
         public string DeviceNotificationToken { get; set; }
         public DateTime CreatedOn { get; set; }
-        public File ProfileImage { get; set; }
+        public EncodedImage ProfileImage { get; set; }
 
-        public User()
-        {
 
-        }
-
-        public User (string name, string surname, string email, string phone, string password, File profileImage)
+        public User (string name, string surname, string email, string password, EncodedImage profileImage)
         {
             Name = name;
             Surname = surname;
             Email = email;
-            Phone = phone;
             Token = "";
             DeviceNotificationToken = "";
             Password = password;
@@ -86,29 +80,5 @@ namespace TuBarrio.Entities
                 return true;
             }
         }
-
-        private bool IsValidPhone(string value)
-        {
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                throw new UserException("El telefono de un usuario no debe ser vacio");
-            }
-            else
-            {
-                try
-                {
-                    int number = Int32.Parse(value);
-                    return true;
-                }
-                catch (Exception e)
-                {
-                    throw new UserException("El telefono de un usuario solo debe contener numeros");
-                }
-            }
-        }
-
-
-
-
     }
 }

@@ -11,18 +11,11 @@ namespace TuBarrio.Entities
 
         public int Id { get; set; }
         public string Image { get; set; }
-        public List<ImageTag> Tags { get; set; }
 
         public EncodedImage() { }
-        public EncodedImage(string image, List<String> tags)
+        public EncodedImage(string image)
         {
             Image = image;
-            Tags = new List<ImageTag>();
-            foreach (var tag in tags)
-            {
-                ImageTag imageTag = new ImageTag(tag);
-                Tags.Add(imageTag);
-            }
         }
 
     }

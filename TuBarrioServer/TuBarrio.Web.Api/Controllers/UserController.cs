@@ -8,6 +8,8 @@ using TuBarrio.BusinessLogic;
 using TuBarrio.Entities;
 using TuBarrio.Exceptions;
 using TuBarrio.EntityModels;
+using System.Net.Http.Headers;
+using System.Dynamic;
 
 namespace TuBarrio.Web.Api.Controllers
 {
@@ -100,6 +102,45 @@ namespace TuBarrio.Web.Api.Controllers
             {
                 return Content(HttpStatusCode.InternalServerError, ex.Message);
             }
+        }
+
+        [HttpPut]
+        [Route("api/LoginUserGoogle")]
+        public IHttpActionResult LogInGoogle(string googleToken)
+        {
+            try
+            {
+                String token = GetTokenInfo(googleToken);
+                return Ok(token);
+            }
+            catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException)
+            {
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        public string GetTokenInfo(String googleToken)
+        {
+            String URL = "https://www.googleapis.com/oauth2/v3/tokeninfo";
+            String urlParameters = "?id_token=" + googleToken;
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(URL);
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = client.GetAsync(urlParameters).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                dynamic dataObjects = response.Content.ReadAsAsync<ExpandoObject>().Result;
+                String email = dataObjects.email;
+                String name = dataObjects.given_name;
+                String surname = dataObjects.family_name;
+                return authenticationLogic.HandleGoogleSignIn(email, name, surname);
+            }
+            throw new Exception("Error obteniendo datos de Google");
         }
     }
 }
