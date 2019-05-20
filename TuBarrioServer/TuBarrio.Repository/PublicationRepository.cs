@@ -94,6 +94,26 @@ namespace TuBarrio.Repository
             return returnList;
         }
 
+        public void AddCommentToPublication(Comment newComment, Publication publicationToUpdate)
+        {
+            using (TuBarrioDbContext context = new TuBarrioDbContext())
+            {
+                Publication toUpdate = context.Publications.Include(p => p.Comments).Where(u => u.Id == publicationToUpdate.Id).FirstOrDefault();
+                toUpdate.Comments.Add(newComment);
+                context.SaveChanges();
+            }
+        }
+
+        public void DeleteCommentFromPublication(Comment commentToDelete, Publication publicationToUpdate)
+        {
+            using (TuBarrioDbContext context = new TuBarrioDbContext())
+            {
+                publicationToUpdate = context.Publications.Include(p => p.Comments).Where(u => u.Id == publicationToUpdate.Id).FirstOrDefault();
+                publicationToUpdate.Comments.Remove(commentToDelete);
+                context.SaveChanges();
+            }
+        }
+
 
 
 
