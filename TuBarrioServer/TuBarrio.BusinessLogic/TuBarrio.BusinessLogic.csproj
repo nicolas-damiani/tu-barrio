@@ -47,7 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="IAuthenticationLogic.cs" />
     <Compile Include="IPublicationLogic.cs" />
     <Compile Include="IUserLogic.cs" />
@@ -70,6 +69,10 @@
     <ProjectReference Include="..\TuBarrio.EntityModels\TuBarrio.EntityModels.csproj">
       <Project>{926ae748-799c-4768-bb32-a315cde41344}</Project>
       <Name>TuBarrio.EntityModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TuBarrio.Exceptions\TuBarrio.Exceptions.csproj">
+      <Project>{26ba745e-4cb8-40bd-b387-6ed7f8b127bf}</Project>
+      <Name>TuBarrio.Exceptions</Name>
     </ProjectReference>
     <ProjectReference Include="..\TuBarrio.Repository\TuBarrio.Repository.csproj">
       <Project>{15c28873-1992-4381-9f0d-c9ca959bb323}</Project>

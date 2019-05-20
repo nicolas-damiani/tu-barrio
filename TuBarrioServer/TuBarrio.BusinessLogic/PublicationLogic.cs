@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TuBarrio.Entities;
 using TuBarrio.EntityModels;
 using TuBarrio.Repository;
+using TuBarrio.Exceptions;
 
 namespace TuBarrio.BusinessLogic
 {
@@ -89,6 +90,16 @@ namespace TuBarrio.BusinessLogic
             {
                 throw new PublicationException("No tiene permiso para eliminar un evento");
             }
+        }
+
+        public void AddCommentToPublication(Comment newComment, Publication publicationToUpdate)
+        {
+           
+        }
+
+        public void DeleteCommentFromPublication(int id, Publication publicationToUpdate, string token)
+        {
+
         }
 
 
