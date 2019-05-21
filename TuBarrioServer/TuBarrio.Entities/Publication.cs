@@ -40,3 +40,7 @@ namespace TuBarrio.Entities
     }
 
 }
+
+    
+
+   
