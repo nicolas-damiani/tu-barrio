@@ -17,7 +17,7 @@ namespace TuBarrio.BusinessLogic
         void UpdatePublication(Publication publicationToUpdate, int id, string token);
         void AddImageToPublication(List<EncodedImage> images, Publication publicationToUpdate, string token);
         void AddCommentToPublication(Comment newComment, Publication publicationToUpdate);
-        void DeleteCommentFromPublication(int id, Publication publicationToUpdate,string token);
+        void DeleteCommentFromPublication(Comment commentToDelete, Publication publicationToUpdate,string token);
 
     }
 }

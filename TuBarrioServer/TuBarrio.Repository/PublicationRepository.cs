@@ -114,6 +114,23 @@ namespace TuBarrio.Repository
             }
         }
 
+        public Comment GetCommentById(Publication publicationToSearch,int id)
+        {
+            using(TuBarrioDbContext context = new TuBarrioDbContext())
+            {
+                Comment returnComment = new Comment();
+                publicationToSearch = context.Publications.Include(p => p.Comments).Where(u => u.Id == publicationToSearch.Id).FirstOrDefault();
+                foreach (var com in publicationToSearch.Comments.ToList())
+                {
+                    if(com.Id == id)
+                    {
+                        returnComment = com;
+                    }
+                }
+                return returnComment;
+            }
+        }
+
 
 
 

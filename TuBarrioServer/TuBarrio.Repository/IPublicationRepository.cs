@@ -18,5 +18,6 @@ namespace TuBarrio.Repository
         void AddImageToPublication(List<EncodedImage> images, Publication publicationToUpdate);
         void AddCommentToPublication(Comment newComment, Publication publicationToUpdate);
         void DeleteCommentFromPublication(Comment commentToDelete, Publication publicationToUpdate);
+        Comment GetCommentById(Publication publication, int id);
     }
 }
