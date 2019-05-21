@@ -41,7 +41,7 @@ namespace TuBarrio.BusinessLogic
             }
             else
             {
-                throw new PublicationException("No tiene permiso para eliminar un evento");
+                throw new PublicationException("No tiene permiso para eliminar una publicacion");
             }
 
         }
@@ -55,7 +55,7 @@ namespace TuBarrio.BusinessLogic
             }
             else
             {
-                throw new PublicationException("No tiene permiso para eliminar un evento");
+                throw new PublicationException("No tiene permiso para editar una publicacion");
             }
         }
 
@@ -74,7 +74,7 @@ namespace TuBarrio.BusinessLogic
             }
             else
             {
-                throw new PublicationException("No tiene permiso para eliminar un evento");
+                throw new PublicationException("No tiene permiso para agregar una imagen");
             }
         }
 
@@ -88,18 +88,27 @@ namespace TuBarrio.BusinessLogic
             }
             else
             {
-                throw new PublicationException("No tiene permiso para eliminar un evento");
+                throw new PublicationException("No tiene permiso para llamar a la publicacion");
             }
         }
 
         public void AddCommentToPublication(Comment newComment, Publication publicationToUpdate)
         {
-           
+            Publication publicationToAddComment = publicationRepository.GetPublicationById(publicationToUpdate.Id);
+            publicationToAddComment.Comments.Add(newComment);
         }
 
-        public void DeleteCommentFromPublication(int id, Publication publicationToUpdate, string token)
+        public void DeleteCommentFromPublication(Comment commentToDelete, Publication publicationToUpdate, string token)
         {
-
+            User author = authenticationLogic.GetUserWithToken(token);
+            if (author.Equals(publicationToUpdate.Author))
+            {
+                publicationRepository.DeleteCommentFromPublication(commentToDelete, publicationToUpdate);
+            }
+            else
+            {
+                throw new PublicationException("No tiene permiso para eliminar un comentario");
+            }
         }
 
 
