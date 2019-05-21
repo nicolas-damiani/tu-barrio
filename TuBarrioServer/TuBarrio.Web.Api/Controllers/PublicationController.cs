@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 using TuBarrio.Entities;
 using TuBarrio.BusinessLogic;
+using TuBarrio.EntityModels;
+using TuBarrio.Exceptions;
 
 namespace TuBarrio.Web.Api.Controllers
 {
@@ -50,7 +52,7 @@ namespace TuBarrio.Web.Api.Controllers
         {
             try
             {
-                List<Publication> publications = publicationLogic.GetAllFromUser(token);
+                List<Publication> publications = publicationLogic.GetAllPublicationsFromUser(token);
                 return Ok(publications);
             }
             catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
