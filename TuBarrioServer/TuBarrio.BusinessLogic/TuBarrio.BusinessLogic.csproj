@@ -47,7 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EncodedImageLogic.cs" />
     <Compile Include="IAuthenticationLogic.cs" />
+    <Compile Include="IEncodedImageLogic.cs" />
     <Compile Include="IPublicationLogic.cs" />
     <Compile Include="IUserLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
