@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TuBarrio.Entities;
+using TuBarrio.EntityModels;
+
 
 namespace TuBarrio.BusinessLogic
 {
@@ -18,6 +20,6 @@ namespace TuBarrio.BusinessLogic
         void AddImageToPublication(List<EncodedImage> images, Publication publicationToUpdate, string token);
         void AddCommentToPublication(Comment newComment, Publication publicationToUpdate);
         void DeleteCommentFromPublication(Comment commentToDelete, Publication publicationToUpdate,string token);
-
+        Publication GetPublicationFromModel(PublicationModel model);
     }
 }

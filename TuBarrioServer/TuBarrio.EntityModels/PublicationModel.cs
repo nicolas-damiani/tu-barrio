@@ -24,6 +24,7 @@ namespace TuBarrio.EntityModels
 
         public PublicationModel()
         {
+            
             Title = "";
             Description = "";
             Longitude = 0;

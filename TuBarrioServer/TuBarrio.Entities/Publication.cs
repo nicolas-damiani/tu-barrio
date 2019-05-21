@@ -24,8 +24,16 @@ namespace TuBarrio.Entities
         public EncodedImage PublicationImage { get; set; }
 
 
-        public Publication()
+        public Publication(User author,DateTime createdOn, int deleted, string description, double latitude, double longitude, string title, DateTime updatedOn)
         {
+            Author = author;
+            CreatedOn = createdOn;
+            Deleted = deleted;
+            Description = description;
+            Latitude = latitude;
+            Longitude = longitude;
+            Title = title;
+            UpdatedOn = updatedOn;
 
         }
 
