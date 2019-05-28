@@ -169,5 +169,26 @@ namespace TuBarrio.Web.Api.Controllers
                 return Content(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
+
+        [HttpPost]
+        [Route("api/Publication/{publicationId}/Comment")]
+        public IHttpActionResult AddCommentToPublication(string token, [FromBody]CommentModel commentModel, int publicationId)
+        {
+            try
+            {
+                Publication publicationToModify = publicationLogic.GetPublicationById(publicationId, token);
+                Comment commentToAdd = publicationLogic.GetCommentFromModel(commentModel);
+                publicationLogic.AddCommentToPublication(commentToAdd, publicationToModify, token);
+                return Ok("Comentario agregado a publicacion exitosamente");
+            }
+            catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
+            {
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
     }
 }
