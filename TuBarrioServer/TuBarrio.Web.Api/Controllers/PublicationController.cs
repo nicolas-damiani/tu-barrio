@@ -169,5 +169,26 @@ namespace TuBarrio.Web.Api.Controllers
                 return Content(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
+
+        [HttpPost]
+        [Route("api/Publication/{publicationId}/Comment")]
+        public IHttpActionResult AddGuestToEvent(string token, [FromBody]CommentModel commentModel, int publicationId)
+        {
+            try
+            {
+                Publication publicationToModify = publicationLogic.GetPublicationById(publicationId, token);
+                Comment commentToAdd = commentLog.GetUserByEmail(userEmail);
+                eventLogic.AddGuestToEvent(memberToAdd, eventToModify, token);
+                return Ok("Usuario agregado a evento exitosamente");
+            }
+            catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is EventException)
+            {
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
     }
 }
