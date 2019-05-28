@@ -178,7 +178,7 @@ namespace TuBarrio.Web.Api.Controllers
             {
                 Publication publicationToModify = publicationLogic.GetPublicationById(publicationId, token);
                 Comment commentToAdd = publicationLogic.GetCommentFromModel(commentModel);
-                publicationLogic.AddCommentToPublication(commentToAdd, publicationToModify, token);
+                publicationLogic.AddCommentToPublication(commentToAdd, publicationToModify);
                 return Ok("Comentario agregado a publicacion exitosamente");
             }
             catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
