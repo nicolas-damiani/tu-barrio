@@ -121,5 +121,10 @@ namespace TuBarrio.BusinessLogic
         {
             throw new NotImplementedException();
         }
+
+        public Comment GetCommentFromModel(CommentModel model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

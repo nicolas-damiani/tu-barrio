@@ -21,5 +21,6 @@ namespace TuBarrio.BusinessLogic
         void AddCommentToPublication(Comment newComment, Publication publicationToUpdate);
         void DeleteCommentFromPublication(Comment commentToDelete, Publication publicationToUpdate,string token);
         Publication GetPublicationFromModel(PublicationModel model);
+        Comment GetCommentFromModel(CommentModel model);
     }
 }

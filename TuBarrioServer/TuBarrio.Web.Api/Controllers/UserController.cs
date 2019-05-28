@@ -64,25 +64,6 @@ namespace TuBarrio.Web.Api.Controllers
 
         }
 
-        [HttpPost]
-        [Route("api/User")]
-        public IHttpActionResult AddUser([FromBody]UserModel model)
-        {
-            try
-            {
-                User user = userLogic.GetUserFromModel(model);
-                userLogic.AddUser(user);
-                return Ok("Usuario agregado exitosamente");
-            }
-            catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is UserException)
-            {
-                return Content(HttpStatusCode.BadRequest, ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return Content(HttpStatusCode.InternalServerError, ex.Message);
-            }
-        }
 
         [HttpPut]
         [Route("api/User")]
