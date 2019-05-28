@@ -172,16 +172,16 @@ namespace TuBarrio.Web.Api.Controllers
 
         [HttpPost]
         [Route("api/Publication/{publicationId}/Comment")]
-        public IHttpActionResult AddGuestToEvent(string token, [FromBody]CommentModel commentModel, int publicationId)
+        public IHttpActionResult AddCommentToPublication(string token, [FromBody]CommentModel commentModel, int publicationId)
         {
             try
             {
                 Publication publicationToModify = publicationLogic.GetPublicationById(publicationId, token);
-                Comment commentToAdd = commentLog.GetUserByEmail(userEmail);
-                eventLogic.AddGuestToEvent(memberToAdd, eventToModify, token);
-                return Ok("Usuario agregado a evento exitosamente");
+                Comment commentToAdd = publicationLogic.GetCommentFromModel(commentModel);
+                publicationLogic.AddCommentToPublication(commentToAdd, publicationToModify, token);
+                return Ok("Comentario agregado a publicacion exitosamente");
             }
-            catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is EventException)
+            catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
             {
                 return Content(HttpStatusCode.BadRequest, ex.Message);
             }
