@@ -26,6 +26,9 @@ public class LoadingActivity extends Activity {
             startActivity(loginIntent);
             finish();
         } else {
+            Intent loginIntent = new Intent(LoadingActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
+            finish();
             //ir a home activity
         }
     }

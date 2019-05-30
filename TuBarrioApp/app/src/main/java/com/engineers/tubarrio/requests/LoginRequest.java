@@ -89,7 +89,7 @@ public class LoginRequest extends AsyncTask<String, Void, String> {
 
     @NonNull
     private String generateUrl() {
-        String urlString = Constants.URL + "LoginUserGoogle?googleToken=" + token;
+        String urlString = Constants.URL + "/api/LoginUserGoogle?googleToken=123" + token;
         return urlString;
     }
 

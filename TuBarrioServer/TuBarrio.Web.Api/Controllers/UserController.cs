@@ -24,6 +24,9 @@ namespace TuBarrio.Web.Api.Controllers
             userLogic = uLogic;
         }
 
+        public UserController() {
+        }
+
         [HttpGet]
         [Route("api/User")]
         public IHttpActionResult GetUserByToken(string token)
@@ -85,8 +88,8 @@ namespace TuBarrio.Web.Api.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("api/LoginUserGoogle")]
+        [HttpGet]
+        [Route("api/User/LoginUserGoogle")]
         public IHttpActionResult LogInGoogle(string googleToken)
         {
             try

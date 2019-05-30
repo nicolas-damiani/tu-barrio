@@ -10,10 +10,12 @@ import android.widget.Toast;
 
 import com.engineers.tubarrio.R;
 import com.engineers.tubarrio.requests.LoginRequest;
+import com.engineers.tubarrio.requests.LoginRequestVolley;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
@@ -28,7 +30,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button loginBtn = findViewById(R.id.sign_in_button);
+        SignInButton loginBtn = (SignInButton) findViewById(R.id.sign_in_button);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,8 +74,7 @@ public class LoginActivity extends Activity {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             String googleToken = account.getIdToken();
             // Signed in successfully, show authenticated UI.
-            LoginRequest loginRequest = new LoginRequest(this,googleToken);
-            loginRequest.execute();
+            LoginRequestVolley loginRequest = new LoginRequestVolley(this,googleToken);
 
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.

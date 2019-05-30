@@ -12,6 +12,8 @@ namespace TuBarrio.Web.Api
             // Web API configuration and services
 
             // Web API routes
+            //var cors = new EnableCorsAttribute("*", "*", "GET, HEAD, OPTIONS, POST, PUT, DELETE");
+            //config.EnableCors(cors);
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
