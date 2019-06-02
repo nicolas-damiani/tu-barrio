@@ -34,8 +34,8 @@ public class LoginRequestVolley {
         this.context = activity.getApplicationContext();
         params = new HashMap<String, String>();
 
-        String url = Constants.URL + "api/LoginUserGoogle?googleToken=123";
-        StringRequest postRequest = new StringRequest(Request.Method.PUT, url,
+        String url = Constants.URL + "api/User/LoginUserGoogle?googleToken=123";
+        StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

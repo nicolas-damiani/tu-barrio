@@ -11,10 +11,12 @@ import android.widget.Toast;
 import com.engineers.tubarrio.R;
 import com.engineers.tubarrio.requests.LoginRequest;
 import com.engineers.tubarrio.requests.LoginRequestVolley;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
@@ -45,6 +47,7 @@ public class LoginActivity extends Activity {
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
+                .requestIdToken("879686178659-1q5oi1ng2eiv6nc0cduj7epubf06ic1m.apps.googleusercontent.com")
                 .build();
 
         googleClient = GoogleSignIn.getClient(this, gso);
@@ -64,24 +67,19 @@ public class LoginActivity extends Activity {
         if (requestCode == RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            GoogleSignInResult task = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(task);
         }
     }
 
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+    private void handleSignInResult(GoogleSignInResult completedTask) {
+
+            GoogleSignInAccount account = completedTask.getSignInAccount();
             String googleToken = account.getIdToken();
             // Signed in successfully, show authenticated UI.
             LoginRequestVolley loginRequest = new LoginRequestVolley(this,googleToken);
 
-        } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-            Toast.makeText(this, "Error iniciando sesion, porfavor verifique su conexion a internet", Toast.LENGTH_LONG);
-        }
+
     }
 
 }
