@@ -64,8 +64,14 @@ public class LoginActivity extends Activity {
         if (requestCode == RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
+            try{
+                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+                handleSignInResult(task);
+            }
+            catch(Exception e) {
+                Toast.makeText(this, "Error iniciando sesion, porfavor verifique su conexion a internet", Toast.LENGTH_LONG);
+
+            }
         }
     }
 
