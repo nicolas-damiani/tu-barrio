@@ -23,6 +23,7 @@
         android:layout_height="130dp" />
     
     <TextView
+        android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -31,6 +32,7 @@
 
 
     <TextView
+        android:id="@+id/user_neighborhood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -127,9 +129,12 @@
 
     <Button
         android:id="@+id/btn_publications"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_button"
+        android:textColor="@android:color/white"
+        android:onClick="newPublicationAction"
         android:text="Publicaciones" />
 
 
@@ -155,6 +160,8 @@
             android:id="@+id/btn_new_publication"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:textColor="@android:color/white"
             android:textSize="15dp"
             android:text="Agregar" />
     </LinearLayout>
