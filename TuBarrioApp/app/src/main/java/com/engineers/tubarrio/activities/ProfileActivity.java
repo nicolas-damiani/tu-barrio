@@ -45,12 +45,17 @@ public class ProfileActivity extends Activity {
         publicationsTV.setText(user.cantPublications);
         commentsTV.setText(user.cantComments);
         followedTV.setText(user.cantFollowed);
-        
+
     }
 
 //    public void newPublicationAction(View view) {
-//        Intent intent = new Intent(ProfileActivity.this, lista de publicaciones);
+//        Intent intent = new Intent(ProfileActivity.this, nueva publicacion);
 //        startActivity(intent);
 //    }
+
+ //   public void seeAllPublicationsAction(View view){
+ //       Intent intent = new Intent(ProfileActivity.this, lista de publicaciones);
+//        startActivity(intent);
+  //  }
 
 }
