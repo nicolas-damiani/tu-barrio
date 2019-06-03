@@ -163,6 +163,10 @@
       <Project>{26ba745e-4cb8-40bd-b387-6ed7f8b127bf}</Project>
       <Name>TuBarrio.Exceptions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TuBarrio.Repository\TuBarrio.Repository.csproj">
+      <Project>{15C28873-1992-4381-9F0D-C9CA959BB323}</Project>
+      <Name>TuBarrio.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

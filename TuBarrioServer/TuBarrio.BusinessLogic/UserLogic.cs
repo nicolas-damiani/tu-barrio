@@ -13,6 +13,11 @@ namespace TuBarrio.BusinessLogic
     {
         private IUserRepository userRepository;
 
+        public UserLogic(IUserRepository userRepository)
+        {
+            this.userRepository = userRepository;
+        }
+
         public User GetUserFromModel(UserModel user)
         {
             User newUser = new User(user.Name, user.Surname, user.Email, user.Password, new EncodedImage(user.ProfileImage));
