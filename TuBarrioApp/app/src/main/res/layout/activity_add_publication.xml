@@ -98,7 +98,7 @@
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/map"
-            class="com.example.fefi.subila.fragments.ScrollableMapFragment"
+            class="com.engineers.tubarrio.fragments.ScrollableMapFragment"
             android:layout_width="360dp"
             android:layout_height="200dp"/>
 
