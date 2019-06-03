@@ -8,12 +8,22 @@
     android:layout_height="match_parent"
     tools:context=".activities.ProfileActivity">
 
+
     <ImageView
+        android:id="@+id/btn_edit_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src=""/>
+
+
+    <ImageView
+        android:id="@+id/user_profile_picture"
         android:layout_width="130dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="150dp"
         android:layout_height="130dp" />
     
     <TextView
+        android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -22,6 +32,7 @@
 
 
     <TextView
+        android:id="@+id/user_neighborhood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -45,10 +56,116 @@
             android:orientation="vertical"
             android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/publications"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="150"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="Publicaciones"/>
+
+         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/followed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="125"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="Seguidas"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/comments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="251"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="Comentarios"/>
 
         </LinearLayout>
 
 
+
+
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:textSize="15dp"
+        android:text="Ultimas publicaciones:"/>
+
+    <Button
+        android:id="@+id/btn_publications"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_button"
+        android:textColor="@android:color/white"
+        android:text="Publicaciones" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="17dp"
+        android:layout_marginTop="65dp"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="0dp"
+            android:textSize="15dp"
+            android:layout_marginLeft="165dp"
+            android:text="Nueva publicacion:"/>
+
+
+        <Button
+            android:id="@+id/btn_new_publication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:textColor="@android:color/white"
+            android:textSize="15dp"
+            android:text="Agregar" />
+    </LinearLayout>
+
+
+
 
 </LinearLayout>
