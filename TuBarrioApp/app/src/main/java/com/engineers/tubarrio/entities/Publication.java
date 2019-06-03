@@ -1,9 +1,14 @@
 package com.engineers.tubarrio.entities;
 
+import org.json.JSONObject;
+
 public class Publication {
 
     private String title;
     private String fileUrl;
+
+    public Publication(JSONObject jsonObj) {
+    }
 
     public String getTitle() {
         return title;

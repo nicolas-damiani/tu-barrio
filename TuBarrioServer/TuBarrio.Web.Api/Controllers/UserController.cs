@@ -10,6 +10,7 @@ using TuBarrio.Exceptions;
 using TuBarrio.EntityModels;
 using System.Net.Http.Headers;
 using System.Dynamic;
+using TuBarrio.Repository;
 
 namespace TuBarrio.Web.Api.Controllers
 {
@@ -17,14 +18,15 @@ namespace TuBarrio.Web.Api.Controllers
     {
         private IAuthenticationLogic authenticationLogic;
         private IUserLogic userLogic;
+        
 
-        public UserController(IUserLogic uLogic, IAuthenticationLogic authLogic)
+        public UserController()
         {
-            authenticationLogic = authLogic;
-            userLogic = uLogic;
-        }
 
-        public UserController() {
+            IUserRepository userRepository = new UserRepository();
+
+            this.authenticationLogic = new AuthenticationLogic(userRepository);
+            this.userLogic = new UserLogic(userRepository);
         }
 
         [HttpGet]
