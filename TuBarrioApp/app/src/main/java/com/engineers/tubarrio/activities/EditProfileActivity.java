@@ -23,8 +23,6 @@ public class EditProfileActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         initializeViews();
-
-
     }
 
     private void initializeViews(){

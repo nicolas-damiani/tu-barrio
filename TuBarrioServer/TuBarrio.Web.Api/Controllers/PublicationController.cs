@@ -8,6 +8,7 @@ using TuBarrio.Entities;
 using TuBarrio.BusinessLogic;
 using TuBarrio.EntityModels;
 using TuBarrio.Exceptions;
+using TuBarrio.Repository;
 
 namespace TuBarrio.Web.Api.Controllers
 {
@@ -27,6 +28,18 @@ namespace TuBarrio.Web.Api.Controllers
             imageLogic = imLogic;
         }
 
+        public PublicationController()
+        {
+            IPublicationRepository publicationRepository = new PublicationRepository();
+            IUserRepository userRepository = new UserRepository();
+
+            this.authenticationLogic = new AuthenticationLogic(userRepository);
+
+            this.publicationLogic = new PublicationLogic(publicationRepository, authenticationLogic);
+            this.imageLogic = new EncodedImageLogic();
+            this.userLogic = new UserLogic(userRepository);
+        }
+
         [HttpGet]
         [Route("api/Publications")]
         public IHttpActionResult GetAllPublications()
@@ -34,7 +47,13 @@ namespace TuBarrio.Web.Api.Controllers
             try
             {
                 List<Publication> publications = publicationLogic.GetAllPublications();
-                return Ok(publications);
+                List<PublicationModel> publicationModels = new List<PublicationModel>();
+                foreach (Publication publication in publications)
+                {
+                    PublicationModel publicationModel = new PublicationModel(publication);
+                    publicationModels.Add(publicationModel);
+                }
+                return Ok(publicationModels);
             }
             catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
             {
@@ -90,6 +109,8 @@ namespace TuBarrio.Web.Api.Controllers
         {
             try
             {
+                User user = GetUserFromToken();
+                model.AuthorEmail = user.Email;
                 Publication publicationToAdd = publicationLogic.GetPublicationFromModel(model);
                 publicationLogic.AddPublication(publicationToAdd);
                 return Ok("Publicacion agregada exitosamente");
@@ -103,6 +124,9 @@ namespace TuBarrio.Web.Api.Controllers
                 return Content(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
+
+
+
 
         [HttpPost]
         [Route("api/Publication/{publicationId}/Images")]
@@ -190,5 +214,14 @@ namespace TuBarrio.Web.Api.Controllers
                 return Content(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
+
+        private User GetUserFromToken()
+        {
+            string token = ActionContext.Request.Headers.GetValues("Token").First();
+            User user = authenticationLogic.GetUserWithToken(token);
+            return user;
+        }
+
+
     }
 }

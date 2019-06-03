@@ -12,5 +12,10 @@ namespace TuBarrio.Entities
         public string Text { get; set; }
         public DateTime CreatedOn { get; set; }
         public User Creator { get; set; }
+
+        public Comment()
+        {
+            Creator = null;
+        }
     }
 }

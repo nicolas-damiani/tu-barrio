@@ -16,7 +16,7 @@ namespace TuBarrio.Repository
             List<Publication> returnList = new List<Publication>();
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                returnList = context.Publications.ToList();
+                returnList = context.Publications.Include(r => r.Author).ToList();
             }
             return returnList;
         }

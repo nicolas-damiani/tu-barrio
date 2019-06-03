@@ -34,9 +34,15 @@ namespace TuBarrio.Entities
             Longitude = longitude;
             Title = title;
             UpdatedOn = updatedOn;
-
         }
 
+        public Publication() {
+            Author = null;
+            Subsrcibers = new List<User>();
+            Comments = new List<Comment>();
+            Images = new List<EncodedImage>();
+            PublicationImage = new EncodedImage();
+        }
     }
 
 }

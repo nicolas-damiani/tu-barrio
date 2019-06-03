@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TuBarrio.Entities;
 
 namespace TuBarrio.EntityModels
 {
@@ -16,10 +17,8 @@ namespace TuBarrio.EntityModels
         public DateTime UpdatedOn { get; set; }
         public DateTime CreatedOn { get; set; }
         public int Deleted { get; set; }
-        public List<UserModel> Subsrcibers { get; set; }
-        public UserModel Author { get; set; }
-        public List<CommentModel> Comments { get; set; }
-        public List<EncodedImageModel> Images { get; set; }
+        public string AuthorEmail { get; set; }
+        public List<EncodedImage> Images { get; set; }
 
 
         public PublicationModel()
@@ -33,14 +32,23 @@ namespace TuBarrio.EntityModels
             UpdatedOn = DateTime.Now;
             CreatedOn = DateTime.Now;
             Deleted = 0;
-            Subsrcibers = new List<UserModel>();
-            Author = new UserModel();
-            Comments = new List<CommentModel>();
-            Images = new List<EncodedImageModel>();
-
-
+            AuthorEmail = "";
+            Images = new List<EncodedImage>();
         }
 
 
+        public PublicationModel(Publication publication)
+        {
+            Title = publication.Title;
+            Description = publication.Description;
+            Longitude = publication.Longitude;
+            Latitude = publication.Latitude;
+            PublicationType = publication.PublicationType;
+            UpdatedOn = publication.UpdatedOn;
+            CreatedOn = publication.CreatedOn;
+            Deleted = publication.Deleted;
+            AuthorEmail = publication.Author.Email;
+            Images = publication.Images;
+        }
     }
 }

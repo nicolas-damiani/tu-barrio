@@ -33,7 +33,13 @@ namespace TuBarrio.BusinessLogic
 
         public User GetUserWithToken(string tokenRecieved)
         {
-            throw new NotImplementedException();
+            User user = userRepository.GetUserWithToken(tokenRecieved);
+            if (user != null)
+            {
+                return user;
+            }
+            else
+                throw new InvalidCredentialException();
         }
 
         public string HandleGoogleSignIn(string email, string name, string surname)

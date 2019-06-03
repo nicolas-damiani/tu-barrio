@@ -16,6 +16,7 @@ public class Publication {
     private ArrayList<EncodedImage> images;
 
     public Publication(JSONObject jsonObj) {
+        this.title = "j";
     }
 
     public String getTitle() {

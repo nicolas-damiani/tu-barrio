@@ -34,7 +34,7 @@ public class PublicationsActivity extends Activity {
 
     private void setPublications(){
         mListPublications = new ArrayList<>();
-        new GetPublications(this, Config.getLoggedUserInfo(this).id) {
+        new GetPublications(this) {
             @Override
             public void onFinished() {
                 mListPublications = this.publications;

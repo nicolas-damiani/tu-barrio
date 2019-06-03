@@ -12,6 +12,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.engineers.tubarrio.LoadingActivity;
+import com.engineers.tubarrio.activities.LoginActivity;
+import com.engineers.tubarrio.activities.MapsActivity;
 import com.engineers.tubarrio.config.Constants;
 
 import org.json.JSONException;
@@ -41,8 +44,10 @@ public class LoginRequestVolley {
                     public void onResponse(String response) {
 
 
-                        Toast toast = Toast.makeText(context, "Entro bien (JSONException)2", Toast.LENGTH_SHORT);
-                        toast.show();
+
+                        Intent loginIntent = new Intent(activity, MapsActivity.class);
+                        activity.startActivity(loginIntent);
+                        activity.finish();
 
                     }
                 },

@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.engineers.tubarrio.R;
+import com.engineers.tubarrio.requests.GetPublications;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
@@ -111,9 +112,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        updateLocationUI();
-        // Add a marker in Sydney and move the camera
-        getDeviceLocation();
+        new GetPublications(this) {
+            @Override
+            public void onFinished() {
+                updateLocationUI();
+                // Add a marker in Sydney and move the camera
+                getDeviceLocation();
+            }
+        };
     }
 
     private void getDeviceLocation() {

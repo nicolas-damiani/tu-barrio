@@ -33,12 +33,12 @@ public abstract class GetPublications {
     Notification pendingNotification;
 
 
-    public GetPublications(final Activity activity, int id) {
+    public GetPublications(final Activity activity) {
         this.activity = activity;
         this.context = activity.getApplicationContext();
         params = new HashMap<String, String>();
 
-        String url = Constants.URL + "api/Publications?id=" + id;
+        String url = Constants.URL + "api/Publications";
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -46,9 +46,8 @@ public abstract class GetPublications {
 
 
                         try {
-                            JSONObject jsonResponse = new JSONObject(response);
 
-                            JSONArray jsonArray = new JSONArray(jsonResponse.getString("navigationMenuOptions"));
+                            JSONArray jsonArray = new JSONArray(response);
                             if (jsonArray.length() != 0) {
                                 ArrayList<Publication> publicationsList= new ArrayList<>();
                                 for (int i = 0; i < jsonArray.length(); i++) {

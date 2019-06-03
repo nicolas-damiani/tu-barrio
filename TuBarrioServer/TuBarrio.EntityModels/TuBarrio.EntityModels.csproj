@@ -47,5 +47,11 @@
     <Compile Include="PublicationModel.cs" />
     <Compile Include="UserModel.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TuBarrio.Entities\TuBarrio.Entities.csproj">
+      <Project>{87416000-14E3-4204-9439-0CCAC0D4C853}</Project>
+      <Name>TuBarrio.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

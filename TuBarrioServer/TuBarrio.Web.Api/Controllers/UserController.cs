@@ -22,9 +22,7 @@ namespace TuBarrio.Web.Api.Controllers
 
         public UserController()
         {
-
             IUserRepository userRepository = new UserRepository();
-
             this.authenticationLogic = new AuthenticationLogic(userRepository);
             this.userLogic = new UserLogic(userRepository);
         }
