@@ -23,8 +23,14 @@ namespace TuBarrio.Entities
         public DateTime CreatedOn { get; set; }
         public EncodedImage ProfileImage { get; set; }
 
+        public User()
+        {
+            ProfileImage = new EncodedImage();
+        }
 
-        public User (string name, string surname, string email, string password, EncodedImage profileImage)
+
+
+        public User(string name, string surname, string email, string password, EncodedImage profileImage)
         {
             Name = name;
             Surname = surname;

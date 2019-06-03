@@ -3,46 +3,65 @@ package com.engineers.tubarrio.requests;
 import android.app.Activity;
 import android.app.Notification;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.config.Constants;
+import com.engineers.tubarrio.entities.Publication;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class LoginRequestVolley {
+public abstract class GetPublications {
 
     Activity activity;
     Context context;
     Map<String, String> params;
+    public List<Publication>  publications;
     Notification pendingNotification;
 
 
-    public LoginRequestVolley(final Activity activity, String token) {
+    public GetPublications(final Activity activity, int id) {
         this.activity = activity;
         this.context = activity.getApplicationContext();
         params = new HashMap<String, String>();
 
-        String url = Constants.URL + "api/User/LoginUserGoogle?googleToken="+token;
+        String url = Constants.URL + "api/Publications?id=" + id;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
 
-                        Toast toast = Toast.makeText(context, "Entro bien (JSONException)2", Toast.LENGTH_SHORT);
-                        toast.show();
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+
+                            JSONArray jsonArray = new JSONArray(jsonResponse.getString("navigationMenuOptions"));
+                            if (jsonArray.length() != 0) {
+                                ArrayList<Publication> publicationsList= new ArrayList<>();
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject jsonObj = jsonArray.getJSONObject(i);
+                                    Publication navigationMenuOption = new Publication(jsonObj);
+                                    publicationsList.add(navigationMenuOption);
+                                }
+                                publications = publicationsList;
+                                onFinished();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
                     }
                 },
@@ -74,6 +93,7 @@ public class LoginRequestVolley {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<String, String>();
+                headers.put("token", Config.getToken(activity));
                 return headers;
             }
 
@@ -84,5 +104,6 @@ public class LoginRequestVolley {
         };
         MySingleton.getInstance(context).addToRequestQueue(postRequest);
     }
-}
 
+    public abstract void onFinished();
+}

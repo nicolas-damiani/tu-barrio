@@ -75,10 +75,13 @@ public class LoginActivity extends Activity {
     private void handleSignInResult(GoogleSignInResult completedTask) {
 
             GoogleSignInAccount account = completedTask.getSignInAccount();
-            String googleToken = account.getIdToken();
-            // Signed in successfully, show authenticated UI.
-            LoginRequestVolley loginRequest = new LoginRequestVolley(this,googleToken);
-
+            if (account!=null) {
+                String googleToken = account.getIdToken();
+                // Signed in successfully, show authenticated UI.
+                LoginRequestVolley loginRequest = new LoginRequestVolley(this, googleToken);
+            }else{
+                Toast.makeText(this, "Error, verifique conexion a internet", Toast.LENGTH_SHORT);
+            }
 
     }
 

@@ -13,6 +13,11 @@ namespace TuBarrio.BusinessLogic
     {
         private IUserRepository userRepository;
 
+        public AuthenticationLogic(IUserRepository userRepository)
+        {
+            this.userRepository = userRepository;
+        }
+
         public User GetUserByEmail(string email)
         {
             User user = userRepository.GetUserByEmail(email);

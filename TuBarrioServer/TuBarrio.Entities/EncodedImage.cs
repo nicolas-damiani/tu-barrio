@@ -12,7 +12,9 @@ namespace TuBarrio.Entities
         public int Id { get; set; }
         public string Image { get; set; }
 
-        public EncodedImage() { }
+        public EncodedImage() {
+
+        }
         public EncodedImage(string image)
         {
             Image = image;
