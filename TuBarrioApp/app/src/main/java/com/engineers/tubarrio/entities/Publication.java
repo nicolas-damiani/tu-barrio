@@ -14,6 +14,7 @@ public class Publication {
     private Double latitude;
     private Date updatedOn;
     private String username;
+    private String userPhone;
     private ArrayList<EncodedImage> images;
 
     public Publication(JSONObject jsonObj) {
@@ -37,6 +38,14 @@ public class Publication {
     public void setTitle(String title) {
 
         this.title = title;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
     }
 
     public String getDescription() {

@@ -21,6 +21,7 @@
                 android:layout_height="match_parent" />
 
             <ImageView
+                android:id="@+id/edit_publication_icon"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginLeft="320dp"
@@ -28,80 +29,20 @@
                 android:src="@drawable/edit_publication" />
 
             <TextView
-                android:id="@+id/publication_text"
+                android:id="@+id/publication_title"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="140dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="17dp"
                 android:text="Hola"
                 android:textSize="25dp" />
 
-            <LinearLayout
-                android:layout_width="150dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_marginTop="150dp"
-                android:weightSum="5">
-
-                <ImageView
-                    android:id="@+id/star_rating_1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"></ImageView>
-
-                <ImageView
-                    android:id="@+id/star_rating_2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"></ImageView>
-
-                <ImageView
-                    android:id="@+id/star_rating_3"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"></ImageView>
-
-                <ImageView
-                    android:id="@+id/star_rating_4"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"></ImageView>
-
-                <ImageView
-                    android:id="@+id/star_rating_5"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"></ImageView>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="175dp"
-                android:layout_marginRight="17dp"
-                android:layout_marginTop="150dp"
-                android:gravity="center_vertical"
-                android:text="24 Reviews"
-                android:textSize="15dp"
-                android:weightSum="5" />
-
         </RelativeLayout>
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="320dp">
+            android:layout_height="490dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -119,6 +60,7 @@
                     android:textSize="20dp" />
 
                 <TextView
+                    android:id="@+id/publication_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="17dp"
@@ -149,6 +91,7 @@
                         android:src="@drawable/phone" />
 
                     <TextView
+                        android:id="@+id/publication_user_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="40dp"
