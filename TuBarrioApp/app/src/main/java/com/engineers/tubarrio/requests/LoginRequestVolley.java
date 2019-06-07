@@ -15,6 +15,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.engineers.tubarrio.LoadingActivity;
 import com.engineers.tubarrio.activities.LoginActivity;
 import com.engineers.tubarrio.activities.MapsActivity;
+import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.config.Constants;
 
 import org.json.JSONException;
@@ -43,7 +44,7 @@ public class LoginRequestVolley {
                     @Override
                     public void onResponse(String response) {
 
-
+                        Config.setToken(activity, response);
 
                         Intent loginIntent = new Intent(activity, MapsActivity.class);
                         activity.startActivity(loginIntent);
