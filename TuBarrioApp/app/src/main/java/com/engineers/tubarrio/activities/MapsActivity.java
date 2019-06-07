@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.engineers.tubarrio.R;
+import com.engineers.tubarrio.entities.Publication;
 import com.engineers.tubarrio.requests.GetPublications;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -23,6 +24,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -32,6 +36,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private final int DEFAULT_ZOOM = 10;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private Location mLastKnownLocation;
+    private List<Publication> mPublications;
     private final LatLng mDefaultLocation = new LatLng(-34.908503, -56.133590);
 
     private void getLocationPermission() {
@@ -92,11 +97,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        mPublications = new ArrayList<>();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
     }
 
 
@@ -115,6 +122,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         new GetPublications(this) {
             @Override
             public void onFinished() {
+                mPublications = this.publications;
                 updateLocationUI();
                 // Add a marker in Sydney and move the camera
                 getDeviceLocation();
@@ -154,9 +162,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void setMarkers(){
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(-34.908503, -56.133590))
-                .title("Prueba"));
+        for (int i = 0; i<mPublications.size(); i++) {
+            Publication publication = mPublications.get(i);
+            mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(publication.getLatitude(), publication.getLongitude()))
+                    .title(publication.getTitle()));
+        }
     }
 
 }

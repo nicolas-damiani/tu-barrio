@@ -95,7 +95,10 @@ namespace TuBarrio.Web.Api.Controllers
             try
             {
                 String token = GetTokenInfo(googleToken);
-                return Ok(token);
+                User user =  authenticationLogic.GetUserWithToken(token);
+                UserModel userModel = new UserModel(user);
+                TokenModel tokenModel = new TokenModel(token, userModel);
+                return Ok(tokenModel);
             }
             catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException)
             {

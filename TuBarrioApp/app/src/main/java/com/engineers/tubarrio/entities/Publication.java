@@ -1,5 +1,6 @@
 package com.engineers.tubarrio.entities;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -16,7 +17,17 @@ public class Publication {
     private ArrayList<EncodedImage> images;
 
     public Publication(JSONObject jsonObj) {
-        this.title = "j";
+        try {
+            //TODO
+            this.title = jsonObj.has("Title")?jsonObj.getString("Title"):"";
+            this.description = jsonObj.has("Description")?jsonObj.getString("Description"):"";
+            this.longitude= jsonObj.has("Longitude")?jsonObj.getDouble("Longitude"):0;
+            this.latitude= jsonObj.has("Latitude")?jsonObj.getDouble("Latitude"):0;
+          //  this.updatedOn= jsonObj.has("Title")?jsonObj.getString("Title"):"";
+            this.username = jsonObj.has("AuthorEmail")?jsonObj.getString("AuthorEmail"):"";
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getTitle() {

@@ -3,14 +3,11 @@ package com.engineers.tubarrio.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.engineers.tubarrio.R;
 import com.engineers.tubarrio.requests.LoginRequest;
-import com.engineers.tubarrio.requests.LoginRequestVolley;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -18,10 +15,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.Task;
-
-import static android.content.ContentValues.TAG;
 
 public class LoginActivity extends Activity {
 
@@ -78,7 +71,7 @@ public class LoginActivity extends Activity {
             if (account!=null) {
                 String googleToken = account.getIdToken();
                 // Signed in successfully, show authenticated UI.
-                LoginRequestVolley loginRequest = new LoginRequestVolley(this, googleToken);
+                LoginRequest loginRequest = new LoginRequest(this, googleToken);
             }else{
                 Toast.makeText(this, "Error, verifique conexion a internet", Toast.LENGTH_SHORT);
             }

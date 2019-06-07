@@ -1,12 +1,20 @@
 package com.engineers.tubarrio.requests;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
-import com.engineers.tubarrio.activities.EditProfileActivity;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.engineers.tubarrio.LoadingActivity;
+import com.engineers.tubarrio.activities.LoginActivity;
+import com.engineers.tubarrio.activities.MapsActivity;
 import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.config.Constants;
 import com.engineers.tubarrio.entities.User;
@@ -14,83 +22,81 @@ import com.engineers.tubarrio.entities.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
-public class LoginRequest extends AsyncTask<String, Void, String> {
+public class LoginRequest {
+
+    Activity activity;
+    Context context;
+    Map<String, String> params;
+    Notification pendingNotification;
 
 
-    private boolean success;
-    private Activity mActivity;
-    private String token;
+    public LoginRequest(final Activity activity, String token) {
+        this.activity = activity;
+        this.context = activity.getApplicationContext();
+        params = new HashMap<String, String>();
 
-    public LoginRequest(Activity activity, String token) {
-        mActivity = activity;
-        this.token = token;
-        success = false;
-    }
+        String url = Constants.URL + "api/User/LoginUserGoogle?googleToken="+token;
+        StringRequest postRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
 
-    @Override
-    protected String doInBackground(String... urls) {
-        try {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            Config.setToken(activity, jsonObject.getString("Token"));
+                            Config.setLoggedUserInfo(activity, new User(jsonObject.getJSONObject("User")));
 
-            URL url = new URL(generateUrl());
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setDoInput(true);
-            con.setRequestMethod("PUT");
-            con.connect();
-            int status = con.getResponseCode();
-            InputStreamReader inputStreamReader = null;
-            if (status >= 400 && status < 600) {
-                inputStreamReader = new InputStreamReader(con.getErrorStream(), "UTF-8");
-            } else {
-                inputStreamReader = new InputStreamReader(con.getInputStream(), "UTF-8");
-            }
-            if (status >= 200 && status < 300) {
-                success = true;
-            }
-            BufferedReader reader = new BufferedReader(inputStreamReader);
-            String valor = reader.readLine();
-            reader.close();
-            con.disconnect();
-            return valor;
-        } catch (Exception ex) {
-            Log.e("Error", ex.getMessage());
-            return ex.getMessage();
-        }
-    }
+                            Intent loginIntent = new Intent(activity, MapsActivity.class);
+                            activity.startActivity(loginIntent);
+                            activity.finish();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-    @Override
-    protected void onPostExecute(String resultString) {
-        if (success) {
-            try {
-                JSONObject jsonObject = new JSONObject(resultString);
-                User user = new User(jsonObject);
-                Config.setLoggedUserInfo(mActivity, user);
-                if (user.hasCompletedProfile){
-                    Intent loginIntent = new Intent(mActivity,EditProfileActivity.class);
-                    mActivity.startActivity(loginIntent);
-                    mActivity.finish();
+
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+//                        Loader loader = new Loader(activity);
+//                        loader.hideLoader();
+                        if (error != null) {
+                            if (error.networkResponse != null) {
+                                byte[] data = error.networkResponse.data;
+                                String dataStr = null;
+                                try {
+                                    dataStr = new String(data, "UTF-8");
+                                } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                }
+                                Log.v("Error - DATA", dataStr);
+                            }
+                        }
+                        if (activity != null) {
+                            Toast toast = Toast.makeText(context, "Verifique su conexion a internet", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    }
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<String, String>();
+                return headers;
             }
-        } else {
 
-        }
+            @Override
+            protected Map<String, String> getParams() {
+                return params;
+            }
+        };
+        MySingleton.getInstance(context).addToRequestQueue(postRequest);
     }
-
-    @Override
-    protected void onCancelled() {
-
-    }
-
-    @NonNull
-    private String generateUrl() {
-        String urlString = Constants.URL + "/api/LoginUserGoogle?googleToken=123" + token;
-        return urlString;
-    }
-
 }
+
