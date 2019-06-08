@@ -13,7 +13,8 @@ namespace TuBarrio.EntityModels
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
-        public EncodedImage ProfileImage { get; set; }
+        public string ProfileImage { get; set; }
+        public string Phone { get; set; }
 
         public UserModel()
         {
@@ -21,6 +22,7 @@ namespace TuBarrio.EntityModels
             Surname = "";
             Email = "";
             ProfileImage = "";
+            Phone = "";
         }
 
         public UserModel(User user)
@@ -28,7 +30,8 @@ namespace TuBarrio.EntityModels
             Name = user.Name;
             Surname = user.Surname;
             Email = user.Email;
-            ProfileImage = user.ProfileImage;
+            ProfileImage = user.ProfileImage.Image;
+            Phone = user.Phone;
         }
     }
 }

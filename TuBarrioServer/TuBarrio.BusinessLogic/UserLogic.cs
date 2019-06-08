@@ -20,7 +20,7 @@ namespace TuBarrio.BusinessLogic
 
         public User GetUserFromModel(UserModel user)
         {
-            User newUser = new User(user.Name, user.Surname, user.Email, user.Password, new EncodedImage(user.ProfileImage));
+            User newUser = new User(user.Name, user.Surname, user.Email, "", user.Phone,new EncodedImage(user.ProfileImage));
             return newUser;
         }
 

@@ -7,36 +7,46 @@ import org.json.JSONObject;
 
 public class User {
 
-    public int id;
-    public String firstName;
-    public String lastName;
-    public String email;
-    public boolean hasCompletedProfile;
-    public int cantPublications;
-    public int cantFollowed;
-    public int cantComments;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String profileImage;
+    private String phone;
+
+
+    public User (){
+        this.firstName = "";
+        this.lastName = "";
+        this.email = "";
+        this.phone = "";
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public User (JSONObject userJson){
         try {
-            this.id = userJson.has("id") ? userJson.getInt("id"): 0 ;
-            this.firstName = userJson.has("first_name") ? userJson.getString("first_name"): "";
-            this.lastName= userJson.has("last_name") ? userJson.getString("last_name"): "";
-            this.email = userJson.has("email") ? userJson.getString("email"): "";
-            this.hasCompletedProfile = userJson.has("has_completed_profile") && userJson.getInt("has_completed_profile") ==  1;
-            this.cantComments = userJson.has("cant_comments") ? userJson.getInt("cant_comments"): 0 ;
-            this.cantPublications = userJson.has("cant_publications") ? userJson.getInt("cant_publications") : 0;
-            this.cantFollowed = userJson.has("cant_followed") ? userJson.getInt("cant_followed") : 0;
+            this.firstName = userJson.has("Name") ? userJson.getString("Name"): "";
+            this.lastName= userJson.has("Surname") ? userJson.getString("Surname"): "";
+            this.email = userJson.has("Email") ? userJson.getString("Email"): "";
+            this.profileImage = userJson.has("ProfileImage") ? userJson.getString("ProfileImage"): "";
+            this.phone =userJson.has("Phone") ? userJson.getString("Phone"): "";
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -63,21 +73,4 @@ public class User {
         this.email = email;
     }
 
-    public boolean isHasCompletedProfile() {
-        return hasCompletedProfile;
-    }
-
-    public void setHasCompletedProfile(boolean hasCompletedProfile) {
-        this.hasCompletedProfile = hasCompletedProfile;
-    }
-
-    public User (){
-        this.id = 0;
-        this.firstName = "";
-        this.lastName = "";
-        this.email = "";
-        this.cantFollowed = 0;
-        this.cantPublications = 0;
-        this.cantComments = 0;
-    }
 }

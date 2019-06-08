@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 
 import com.engineers.tubarrio.R;
 import com.engineers.tubarrio.activities.LoginActivity;
+import com.engineers.tubarrio.activities.PublicationsActivity;
 
 public class MenuBar {
 
@@ -38,8 +39,9 @@ public class MenuBar {
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goToNextActivity = new Intent(activity, LoginActivity.class);
+                Intent goToNextActivity = new Intent(activity, PublicationsActivity.class);
                 activity.startActivity(goToNextActivity);
+                activity.finish();
             }
         });
         myFollowsBtn.setOnClickListener(new View.OnClickListener() {

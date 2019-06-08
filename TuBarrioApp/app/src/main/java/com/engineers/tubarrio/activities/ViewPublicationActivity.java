@@ -36,6 +36,7 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_publication);
         user  = Config.getLoggedUserInfo(this);
+        publication = (Publication) getIntent().getSerializableExtra("publication");
         if(user.getEmail() == publication.getUsername()){
             isAuthor = true;
         }

@@ -9,7 +9,7 @@ namespace TuBarrio.BusinessLogic
 {
     public interface IAuthenticationLogic
     {
-        string LogIn(string email, string password);
+        string LogIn(string email);
         string HandleGoogleSignIn(string email, string name, string surname);
         User GetUserWithToken(string tokenRecieved);
         User GetUserByEmail(string email);

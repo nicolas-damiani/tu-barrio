@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,11 +14,12 @@ namespace TuBarrio.Entities
         private string name;
         private string surname;
         private string email;
-        private string phone;
         public string Surname { get { return surname; } set { if (IsNotEmptySurname(value)) surname = value; } }
         public string Name { get { return name; } set { if (IsNotEmptyName(value)) name = value; } }
+
+        [Key]
         public string Email { get { return email; } set { if (IsValidEmail(value)) email = value; } }
-        public string Password { get; set; }
+        public string Phone { get; set; }
         public string Token { get; set; }
         public string DeviceNotificationToken { get; set; }
         public DateTime CreatedOn { get; set; }
@@ -30,14 +32,14 @@ namespace TuBarrio.Entities
 
 
 
-        public User(string name, string surname, string email, string password, EncodedImage profileImage)
+        public User(string name, string surname, string email, string token, string phone,EncodedImage profileImage)
         {
             Name = name;
             Surname = surname;
             Email = email;
-            Token = "";
+            Token = token;
+            Phone = phone;
             DeviceNotificationToken = "";
-            Password = password;
             ProfileImage = profileImage;
             CreatedOn = DateTime.Now;
         }

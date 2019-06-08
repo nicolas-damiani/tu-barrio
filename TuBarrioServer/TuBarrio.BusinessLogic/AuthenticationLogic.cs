@@ -47,15 +47,15 @@ namespace TuBarrio.BusinessLogic
             User user = userRepository.GetUserByEmail(email);
             if (user == null)
             {
-                user = new User(name, surname, email, new Guid().ToString(), new EncodedImage(""));
+                user = new User(name, surname, email, new Guid().ToString(), "",new EncodedImage(""));
                 userRepository.AddUser(user);
             }
-            return LogIn(user.Email, user.Password);
+            return LogIn(user.Email);
         }
 
-        public string LogIn(string email, string password)
+        public string LogIn(string email)
         {
-            string returnToken = userRepository.LogIn(email, password);
+            string returnToken = userRepository.GetUserByEmail(email).Token;
             if (returnToken == "")
             {
                 throw new InvalidCredentialException("No se encontro un usuario con esas credenciales");

@@ -35,7 +35,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:visibility="gone"
         android:id="@+id/menu_section_container"
         android:weightSum="3">
 

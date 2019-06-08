@@ -3,10 +3,11 @@ package com.engineers.tubarrio.entities;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Publication {
+public class Publication implements Serializable{
 
     private String title;
     private String description;

@@ -8,7 +8,7 @@ using TuBarrio.Entities;
 
 namespace TuBarrio.Data.Access
 {
-  public class TuBarrioDbContext : DbContext
+    public class TuBarrioDbContext : DbContext
     {
         public TuBarrioDbContext() : base("TuBarrioDataBase")
         { }
@@ -17,8 +17,9 @@ namespace TuBarrio.Data.Access
         public DbSet<Publication> Publications { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<File> Files { get; set; }
+        public DbSet<EncodedImage> EncodedImages { get; set; }
 
-      
+
 
 
 

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
+using System.Data.Entity;
 using System.Threading.Tasks;
 using TuBarrio.Entities;
 using TuBarrio.Data.Access;
+using System.Linq;
 
 namespace TuBarrio.Repository
 {
@@ -36,7 +37,7 @@ namespace TuBarrio.Repository
             User returnUser = null;
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                returnUser = context.Users.Where(u => u.Token == token).FirstOrDefault();
+                returnUser = context.Users.Include(u => u.ProfileImage).Where(u => u.Token == token).FirstOrDefault();
                 return returnUser;
             }
         }
@@ -45,7 +46,7 @@ namespace TuBarrio.Repository
         {
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                User user = context.Users.Where(u => u.Email == email).Where(u => u.Password == password).FirstOrDefault();
+                User user = context.Users.Where(u => u.Email == email).FirstOrDefault();
                 if (user != null)
                 {
                     user.Token = Guid.NewGuid().ToString();
@@ -61,7 +62,7 @@ namespace TuBarrio.Repository
             User returnUser = null;
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                returnUser = context.Users.Where(u => u.Email == email).FirstOrDefault();
+                returnUser = context.Users.Include(u => u.ProfileImage).Where(u => u.Email == email).FirstOrDefault();
                 return returnUser;
             }
         }
@@ -83,7 +84,6 @@ namespace TuBarrio.Repository
             {
                 User oldUser = context.Users.Find(user.Email);
                 oldUser.Name = user.Name;
-                oldUser.Password = user.Password;
                 oldUser.Surname = user.Surname;
                 oldUser.ProfileImage = user.ProfileImage;
                 context.SaveChanges();

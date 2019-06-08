@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.engineers.tubarrio.R;
 import com.engineers.tubarrio.config.Config;
@@ -16,7 +15,7 @@ public class EditProfileActivity extends Activity {
 
     EditText firstNameET;
     EditText lastNameET;
-    EditText emailET;
+    EditText phoneET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +27,7 @@ public class EditProfileActivity extends Activity {
     private void initializeViews(){
         firstNameET = (EditText) findViewById(R.id.name_profile);
         lastNameET = (EditText) findViewById(R.id.surname_profile);
-        emailET = (EditText) findViewById(R.id.email_profile);
+        phoneET = (EditText) findViewById(R.id.phone_profile);
         Button continueBtn = (Button) findViewById(R.id.continue_btn);
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,12 +36,12 @@ public class EditProfileActivity extends Activity {
             }
         });
         User user = Config.getLoggedUserInfo(this);
-        if (!user.firstName.isEmpty())
-            firstNameET.setText(user.firstName);
-        if (!user.lastName.isEmpty())
-            lastNameET.setText(user.lastName);
-        if (!user.email.isEmpty())
-            emailET.setText(user.email);
+        if (!user.getFirstName().isEmpty())
+            firstNameET.setText(user.getFirstName());
+        if (!user.getLastName().isEmpty())
+            lastNameET.setText(user.getLastName());
+        if (!user.getPhone().isEmpty())
+            phoneET.setText(user.getPhone());
     }
 
     private void continueActions(){
@@ -51,16 +50,17 @@ public class EditProfileActivity extends Activity {
             new SendUserInformation(this, user);
         }
     }
-    // TODO
+
+    // TODO hacer validaciones de usuario
     private boolean hasValidateFields(){
         return true;
     }
 
     private User getUserFromFields(){
         User user = new User();
-        user.firstName= firstNameET.getText().toString();
-        user.lastName= lastNameET.getText().toString();
-        user.email = emailET.getText().toString();
+        user.setFirstName( firstNameET.getText().toString());
+        user.setLastName(lastNameET.getText().toString());
+        user.setPhone(phoneET.getText().toString());
         return user;
     }
 

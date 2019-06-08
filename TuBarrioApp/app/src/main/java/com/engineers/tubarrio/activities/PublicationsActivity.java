@@ -1,7 +1,10 @@
 package com.engineers.tubarrio.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.engineers.tubarrio.R;
@@ -42,6 +45,16 @@ public class PublicationsActivity extends Activity {
                 publicationsListView.setAdapter(publicationsAdapter);
             }
         };
+        publicationsListView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Publication publication = (Publication) publicationsListView.getItemAtPosition(position);
+
+                Intent goToNextActivity = new Intent(activity, ViewPublicationActivity.class);
+                goToNextActivity.putExtra("publication", publication);
+                activity.startActivity(goToNextActivity);
+            }
+        });
 
     }
 }
