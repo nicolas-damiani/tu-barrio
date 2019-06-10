@@ -28,7 +28,7 @@ namespace TuBarrio.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("api/User")]
+        [Route("api/User/GetByToken")]
         public IHttpActionResult GetUserByToken(string token)
         {
             try
@@ -48,7 +48,7 @@ namespace TuBarrio.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("api/User")]
+        [Route("api/User/GetByEmail")]
         public IHttpActionResult GetUserByEmail(string email)
         {
             try

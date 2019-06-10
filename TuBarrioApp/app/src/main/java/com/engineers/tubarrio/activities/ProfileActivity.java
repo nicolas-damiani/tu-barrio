@@ -42,9 +42,9 @@ public class ProfileActivity extends Activity {
         User user = Config.getLoggedUserInfo(this);
         if (!user.firstName.isEmpty())
             nameTV.setText(user.firstName);
-        publicationsTV.setText(user.cantPublications);
-        commentsTV.setText(user.cantComments);
-        followedTV.setText(user.cantFollowed);
+//        publicationsTV.setText(user.cantPublications);
+//        commentsTV.setText(user.cantComments);
+//        followedTV.setText(user.cantFollowed);
 
     }
 

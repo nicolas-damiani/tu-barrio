@@ -66,7 +66,7 @@ namespace TuBarrio.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("api/Publications")]
+        [Route("api/Publications/AllFromUser")]
         public IHttpActionResult GetAllPublicationsFromUser(string token)
         {
             try

@@ -7,9 +7,10 @@ import org.json.JSONObject;
 
 public class User {
 
-    private String firstName;
-    private String lastName;
-    private String email;
+    public String firstName;
+    public String lastName;
+    public String email;
+    public int id;
     private String profileImage;
     private String phone;
 
