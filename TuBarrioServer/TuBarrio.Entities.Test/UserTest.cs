@@ -19,7 +19,7 @@ namespace TuBarrio.Entities.Test
         public void SetUp()
         {
             image = new EncodedImage("asd");
-            user = new User("Felipe", "Diaz", "felipe@hotmail.com", "myPass", image);
+            user = new User("Felipe", "Diaz", "felipe@hotmail.com","token","099112233" ,image);
         }
 
         [TestMethod]
@@ -28,9 +28,112 @@ namespace TuBarrio.Entities.Test
             Assert.AreEqual(user.Name, "Felipe");
         }
 
+        [TestMethod]
+        public void UserConstructorSurnameTest()
+        {
+            Assert.AreEqual(user.Surname, "Diaz");
+        }
 
+        [TestMethod]
+        public void UserConstructorUserEmailTest()
+        {
+            Assert.AreEqual(user.Email, "felipe@hotmail.com");
+        }
 
+        [TestMethod]
+        public void UserConstructorPhoneTest()
+        {
+            Assert.AreEqual(user.Phone, "099112233");
+        }
 
+        [TestMethod]
+        [ExpectedException(typeof(UserException))]
+        public void UserSetNameInvalidTest()
+        {
+            user.Name = "";
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UserException))]
+        public void UserSetSurnameInvalidTest()
+        {
+            user.Surname = "";
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UserException))]
+        public void UserSetUserEmailInvalidNoFirstPartTest()
+        {
+            user.Email = "@gmail.com";
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UserException))]
+        public void UserSetUserEmailInvalidNoSecondPartTest()
+        {
+            user.Email = "felipe@.com";
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UserException))]
+        public void UserSetUserEmailInvalidNoAtTest()
+        {
+            user.Email = "felipegmail.com";
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UserException))]
+        public void UserSetPhoneInvalidEmptyTest()
+        {
+            user.Phone = "";
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UserException))]
+        public void UserSetPhoneInvalidNotNumberTest()
+        {
+            user.Phone = "My phone";
+        }
+
+        [TestMethod]
+        public void UserConstructorTokenTest()
+        {
+            Assert.AreEqual(user.DeviceNotificationToken, "");
+        }
+
+        [TestMethod]
+        public void UserConstructorProfileImageTest()
+        {
+            Assert.AreEqual(user.ProfileImage.Image, "asd");
+        }
+
+        [TestMethod]
+        public void UserEqualsWithAnotherObjectTest()
+        {
+            string text = "This is a test string.";
+            Assert.IsFalse(user.Equals(text));
+        }
+
+        [TestMethod]
+        public void UserNotEqualsWithNullTest()
+        {
+            User nullUser = null;
+            Assert.IsFalse(user.Equals(nullUser));
+        }
+
+        [TestMethod]
+        public void UserEqualsTest()
+        {
+            User sameUser = new User("Felipe", "Diaz", "felipe@hotmail.com","token","099112233", image);
+            Assert.AreEqual(user, sameUser);
+        }
+
+        [TestMethod]
+        public void UserNotEqualsTest()
+        {
+            User differentUser = new User("Felipe", "Diaz", "guille@hotmail.com", "token", "099112233", image);
+            Assert.AreNotEqual(user, differentUser);
+        }
 
 
 
