@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuBarrio.EntityModels", "Tu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuBarrio.Entities.Test", "TuBarrio.Entities.Test\TuBarrio.Entities.Test.csproj", "{6CF19A54-D12B-452D-BC13-58964296CC37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuBarrio.BusinessLogic.Test", "TuBarrio.BusinessLogic.Test\TuBarrio.BusinessLogic.Test.csproj", "{7025697E-43E8-4202-811F-A730BA056810}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{6CF19A54-D12B-452D-BC13-58964296CC37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CF19A54-D12B-452D-BC13-58964296CC37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CF19A54-D12B-452D-BC13-58964296CC37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7025697E-43E8-4202-811F-A730BA056810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7025697E-43E8-4202-811F-A730BA056810}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7025697E-43E8-4202-811F-A730BA056810}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7025697E-43E8-4202-811F-A730BA056810}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
