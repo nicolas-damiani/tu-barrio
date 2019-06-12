@@ -114,7 +114,7 @@ namespace TuBarrio.BusinessLogic
         public Publication GetPublicationFromModel(PublicationModel model)
         {
             User author = authenticationLogic.GetUserByEmail(model.AuthorEmail);
-            return new Publication(author, model.CreatedOn, model.Deleted, model.Description, model.Latitude, model.Longitude, model.Title, model.UpdatedOn);
+            return new Publication(author, model.CreatedOn, model.Deleted, model.Description, model.Latitude, model.Longitude, model.Title, model.UpdatedOn, model.PublicationImage);
         }
 
         public void DeleteCommentFromPublication(int id, Publication publicationToUpdate, string token)

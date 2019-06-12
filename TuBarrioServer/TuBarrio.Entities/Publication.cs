@@ -23,7 +23,7 @@ namespace TuBarrio.Entities
         public string PublicationImage { get; set; }
 
 
-        public Publication(User author,DateTime createdOn, int deleted, string description, double latitude, double longitude, string title, DateTime updatedOn)
+        public Publication(User author,DateTime createdOn, int deleted, string description, double latitude, double longitude, string title, DateTime updatedOn, string publicationImage)
         {
             Author = author;
             CreatedOn = createdOn;
@@ -33,6 +33,9 @@ namespace TuBarrio.Entities
             Longitude = longitude;
             Title = title;
             UpdatedOn = updatedOn;
+            PublicationImage = publicationImage;
+
+
         }
 
         public Publication() {

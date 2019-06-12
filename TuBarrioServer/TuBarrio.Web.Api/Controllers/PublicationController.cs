@@ -128,31 +128,26 @@ namespace TuBarrio.Web.Api.Controllers
 
 
 
-        [HttpPost]
-        [Route("api/Publication/{publicationId}/Images")]
-        public IHttpActionResult AddImagesToPublication(int publicationId, string token, [FromBody]EncodedImageModel[] images)
-        {
-            try
-            {
-                Publication publicationToModify = publicationLogic.GetPublicationById(publicationId, token);
-                List<EncodedImage> imagesToAdd = new List<EncodedImage>();
-                for (int i = 0; i < images.Length; i++)
-                {
-                    EncodedImage image = imageLogic.getEncodedImageFromModel(images[i]);
-                    imagesToAdd.Add(image);
-                }
-                publicationLogic.AddImageToPublication(imagesToAdd, publicationToModify, token);
-                return Ok("Imagen/es agregada/s exitosamente a la publicacion");
-            }
-            catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
-            {
-                return Content(HttpStatusCode.BadRequest, ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return Content(HttpStatusCode.InternalServerError, ex.Message);
-            }
-        }
+        //[HttpPost]
+        //[Route("api/Publication/{publicationId}/Images")]
+        //public IHttpActionResult AddImagesToPublication(int publicationId, string token, [FromBody]EncodedImageModel[] images)
+        //{
+        //    try
+        //    {
+        //        Publication publicationToModify = publicationLogic.GetPublicationById(publicationId, token);
+          
+        //        publicationLogic.AddImageToPublication(imagesToAdd, publicationToModify, id ,token);
+        //        return Ok("Imagen/es agregada/s exitosamente a la publicacion");
+        //    }
+        //    catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
+        //    {
+        //        return Content(HttpStatusCode.BadRequest, ex.Message);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Content(HttpStatusCode.InternalServerError, ex.Message);
+        //    }
+        //}
 
 
         [HttpPut]

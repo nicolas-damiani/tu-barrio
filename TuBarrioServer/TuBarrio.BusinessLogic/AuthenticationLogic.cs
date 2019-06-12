@@ -47,7 +47,7 @@ namespace TuBarrio.BusinessLogic
             User user = userRepository.GetUserByEmail(email);
             if (user == null)
             {
-                user = new User(name, surname, email, new Guid().ToString(), "",new EncodedImage(""));
+                user = new User(name, surname, email, new Guid().ToString(), "");
                 userRepository.AddUser(user);
             }
             return LogIn(user.Email);
