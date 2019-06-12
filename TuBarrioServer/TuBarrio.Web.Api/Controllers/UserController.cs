@@ -68,7 +68,7 @@ namespace TuBarrio.Web.Api.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPut]
         [Route("api/User")]
         public IHttpActionResult UpdateUser([FromBody]UserModel modifiedUser)
         {
