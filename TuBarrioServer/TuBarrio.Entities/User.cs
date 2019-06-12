@@ -23,16 +23,16 @@ namespace TuBarrio.Entities
         public string Token { get; set; }
         public string DeviceNotificationToken { get; set; }
         public DateTime CreatedOn { get; set; }
-        public EncodedImage ProfileImage { get; set; }
+        public string ProfileImage { get; set; }
 
         public User()
         {
-            ProfileImage = new EncodedImage();
+           
         }
 
 
 
-        public User(string name, string surname, string email, string token, string phone,EncodedImage profileImage)
+        public User(string name, string surname, string email, string token, string phone)
         {
             Name = name;
             Surname = surname;
@@ -40,7 +40,7 @@ namespace TuBarrio.Entities
             Token = token;
             Phone = phone;
             DeviceNotificationToken = "";
-            ProfileImage = profileImage;
+            ProfileImage = "";
             CreatedOn = DateTime.Now;
         }
 

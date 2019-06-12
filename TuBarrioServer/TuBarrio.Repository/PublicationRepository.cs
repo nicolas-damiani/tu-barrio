@@ -36,10 +36,6 @@ namespace TuBarrio.Repository
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
                 publicationToRemove = context.Publications.Include(g => g.Author).Where(g => g.Id == publicationToRemove.Id).FirstOrDefault();
-                foreach(var image in publicationToRemove.Images.ToList())
-                {
-                    publicationToRemove.Images.Remove(image);
-                }
                 context.Publications.Remove(publicationToRemove);
                 context.SaveChanges();
             }
@@ -50,7 +46,7 @@ namespace TuBarrio.Repository
             Publication publicationReturn = null;
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                publicationReturn = context.Publications.Include(p => p.PublicationImage).Include(p => p.Author).Where(p => p.Id == id).FirstOrDefault();
+                publicationReturn = context.Publications.Include(p => p.Author).Where(p => p.Id == id).FirstOrDefault();
                 return publicationReturn;
             }
         }
@@ -69,16 +65,12 @@ namespace TuBarrio.Repository
             }
         }
 
-        public void AddImageToPublication(List<EncodedImage> images, Publication publicationToUpdate)
+        public void AddImageToPublication(string image, Publication publicationToUpdate, int id)
         {
             using(TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                Publication publicationToAddImages = context.Publications.Include(p => p.Images).Where(p => p.Id == publicationToUpdate.Id).FirstOrDefault();
-                foreach (EncodedImage i in images)
-                {
-                    publicationToAddImages.Images.Add(i);
-                
-                }
+                Publication olderPublication = context.Publications.Find(id);
+                olderPublication.PublicationImage = publicationToUpdate.PublicationImage;
                 context.SaveChanges();
             }
         }

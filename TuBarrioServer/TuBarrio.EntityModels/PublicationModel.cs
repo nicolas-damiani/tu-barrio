@@ -18,7 +18,7 @@ namespace TuBarrio.EntityModels
         public DateTime CreatedOn { get; set; }
         public int Deleted { get; set; }
         public string AuthorEmail { get; set; }
-        public List<EncodedImage> Images { get; set; }
+        public string PublicationImage { get; set; }
 
 
         public PublicationModel()
@@ -33,7 +33,7 @@ namespace TuBarrio.EntityModels
             CreatedOn = DateTime.Now;
             Deleted = 0;
             AuthorEmail = "";
-            Images = new List<EncodedImage>();
+            PublicationImage = "";
         }
 
 
@@ -48,7 +48,7 @@ namespace TuBarrio.EntityModels
             CreatedOn = publication.CreatedOn;
             Deleted = publication.Deleted;
             AuthorEmail = publication.Author.Email;
-            Images = publication.Images;
+            PublicationImage = publication.PublicationImage;
         }
     }
 }

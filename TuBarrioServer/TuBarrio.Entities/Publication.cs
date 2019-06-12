@@ -20,8 +20,7 @@ namespace TuBarrio.Entities
         public List<User> Subsrcibers { get; set; }
         public User Author { get; set; }
         public List<Comment> Comments { get; set; }
-        public List<EncodedImage> Images { get; set; }
-        public EncodedImage PublicationImage { get; set; }
+        public string PublicationImage { get; set; }
 
 
         public Publication(User author,DateTime createdOn, int deleted, string description, double latitude, double longitude, string title, DateTime updatedOn)
@@ -40,8 +39,6 @@ namespace TuBarrio.Entities
             Author = null;
             Subsrcibers = new List<User>();
             Comments = new List<Comment>();
-            Images = new List<EncodedImage>();
-            PublicationImage = new EncodedImage();
         }
     }
 

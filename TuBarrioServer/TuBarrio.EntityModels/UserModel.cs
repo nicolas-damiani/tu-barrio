@@ -30,7 +30,7 @@ namespace TuBarrio.EntityModels
             Name = user.Name;
             Surname = user.Surname;
             Email = user.Email;
-            ProfileImage = user.ProfileImage.Image;
+            ProfileImage = user.ProfileImage;
             Phone = user.Phone;
         }
     }

@@ -65,12 +65,12 @@ namespace TuBarrio.BusinessLogic
             return publicationRepository.GetAllPublicationsFromUser(author);
         }
 
-        public void AddImageToPublication(List<EncodedImage> images, Publication publicationToUpdate, string token)
+        public void AddImageToPublication(string image, Publication publicationToUpdate,int id,string token)
         {
             User author = authenticationLogic.GetUserWithToken(token);
             if (author.Equals(publicationToUpdate.Author))
             {
-                publicationRepository.AddImageToPublication(images, publicationToUpdate);
+                publicationRepository.AddImageToPublication(image, publicationToUpdate,id);
             }
             else
             {

@@ -15,7 +15,7 @@ namespace TuBarrio.Repository
         void RemovePublication(Publication publicationToRemove);
         Publication GetPublicationById(int id);
         void UpdatePublication(Publication publicationToUpdate, int id);
-        void AddImageToPublication(List<EncodedImage> images, Publication publicationToUpdate);
+        void AddImageToPublication(string image, Publication publicationToUpdate,int id);
         void AddCommentToPublication(Comment newComment, Publication publicationToUpdate);
         void DeleteCommentFromPublication(Comment commentToDelete, Publication publicationToUpdate);
         Comment GetCommentById(Publication publication, int id);

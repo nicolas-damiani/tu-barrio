@@ -37,7 +37,7 @@ namespace TuBarrio.Repository
             User returnUser = null;
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                returnUser = context.Users.Include(u => u.ProfileImage).Where(u => u.Token == token).FirstOrDefault();
+                returnUser = context.Users.Where(u => u.Token == token).FirstOrDefault();
                 return returnUser;
             }
         }
@@ -62,7 +62,7 @@ namespace TuBarrio.Repository
             User returnUser = null;
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                returnUser = context.Users.Include(u => u.ProfileImage).Where(u => u.Email == email).FirstOrDefault();
+                returnUser = context.Users.Where(u => u.Email == email).FirstOrDefault();
                 return returnUser;
             }
         }
