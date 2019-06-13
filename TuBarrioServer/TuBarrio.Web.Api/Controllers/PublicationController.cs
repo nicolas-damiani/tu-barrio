@@ -210,6 +210,33 @@ namespace TuBarrio.Web.Api.Controllers
             }
         }
 
+
+        [HttpGet]
+        [Route("api/Publication/GetComments")]
+        public IHttpActionResult GetCommentsFromPublication(string token, int publicationId)
+        {
+            try
+            {
+                Publication publicationToGet = publicationLogic.GetPublicationById(publicationId, token);
+                List<Comment> comments = publicationLogic.GetCommentsFromPublication(publicationToGet);
+                return Ok(comments);
+            }
+            catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
+            {
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+
+        [HttpGet]
+        [Route("api/Publication/GetFollowedPublications")]
+
+
+
         private User GetUserFromToken()
         {
             string token = ActionContext.Request.Headers.GetValues("Token").First();
