@@ -36,7 +36,7 @@ public class Config {
 
     public static User getLoggedUserInfo (Activity activity){
         User user = new User();
-        user.id = activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getInt("userId", 0);
+        user.id = Integer.parseInt(activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userId",""));
         user.firstName = activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userFirstName", "");
         user.lastName= activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userFirstName", "");
         user.email = activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userEmail", "");

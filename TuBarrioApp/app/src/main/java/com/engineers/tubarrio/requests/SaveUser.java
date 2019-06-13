@@ -45,8 +45,8 @@ public class SaveUser {
         String url = Constants.URL + "api/User";
         params.put("Name", user.getFirstName());
         params.put("Surname", user.getLastName());
-        params.put("Email", user.getEmail());
-        params.put("ProfileImage", user.getProfileImage());
+        params.put("Email", "moonideasuy@gmail.com");
+        params.put("ProfileImage", "");
         params.put("Phone", user.getPhone());
 
         StringRequest postRequest = new StringRequest(Request.Method.PUT, url,

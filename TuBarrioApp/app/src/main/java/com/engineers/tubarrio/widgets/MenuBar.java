@@ -9,15 +9,16 @@ import android.widget.RelativeLayout;
 
 import com.engineers.tubarrio.R;
 import com.engineers.tubarrio.activities.LoginActivity;
+import com.engineers.tubarrio.activities.ProfileActivity;
 import com.engineers.tubarrio.activities.PublicationsActivity;
 
 public class MenuBar {
 
     private Activity activity;
-    private RelativeLayout homeBtn;
+    private LinearLayout homeBtn;
     private ImageView mainBtn;
-    private RelativeLayout myFollowsBtn;
-    private RelativeLayout myProfileBtn;
+    private LinearLayout myFollowsBtn;
+    private LinearLayout myProfileBtn;
     private LinearLayout menuSectionContainer;
 
 
@@ -28,9 +29,9 @@ public class MenuBar {
     }
 
     private void initializeViews() {
-        homeBtn = (RelativeLayout) activity.findViewById(R.id.home_btn);
-        myFollowsBtn = (RelativeLayout) activity.findViewById(R.id.my_follows_btn);
-        myProfileBtn = (RelativeLayout) activity.findViewById(R.id.my_profile_btn);
+        homeBtn = (LinearLayout) activity.findViewById(R.id.home_btn);
+        myFollowsBtn = (LinearLayout) activity.findViewById(R.id.my_follows_btn);
+        myProfileBtn = (LinearLayout) activity.findViewById(R.id.my_profile_btn);
         mainBtn = (ImageView) activity.findViewById(R.id.main_btn);
         menuSectionContainer = (LinearLayout) activity.findViewById(R.id.menu_section_container);
     }
@@ -54,7 +55,7 @@ public class MenuBar {
         myProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goToNextActivity = new Intent(activity, LoginActivity.class);
+                Intent goToNextActivity = new Intent(activity, ProfileActivity.class);
                 activity.startActivity(goToNextActivity);
             }
         });

@@ -9,6 +9,7 @@ import android.widget.EditText;
 import com.engineers.tubarrio.R;
 import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.entities.User;
+import com.engineers.tubarrio.requests.SaveUser;
 import com.engineers.tubarrio.requests.SendUserInformation;
 
 public class EditProfileActivity extends Activity {
@@ -47,7 +48,7 @@ public class EditProfileActivity extends Activity {
     private void continueActions(){
         if (hasValidateFields()){
             User user = getUserFromFields();
-            new SendUserInformation(this, user);
+            new SaveUser(this, user);
         }
     }
 

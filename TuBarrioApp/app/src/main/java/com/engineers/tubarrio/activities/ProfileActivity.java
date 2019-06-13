@@ -39,9 +39,9 @@ public class ProfileActivity extends Activity {
         commentsTV = findViewById(R.id.comments);
         followedTV = findViewById(R.id.followed);
         userPicTV = findViewById(R.id.user_profile_picture);
-        User user = Config.getLoggedUserInfo(this);
+  /*      User user = Config.getLoggedUserInfo(this);
         if (!user.firstName.isEmpty())
-            nameTV.setText(user.firstName);
+            nameTV.setText(user.firstName);*/
 //        publicationsTV.setText(user.cantPublications);
 //        commentsTV.setText(user.cantComments);
 //        followedTV.setText(user.cantFollowed);
