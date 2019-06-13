@@ -126,5 +126,11 @@ namespace TuBarrio.BusinessLogic
         {
             throw new NotImplementedException();
         }
+
+        public List<Comment> GetCommentsFromPublications(Publication publication)
+        {
+            return publicationRepository.GetCommentsFromPublication(publication);
+        }
+
     }
 }

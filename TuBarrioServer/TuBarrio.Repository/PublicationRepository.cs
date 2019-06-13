@@ -86,6 +86,18 @@ namespace TuBarrio.Repository
             return returnList;
         }
 
+
+        public List<Comment> GetCommentsFromPublication(Publication publication)
+        {
+            List<Comment> returnList = new List<Comment>();
+            using(TuBarrioDbContext context = new TuBarrioDbContext())
+            {
+                returnList = context.Publications.Include(p => p.Comments).Where(u => u.Id == publication.Id).FirstOrDefault().Comments;
+            }
+            return returnList;
+        }
+
+
         public void AddCommentToPublication(Comment newComment, Publication publicationToUpdate)
         {
             using (TuBarrioDbContext context = new TuBarrioDbContext())
