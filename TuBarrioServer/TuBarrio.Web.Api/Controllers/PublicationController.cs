@@ -234,6 +234,23 @@ namespace TuBarrio.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/Publication/GetFollowedPublications")]
+        public IHttpActionResult GetFollowedPublication(string token)
+        {
+            try
+            {
+                User user = GetUserFromToken();
+                List<Publication> toReturn = publicationLogic.GetFollowedPublications(user);
+                return Ok(toReturn);
+            }
+            catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
+            {
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
 
 
 
