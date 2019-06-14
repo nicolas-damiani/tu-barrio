@@ -1,15 +1,51 @@
 package com.engineers.tubarrio.activities;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.engineers.tubarrio.R;
+import com.engineers.tubarrio.adapters.CommentsAdapter;
+import com.engineers.tubarrio.adapters.PublicationsAdapter;
+import com.engineers.tubarrio.entities.Comment;
+import com.engineers.tubarrio.entities.Publication;
+import com.engineers.tubarrio.requests.GetCommentsFromPublication;
+import com.engineers.tubarrio.requests.GetPublications;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ViewPublicationCommentsActivity extends AppCompatActivity {
+
+    List<Comment> mListComments;
+    ListView commentsListView;
+    Activity activity;
+    Publication publication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_publication_comments);
+    }
+
+    private void initializeView(){
+        commentsListView = (ListView) findViewById(R.id.comments_list);
+    }
+
+    private void setComments(){
+        mListComments = new ArrayList<>();
+        new GetCommentsFromPublication(this, publication) {
+            @Override
+            public void onFinished() {
+                mListComments = this.comments;
+                CommentsAdapter commentsAdapter = new CommentsAdapter(activity, mListComments);
+                commentsListView.setAdapter(commentsAdapter);
+            }
+        };
+
     }
 }

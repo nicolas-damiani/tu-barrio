@@ -9,6 +9,7 @@ import java.util.Date;
 
 public class Publication implements Serializable{
 
+    private int id;
     private String title;
     private String description;
     private Double longitude;
@@ -21,6 +22,7 @@ public class Publication implements Serializable{
     public Publication(JSONObject jsonObj) {
         try {
             //TODO
+            this.id = jsonObj.has("Id")?jsonObj.getInt("Id"):0;
             this.title = jsonObj.has("Title")?jsonObj.getString("Title"):"";
             this.description = jsonObj.has("Description")?jsonObj.getString("Description"):"";
             this.longitude= jsonObj.has("Longitude")?jsonObj.getDouble("Longitude"):0;
@@ -32,14 +34,17 @@ public class Publication implements Serializable{
         }
     }
 
+
+
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
+
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-
-        this.title = title;
-    }
+    public void setTitle(String title) { this.title = title; }
 
     public String getUserPhone() {
         return userPhone;

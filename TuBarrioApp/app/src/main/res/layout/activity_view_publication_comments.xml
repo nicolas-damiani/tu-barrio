@@ -21,12 +21,12 @@
             android:textColor="@android:color/white"
             android:textSize="40dp" />
 
-        <ScrollView
+        <ListView
+            android:id="@+id/comments_list"
+            android:scrollbars="vertical"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:layout_marginTop="20dp">
-
-        </ScrollView>
+            android:layout_height="350dp"
+            />
 
         <Button
             android:id="@+id/add_comment_btn"
