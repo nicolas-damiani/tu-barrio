@@ -45,11 +45,24 @@ public class SaveUser {
         String url = Constants.URL + "api/User";
         params.put("Name", user.getFirstName());
         params.put("Surname", user.getLastName());
-        params.put("Email", "moonideasuy@gmail.com");
-        params.put("ProfileImage", "");
+        params.put("Email", user.getEmail());
+        params.put("ProfileImage", "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB\n" +
+                "AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEB\n" +
+                "AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCBAgDBgDASIA\n" +
+                "AhEBAxEB/8QAGwAAAwEBAQEBAAAAAAAAAAAAAgMEAQAFBgr/xABWEAACAQEFBQUFBgYBAwICABcB\n" +
+                "AgMRABITITEEIiNBUTIzYXGBQkORofBSU2OxwdEUYnOD4fGTJHKjgrPDBZLT4zTzorJEFVRkwtLi\n" +
+                "dISU8qTkJbTU/8QAGgEBAQEBAQEBAAAAAAAAAAAAAAECAwQFBv/EADgRAAIBBAEDBAIDAAICAgEB\n" +
+                "CQERIQAxQVFhcYGRobHB8ALREuHxIjJCUgNicoKSorLCE9Li8gT/2gAMAwEAAhEDEQA/APwVbbL/\n" +
+                "APMNqlUbXABHPIqLgiOKN8OOnDOfPjZv4HKtKkhCSzbK3GEQxI3/AJ3HdmXrFSn0bS7V/wDMNp2i\n" +
+                "KR55khcSbscUShl/9UcYArTWtKUAItNsiTbUt9ZWQw0N1XNWQMDQ+IqB40rS3gxhAq+fK8eyr6+b\n" +
+                "zft+uvNbLFtM+0LLRY2Em5HUXw9a5RYmVTpmCbPie8sp2uOaTaw104S0vRw0GGcLKb/GZ52mmCDa\n" +
+                "I0kJ/iKw3JNUvOdZB50z6Z9bUySbTsO0tPLJJBKBG8aXMWKVG17008yQfS1LQHiF423OYps+Z6Se\n" +
+                "gHjrU0GzvLJtEu0phJLFI4ZhRVKn/FP20tySbNIVhjjjVXQxkgiN6+7lJkyMvkc9elhSMyPLJtc0\n" +
+                "qvLFeXDrRnpREkyBNSMGmlfe0yIzBHkjJu3o1jXDiAS7cEQzJkrWh8Mx31QKMkM4tYIDd5hkjBdA\n" +
+                "1Amb");
         params.put("Phone", user.getPhone());
 
-        StringRequest postRequest = new StringRequest(Request.Method.PUT, url,
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
