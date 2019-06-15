@@ -109,7 +109,7 @@ namespace TuBarrio.Repository
             List<Publication> returnList = new List<Publication>();
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                returnList = context.Publications.Include(p => p.Subsrcibers.FindAll(s => s.Equals(user))).ToList();
+                returnList = context.Publications.Include(p => p.Subsrcibers).Where(p => p.Subsrcibers.Any(s => s.Email == user.Email)).ToList();
             }
             return returnList;
         }

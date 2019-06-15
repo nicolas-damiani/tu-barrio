@@ -301,10 +301,6 @@ namespace TuBarrio.Web.Api.Controllers
         }
 
 
-
-
-
-
         private User GetUserFromToken()
         {
             string token = ActionContext.Request.Headers.GetValues("Token").First();
