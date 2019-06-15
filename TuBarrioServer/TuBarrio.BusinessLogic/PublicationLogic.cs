@@ -94,8 +94,7 @@ namespace TuBarrio.BusinessLogic
 
         public void AddCommentToPublication(Comment newComment, Publication publicationToUpdate)
         {
-            Publication publicationToAddComment = publicationRepository.GetPublicationById(publicationToUpdate.Id);
-            publicationToAddComment.Comments.Add(newComment);
+            publicationRepository.AddCommentToPublication(newComment, publicationToUpdate);   
         }
 
         public void DeleteCommentFromPublication(Comment commentToDelete, Publication publicationToUpdate, string token)
@@ -124,7 +123,8 @@ namespace TuBarrio.BusinessLogic
 
         public Comment GetCommentFromModel(CommentModel model)
         {
-            throw new NotImplementedException();
+            Comment newComment = new Comment(model.Text, model.CreatedOn);
+            return newComment;
         }
 
         public List<Comment> GetCommentsFromPublication(Publication publication)
