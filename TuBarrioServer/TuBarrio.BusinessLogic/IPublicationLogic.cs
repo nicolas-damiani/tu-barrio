@@ -24,5 +24,7 @@ namespace TuBarrio.BusinessLogic
         Comment GetCommentFromModel(CommentModel model);
         List<Comment> GetCommentsFromPublication(Publication publicationToGetComments);
         List<Publication> GetFollowedPublications(User user);
+        void FollowPublication(User user, int publicationId);
+        void UnfollowPublication(User user, int publicationId);
     }
 }

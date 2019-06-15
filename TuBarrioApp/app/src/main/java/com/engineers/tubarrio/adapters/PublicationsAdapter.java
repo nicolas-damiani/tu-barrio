@@ -43,8 +43,10 @@ public class PublicationsAdapter extends BaseAdapter {
     public View getView(int position, View view, ViewGroup viewFriend) {
         View v = View.inflate(mContext, R.layout.items_publication, null);
         TextView tvName = (TextView) v.findViewById(R.id.publication_title);
+        TextView tvAuthor = (TextView) v.findViewById(R.id.publication_author);
         ImageView tvUsername = (ImageView) v.findViewById(R.id.publication_image);
         tvName.setText(mPublications.get(position).getTitle());
+        tvAuthor.setText(mPublications.get(position).getCreator().getFirstName() + " " + mPublications.get(position).getCreator().getLastName());
         v.setTag(mPublications.get(position));
         return v;
     }

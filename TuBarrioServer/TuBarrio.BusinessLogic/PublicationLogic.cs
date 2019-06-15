@@ -136,5 +136,16 @@ namespace TuBarrio.BusinessLogic
         {
             return publicationRepository.GetFollowedPublications(user);
         }
+
+        public void FollowPublication(User user, int publicationId)
+        {
+            Publication publicationToFollow = publicationRepository.GetPublicationById(publicationId);
+            publicationRepository.FollowPublication(user, publicationToFollow);
+        }
+
+        public void UnfollowPublication(User user, int publicationId)
+        {
+            publicationRepository.UnfollowPublication(user, publicationId);
+        }
     }
 }

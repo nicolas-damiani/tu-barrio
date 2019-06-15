@@ -109,7 +109,7 @@ namespace TuBarrio.Repository
             List<Publication> returnList = new List<Publication>();
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                returnList = context.Publications.Include(p => p.Subsrcibers.FindAll(s => s.Equals(user))).ToList();
+                returnList = context.Publications.Include(p => p.Subsrcibers).Where(p => p.Subsrcibers.Any(s => s.Email == user.Email)).ToList();
             }
             return returnList;
         }
@@ -125,9 +125,6 @@ namespace TuBarrio.Repository
                 context.Entry(user).State = EntityState.Modified;
                 newComment.Creator = user;
                 newComment =  context.Comments.Add(newComment);
-
-               
-
                 toUpdate.Comments.Add(newComment);
                 context.SaveChanges();
             }
@@ -160,12 +157,39 @@ namespace TuBarrio.Repository
             }
         }
 
+        public void FollowPublication(User user, Publication publication)
+        {
+            using(TuBarrioDbContext context = new TuBarrioDbContext())
+            {
+                User userToAdd = context.Users.Where(u => u.Id == user.Id).FirstOrDefault();
+                Publication toUpdate = context.Publications.Include(p => p.Author).Include(p => p.Comments).Where(p => p.Id == publication.Id).FirstOrDefault();
+                context.Users.Attach(userToAdd);
+                context.Entry(userToAdd).State = EntityState.Modified;
+                toUpdate.Subsrcibers.Add(userToAdd);
+                context.SaveChanges();
+
+            }
+        }
+
+        public void UnfollowPublication(User user, int publicationId)
+        {
+            using (TuBarrioDbContext context = new TuBarrioDbContext())
+            {
+                user = context.Users.Where(u => u.Id == user.Id).FirstOrDefault();
+                Publication publicationToUnf = context.Publications.Include(u => u.Author).Include(u => u.Subsrcibers).Where(u => u.Id == publicationId).FirstOrDefault();
+                context.Users.Attach(user);
+                context.Entry(user).State = EntityState.Modified;
+                publicationToUnf.Subsrcibers.Remove(user);
+                context.SaveChanges();
 
 
-
-
-
+            }
+        }
+      
 
 
     }
 }
+
+
+
