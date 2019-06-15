@@ -15,11 +15,16 @@ public class Publication implements Serializable{
     private Double longitude;
     private Double latitude;
     private Date updatedOn;
-    private String username;
-    private String creatorFirstName;
+    private User creator;
 
-    private String creatorLastName;
-    private String userPhone;
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
     private String publicationImage;
 
     public Publication(JSONObject jsonObj) {
@@ -31,7 +36,7 @@ public class Publication implements Serializable{
             this.longitude= jsonObj.has("Longitude")?jsonObj.getDouble("Longitude"):0;
             this.latitude= jsonObj.has("Latitude")?jsonObj.getDouble("Latitude"):0;
             this.publicationImage= jsonObj.has("PublicationImage")?jsonObj.getString("PublicationImage"):"";
-            this.username = jsonObj.has("AuthorEmail")?jsonObj.getString("AuthorEmail"):"";
+            this.creator = new User(new JSONObject(jsonObj.getString("Creator")));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -48,14 +53,6 @@ public class Publication implements Serializable{
     }
 
     public void setTitle(String title) { this.title = title; }
-
-    public String getUserPhone() {
-        return userPhone;
-    }
-
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
-    }
 
     public String getDescription() {
         return description;
@@ -89,14 +86,6 @@ public class Publication implements Serializable{
         this.updatedOn = updatedOn;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getImage() {
         return publicationImage;
     }
@@ -104,23 +93,6 @@ public class Publication implements Serializable{
     public void setImage(String image) {
         this.publicationImage = image;
     }
-
-    public String getCreatorFirstName() {
-        return creatorFirstName;
-    }
-
-    public void setCreatorFirstName(String creatorFirstName) {
-        this.creatorFirstName = creatorFirstName;
-    }
-
-    public String getCreatorLastName() {
-        return creatorLastName;
-    }
-
-    public void setCreatorLastName(String creatorLastName) {
-        this.creatorLastName = creatorLastName;
-    }
-
     public String getPublicationImage() {
         return publicationImage;
     }

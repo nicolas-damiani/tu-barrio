@@ -54,7 +54,7 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
         user  = Config.getLoggedUserInfo(this);
         activity = this;
         publication = (Publication) getIntent().getSerializableExtra("publication");
-        if(user.getEmail().equals(publication.getUsername())){
+        if(user.getEmail().equals(publication.getCreator().getEmail())){
             isAuthor = true;
         }
 
@@ -78,7 +78,7 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
         publicationImage = (ImageView) findViewById(R.id.publication_image);
         pubTitle.setText(publication.getTitle());
         pubDescription.setText(publication.getDescription());
-        pubUserPhone.setText(publication.getUserPhone());
+        pubUserPhone.setText(publication.getCreator().getPhone());
         viewComments = (Button) findViewById(R.id.view_comments_btn);
         followPublication = (Button) findViewById(R.id.follow_publication_btn);
 

@@ -46,7 +46,7 @@ public class PublicationsAdapter extends BaseAdapter {
         TextView tvAuthor = (TextView) v.findViewById(R.id.publication_author);
         ImageView tvUsername = (ImageView) v.findViewById(R.id.publication_image);
         tvName.setText(mPublications.get(position).getTitle());
-        tvAuthor.setText(mPublications.get(position).getCreatorFirstName() + " " + mPublications.get(position).getCreatorLastName());
+        tvAuthor.setText(mPublications.get(position).getCreator().getFirstName() + " " + mPublications.get(position).getCreator().getLastName());
         v.setTag(mPublications.get(position));
         return v;
     }
