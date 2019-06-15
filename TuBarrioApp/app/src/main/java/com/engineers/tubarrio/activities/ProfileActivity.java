@@ -17,11 +17,11 @@ import com.engineers.tubarrio.requests.SendUserInformation;
 public class ProfileActivity extends Activity {
 
     TextView nameTV;
-    TextView neighborhoodTV;
+    TextView emailTV;
     TextView publicationsTV;
     TextView commentsTV;
     TextView followedTV;
-    ImageView userPicTV;
+    ImageView userPicIV;
 
 
     @Override
@@ -34,11 +34,11 @@ public class ProfileActivity extends Activity {
 
     private void initializeViews(){
         nameTV = findViewById(R.id.user_name);
-        neighborhoodTV = findViewById(R.id.user_neighborhood);
+        emailTV = findViewById(R.id.user_email);
         publicationsTV = findViewById(R.id.publications);
         commentsTV = findViewById(R.id.comments);
         followedTV = findViewById(R.id.followed);
-        userPicTV = findViewById(R.id.user_profile_picture);
+        userPicIV = findViewById(R.id.user_profile_picture);
   /*      User user = Config.getLoggedUserInfo(this);
         if (!user.firstName.isEmpty())
             nameTV.setText(user.firstName);*/

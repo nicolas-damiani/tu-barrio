@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,21 +15,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#292E45"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
 
             <ImageView
-                android:id="@+id/btn_edit_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:id="@+id/edit_profile"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/edit_publication" />
 
 
             <ImageView
                 android:id="@+id/user_profile_picture"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
-                android:layout_marginTop="150dp" />
+                android:layout_marginTop="50dp" />
 
             <TextView
                 android:id="@+id/user_name"
@@ -41,19 +45,19 @@
 
 
             <TextView
-                android:id="@+id/user_neighborhood"
+                android:id="@+id/user_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Pocitos, Montevideo"
+                android:text="maria@snow.com"
                 android:textSize="17dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
                 android:layout_marginTop="9dp"
+                android:layout_marginRight="17dp"
                 android:background="@android:color/white"
                 android:weightSum="3">
 
@@ -130,7 +134,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
-                android:text="Ultimas publicaciones:"
+                android:text="Ver publicaciones:"
                 android:textSize="15dp" />
 
             <Button
@@ -143,35 +147,17 @@
                 android:textColor="@android:color/white" />
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/btn_new_publication"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_marginTop="65dp"
-                android:background="@android:color/white">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="165dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_weight="1"
-                    android:text="Nueva publicacion:"
-                    android:textSize="15dp" />
-
-
-                <Button
-                    android:id="@+id/btn_new_publication"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_button"
-                    android:text="Agregar"
-                    android:textColor="@android:color/white"
-                    android:textSize="15dp" />
-            </LinearLayout>
+                android:layout_marginTop="50dp"
+                android:background="@drawable/rounded_button"
+                android:text="Agregar"
+                android:textColor="@android:color/white"
+                android:textSize="15dp" />
         </LinearLayout>
     </ScrollView>
 
 
-</LinearLayout>
+</RelativeLayout>
