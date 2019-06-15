@@ -39,5 +39,20 @@ namespace TuBarrio.BusinessLogic
         {
             userRepository.UpdateUser(user);
         }
+
+        public int GetCantFollowed(User user)
+        {
+             return userRepository.GetCantComments(user);
+        }
+
+        public int GetCantComments(User user)
+        {
+            return userRepository.GetCantComments(user);
+        }
+
+        public int GetCantPublications(User user)
+        {
+            return userRepository.GetCantPublications(user);
+        }
     }
 }

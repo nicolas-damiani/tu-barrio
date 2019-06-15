@@ -110,6 +110,34 @@ namespace TuBarrio.Web.Api.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/User/GetStats")]
+        public IHttpActionResult GetStatisticsFromUser()
+        {
+            try
+            {
+                User user = GetUserFromToken();
+                int cantPublications = userLogic.GetCantPublications(user);
+                int cantComments = userLogic.GetCantComments(user);
+                int cantFollowedPublications = userLogic.GetCantFollowed(user);
+                StatisticModel statModel = new StatisticModel(cantPublications, cantFollowedPublications, cantComments);
+                return Ok(statModel);
+                   
+            }
+            catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException)
+            {
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.InternalServerError, ex.Message);
+            }
+
+        } 
+
+
+
+
         public string GetTokenInfo(String googleToken)
         {
             String URL = "https://www.googleapis.com/oauth2/v3/tokeninfo";
@@ -129,5 +157,15 @@ namespace TuBarrio.Web.Api.Controllers
             }
             throw new Exception("Error obteniendo datos de Google");
         }
+
+
+        private User GetUserFromToken()
+        {
+            string token = ActionContext.Request.Headers.GetValues("Token").First();
+            User user = authenticationLogic.GetUserWithToken(token);
+            return user;
+        }
+
+
     }
 }

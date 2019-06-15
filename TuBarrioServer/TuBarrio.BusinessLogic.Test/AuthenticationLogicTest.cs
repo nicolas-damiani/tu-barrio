@@ -25,7 +25,7 @@ namespace TuBarrio.BusinessLogic.Test
             IUserRepository userRepository = new UserRepository();
             userLogic = new UserLogic(userRepository);
             authenticationLogic = new AuthenticationLogic(userRepository);
-            user = new User("Guille", "Jude", "guillejude@hotmail.com", "099", "095123123", new EncodedImage("image"));
+            user = new User("Guille", "Jude", "guillejude@hotmail.com", "099", "095123123");
             userRepository.AddUser(user);
         }
 
@@ -76,7 +76,7 @@ namespace TuBarrio.BusinessLogic.Test
         [TestMethod]
         public void HandleGoogleSignInNotRegisteredUserTest()
         {
-            User newUser = new User("Sebastian", "Rodriguez", "srod95@hotmail.com", "123", "123", new EncodedImage("image"));
+            User newUser = new User("Sebastian", "Rodriguez", "srod95@hotmail.com", "123", "123");
             string token = authenticationLogic.HandleGoogleSignIn(newUser.Email, newUser.Name, newUser.Surname);
             User userReceived = authenticationLogic.GetUserWithToken(token);
             Assert.AreEqual(newUser.Email, userReceived.Email);
