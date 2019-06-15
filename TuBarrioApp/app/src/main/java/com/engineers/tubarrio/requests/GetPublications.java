@@ -29,16 +29,21 @@ public abstract class GetPublications {
     Activity activity;
     Context context;
     Map<String, String> params;
-    public List<Publication>  publications;
+    public List<Publication> publications;
     Notification pendingNotification;
 
 
-    public GetPublications(final Activity activity) {
+    public GetPublications(final Activity activity, boolean allPublications) {
         this.activity = activity;
         this.context = activity.getApplicationContext();
         params = new HashMap<String, String>();
 
-        String url = Constants.URL + "api/Publications";
+        String url = "";
+        if (allPublications) {
+            url = Constants.URL + "api/Publications";
+        } else {
+            url = Constants.URL + "api/Publications/AllFromUser";
+        }
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -49,7 +54,7 @@ public abstract class GetPublications {
 
                             JSONArray jsonArray = new JSONArray(response);
                             if (jsonArray.length() != 0) {
-                                ArrayList<Publication> publicationsList= new ArrayList<>();
+                                ArrayList<Publication> publicationsList = new ArrayList<>();
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject jsonObj = jsonArray.getJSONObject(i);
                                     Publication navigationMenuOption = new Publication(jsonObj);

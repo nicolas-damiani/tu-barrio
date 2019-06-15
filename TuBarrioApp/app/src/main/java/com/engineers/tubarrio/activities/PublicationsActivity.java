@@ -21,11 +21,14 @@ public class PublicationsActivity extends Activity {
     List<Publication> mListPublications;
     ListView publicationsListView;
     Activity activity;
+    boolean allPublications;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publications);
         activity = this;
+        allPublications = (boolean) getIntent().getSerializableExtra("allPublications");
         initializeView();
         setPublications();
     }
@@ -37,7 +40,7 @@ public class PublicationsActivity extends Activity {
 
     private void setPublications(){
         mListPublications = new ArrayList<>();
-        new GetPublications(this) {
+        new GetPublications(this, allPublications) {
             @Override
             public void onFinished() {
                 mListPublications = this.publications;

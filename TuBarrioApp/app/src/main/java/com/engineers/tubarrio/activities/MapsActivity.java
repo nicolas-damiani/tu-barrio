@@ -122,7 +122,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        new GetPublications(this) {
+        boolean allPublications = true;
+        new GetPublications(this, allPublications) {
             @Override
             public void onFinished() {
                 mPublications = this.publications;
