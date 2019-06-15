@@ -259,6 +259,49 @@ namespace TuBarrio.Web.Api.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("api/Publication/FollowPublication")]
+        public IHttpActionResult FollowPublication(int publicationId)
+        {
+            try
+            {
+                User user = GetUserFromToken();
+                publicationLogic.FollowPublication(user, publicationId);
+                return Ok("Publicacion seguida con exito");
+            }
+            catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
+            {
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Route("api/Publication/UnfollowPublication")]
+        public IHttpActionResult UnfollowPublication(int publicationId)
+        {
+            try
+            {
+                User user = GetUserFromToken();
+                publicationLogic.UnfollowPublication(user, publicationId);
+                return Ok("Publicacion dejada de seguir");
+            }
+            catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
+            {
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+
+
+
 
 
         private User GetUserFromToken()

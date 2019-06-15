@@ -21,5 +21,7 @@ namespace TuBarrio.Repository
         Comment GetCommentById(Publication publication, int id);
         List<Comment> GetCommentsFromPublication(Publication publication);
         List<Publication> GetFollowedPublications(User user);
+        void FollowPublication(User user, Publication publication);
+        void UnfollowPublication(User user, int publicationId);
     }
 }
