@@ -54,7 +54,7 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
         user  = Config.getLoggedUserInfo(this);
         activity = this;
         publication = (Publication) getIntent().getSerializableExtra("publication");
-        if(user.getEmail() == publication.getUsername()){
+        if(user.getEmail().equals(publication.getUsername())){
             isAuthor = true;
         }
 

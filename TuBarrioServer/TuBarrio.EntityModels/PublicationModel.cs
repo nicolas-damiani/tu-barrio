@@ -9,6 +9,7 @@ namespace TuBarrio.EntityModels
 {
     public class PublicationModel
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public double Longitude { get; set; }
@@ -23,7 +24,7 @@ namespace TuBarrio.EntityModels
 
         public PublicationModel()
         {
-            
+            Id = 0;
             Title = "";
             Description = "";
             Longitude = 0;
@@ -39,6 +40,7 @@ namespace TuBarrio.EntityModels
 
         public PublicationModel(Publication publication)
         {
+            Id = publication.Id;
             Title = publication.Title;
             Description = publication.Description;
             Longitude = publication.Longitude;

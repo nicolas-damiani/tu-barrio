@@ -96,7 +96,7 @@ namespace TuBarrio.Repository
                 returnList = context.Publications.Include(p => p.Comments).Where(p => p.Id == publication.Id).FirstOrDefault().Comments;
                 foreach (Comment comment in returnList)
                 {
-                    Comment comment2 = context.Comments.Include(c => c.Creator).FirstOrDefault();
+                    Comment comment2 = context.Comments.Where(c => c.Id == comment.Id).Include(c => c.Creator).FirstOrDefault();
                     comments.Add(comment2);
                 }
             }

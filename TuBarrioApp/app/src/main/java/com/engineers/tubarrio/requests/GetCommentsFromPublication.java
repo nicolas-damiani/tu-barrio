@@ -38,9 +38,8 @@ public abstract class GetCommentsFromPublication {
         this.activity = activity;
         this.context = activity.getApplicationContext();
         params = new HashMap<String, String>();
-        params.put("publicationId", publication.getId()+"");
 
-        String url = Constants.URL + "api/Publications/GetComments";
+        String url = Constants.URL + "api/Publication/GetComments?publicationId="+publication.getId();
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
