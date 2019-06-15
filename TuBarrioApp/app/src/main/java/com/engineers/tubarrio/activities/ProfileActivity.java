@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,26 +23,31 @@ public class ProfileActivity extends Activity {
     TextView commentsTV;
     TextView followedTV;
     ImageView userPicIV;
-
+    Button viewPublications;
+    Activity activity;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        activity = this;
         initializeViews();
+        initializeButtons();
     }
 
 
-    private void initializeViews(){
+    private void initializeViews() {
         nameTV = findViewById(R.id.user_name);
         emailTV = findViewById(R.id.user_email);
         publicationsTV = findViewById(R.id.publications);
         commentsTV = findViewById(R.id.comments);
         followedTV = findViewById(R.id.followed);
         userPicIV = findViewById(R.id.user_profile_picture);
-  /*      User user = Config.getLoggedUserInfo(this);
-        if (!user.firstName.isEmpty())
-            nameTV.setText(user.firstName);*/
+        viewPublications = (Button) findViewById(R.id.btn_publications);
+
+        user = Config.getLoggedUserInfo(this);
+        nameTV.setText(user.firstName + " " + user.lastName);
 //        publicationsTV.setText(user.cantPublications);
 //        commentsTV.setText(user.cantComments);
 //        followedTV.setText(user.cantFollowed);
@@ -53,9 +59,16 @@ public class ProfileActivity extends Activity {
 //        startActivity(intent);
 //    }
 
- //   public void seeAllPublicationsAction(View view){
- //       Intent intent = new Intent(ProfileActivity.this, lista de publicaciones);
-//        startActivity(intent);
-  //  }
+    private void initializeButtons() {
+        viewPublications.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goToNextActivity = new Intent(activity, PublicationsActivity.class);
+                goToNextActivity.putExtra("allPublications", false);
+                activity.startActivity(goToNextActivity);
+                activity.finish();
+            }
+        });
+    }
 
 }
