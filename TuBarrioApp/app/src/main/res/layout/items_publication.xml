@@ -6,32 +6,41 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="80dp"
         android:layout_margin="5dp"
         android:background="@drawable/rounded_card">
 
         <ImageView
             android:layout_width="match_parent"
-            android:background="@color/colorAccent"
+            android:background="#292E45"
             android:id="@+id/publication_image"
             android:layout_height="match_parent"/>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0.3"
-            android:background="@android:color/black"/>
-
+            android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:id="@+id/publication_title"
-            android:layout_centerVertical="true"
             android:text="Prueba de ejemplo"
             android:layout_marginLeft="15dp"
-            android:textSize="20dp"
+            android:gravity="center_vertical"
+            android:textSize="25dp"
+            android:layout_marginTop="20px"
             android:textColor="@android:color/white"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:id="@+id/publication_author"
+            android:text="Prueba de ejemplo"
+            android:layout_marginLeft="15dp"
+            android:textSize="15dp"
+            android:textColor="@android:color/white"
+            />
+        </LinearLayout>
 
     </RelativeLayout>
 </RelativeLayout>

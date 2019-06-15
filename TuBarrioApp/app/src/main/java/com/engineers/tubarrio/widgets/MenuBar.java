@@ -41,6 +41,7 @@ public class MenuBar {
             @Override
             public void onClick(View view) {
                 Intent goToNextActivity = new Intent(activity, PublicationsActivity.class);
+                goToNextActivity.putExtra("allPublications", true);
                 activity.startActivity(goToNextActivity);
                 activity.finish();
             }
