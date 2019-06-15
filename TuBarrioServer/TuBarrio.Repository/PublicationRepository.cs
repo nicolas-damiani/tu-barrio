@@ -92,7 +92,18 @@ namespace TuBarrio.Repository
             List<Comment> returnList = new List<Comment>();
             using(TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                returnList = context.Publications.Include(p => p.Comments).Where(u => u.Id == publication.Id).FirstOrDefault().Comments;
+                returnList = context.Publications.Include(p => p.Comments).Where(p => p.Id == publication.Id).FirstOrDefault().Comments;
+            }
+            return returnList;
+        }
+
+
+        public List<Publication> GetFollowedPublications(User user)
+        {
+            List<Publication> returnList = new List<Publication>();
+            using (TuBarrioDbContext context = new TuBarrioDbContext())
+            {
+                returnList = context.Publications.Include(p => p.Subsrcibers.FindAll(s => s.Equals(user))).ToList();
             }
             return returnList;
         }
@@ -102,7 +113,7 @@ namespace TuBarrio.Repository
         {
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                Publication toUpdate = context.Publications.Include(p => p.Comments).Where(u => u.Id == publicationToUpdate.Id).FirstOrDefault();
+                Publication toUpdate = context.Publications.Include(p => p.Comments).Where(p => p.Id == publicationToUpdate.Id).FirstOrDefault();
                 toUpdate.Comments.Add(newComment);
                 context.SaveChanges();
             }
@@ -112,7 +123,7 @@ namespace TuBarrio.Repository
         {
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                publicationToUpdate = context.Publications.Include(p => p.Comments).Where(u => u.Id == publicationToUpdate.Id).FirstOrDefault();
+                publicationToUpdate = context.Publications.Include(p => p.Comments).Where(p => p.Id == publicationToUpdate.Id).FirstOrDefault();
                 publicationToUpdate.Comments.Remove(commentToDelete);
                 context.SaveChanges();
             }
@@ -123,7 +134,7 @@ namespace TuBarrio.Repository
             using(TuBarrioDbContext context = new TuBarrioDbContext())
             {
                 Comment returnComment = new Comment();
-                publicationToSearch = context.Publications.Include(p => p.Comments).Where(u => u.Id == publicationToSearch.Id).FirstOrDefault();
+                publicationToSearch = context.Publications.Include(p => p.Comments).Where(p => p.Id == publicationToSearch.Id).FirstOrDefault();
                 foreach (var com in publicationToSearch.Comments.ToList())
                 {
                     if(com.Id == id)

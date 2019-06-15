@@ -14,6 +14,7 @@ import com.engineers.tubarrio.R;
 import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.entities.Publication;
 import com.engineers.tubarrio.entities.User;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -47,6 +48,7 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
             isAuthor = true;
         }
         initializeViews();
+        InitializeButtons();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -62,12 +64,11 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
         pubUserPhone.setText(publication.getUserPhone());
         viewComments = (Button) findViewById(R.id.view_comments_btn);
 
-        //Ver si el user logueado es el autor, si no, esconder el icono de editar
         if(!isAuthor){
             editIcon.setVisibility(View.GONE);
         }
 
-        //TODO: Poner la primer imagen como fondo del cosito, ver si poner las otras en un boton o hacer galeria
+        //TODO: Poner la primer imagen como fondo del cosito
 
 
         //TODO: Si ya esta suscripto, boton diga dejar de seguir
@@ -83,10 +84,10 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(publication.getLatitude(), publication.getLongitude()))
                 .title(publication.getTitle()));
-    }
-
-    {
-
+        LatLng mDefaultLocation = new LatLng(publication.getLatitude(), publication.getLongitude());
+        int DEFAULT_ZOOM = 15;
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
+        mMap.getUiSettings().setMyLocationButtonEnabled(false);
     }
 
     private void InitializeButtons(){

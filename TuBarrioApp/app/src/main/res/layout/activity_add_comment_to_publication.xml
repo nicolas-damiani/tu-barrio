@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.AddCommentToPublicationActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#343A52"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="17dp"
+            android:text="Agregar Comentario"
+            android:textColor="@android:color/white"
+            android:textSize="35dp" />
+
+        <EditText
+            android:id="@+id/comment_text"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginBottom="90dp"
+            android:focusableInTouchMode="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_edit_text"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
+            android:padding="10dp"
+            android:textColor="@android:color/white" />
+
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/continue_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_button"
+        android:onClick="onClickAddComment"
+        android:paddingBottom="10dp"
+        android:gravity="center_horizontal"
+        android:paddingTop="14dp"
+        android:text="Agregar"
+        android:textColor="@android:color/white"
+        android:textSize="15dp" />
+
+</RelativeLayout>

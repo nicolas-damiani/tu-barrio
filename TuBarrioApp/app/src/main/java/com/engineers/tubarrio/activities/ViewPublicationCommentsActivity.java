@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.engineers.tubarrio.R;
@@ -25,11 +26,18 @@ public class ViewPublicationCommentsActivity extends AppCompatActivity {
     ListView commentsListView;
     Activity activity;
     Publication publication;
+    Button addComment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_publication_comments);
+        initializeView();
+        addComment = (Button)findViewById(R.id.add_comment_btn);
+        InitializeButtons();
+        publication = (Publication) getIntent().getSerializableExtra("publication");
+        activity = this;
+        setComments();
     }
 
     private void initializeView(){
@@ -47,5 +55,16 @@ public class ViewPublicationCommentsActivity extends AppCompatActivity {
             }
         };
 
+    }
+
+    private void InitializeButtons(){
+        addComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goToNextActivity = new Intent(activity, AddCommentToPublicationActivity.class);
+                goToNextActivity.putExtra("publication", publication);
+                activity.startActivity(goToNextActivity);
+            }
+        });
     }
 }

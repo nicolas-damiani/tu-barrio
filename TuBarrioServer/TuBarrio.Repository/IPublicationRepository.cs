@@ -20,5 +20,6 @@ namespace TuBarrio.Repository
         void DeleteCommentFromPublication(Comment commentToDelete, Publication publicationToUpdate);
         Comment GetCommentById(Publication publication, int id);
         List<Comment> GetCommentsFromPublication(Publication publication);
+        List<Publication> GetFollowedPublications(User user);
     }
 }

@@ -26,6 +26,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".activities.ViewPublicationCommentsActivity"></activity>
+        <activity
+            android:name=".activities.AddCommentToPublicationActivity"
+            android:label="@string/title_activity_add_comment_to_publication"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

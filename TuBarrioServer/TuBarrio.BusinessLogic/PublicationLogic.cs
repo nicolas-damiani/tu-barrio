@@ -131,5 +131,10 @@ namespace TuBarrio.BusinessLogic
         {
             return publicationRepository.GetCommentsFromPublication(publication);
         }
+
+        public List<Publication> GetFollowedPublications(User user)
+        {
+            return publicationRepository.GetFollowedPublications(user);
+        }
     }
 }
