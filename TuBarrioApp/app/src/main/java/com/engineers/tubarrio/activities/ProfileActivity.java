@@ -24,6 +24,7 @@ public class ProfileActivity extends Activity {
     TextView followedTV;
     ImageView userPicIV;
     Button viewPublications;
+    Button newPublication;
     Activity activity;
     User user;
 
@@ -45,6 +46,7 @@ public class ProfileActivity extends Activity {
         followedTV = findViewById(R.id.followed);
         userPicIV = findViewById(R.id.user_profile_picture);
         viewPublications = (Button) findViewById(R.id.btn_publications);
+        newPublication = (Button) findViewById(R.id.btn_new_publication);
 
         user = Config.getLoggedUserInfo(this);
         nameTV.setText(user.firstName + " " + user.lastName);
@@ -65,6 +67,15 @@ public class ProfileActivity extends Activity {
             public void onClick(View view) {
                 Intent goToNextActivity = new Intent(activity, PublicationsActivity.class);
                 goToNextActivity.putExtra("allPublications", false);
+                activity.startActivity(goToNextActivity);
+                activity.finish();
+            }
+        });
+
+         newPublication.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goToNextActivity = new Intent(activity, AddPublicationActivity.class);
                 activity.startActivity(goToNextActivity);
                 activity.finish();
             }

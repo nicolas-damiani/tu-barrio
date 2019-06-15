@@ -153,7 +153,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/rounded_button"
-                android:text="Agregar"
+                android:text="Nueva publicación"
                 android:textColor="@android:color/white"
                 android:textSize="15dp" />
         </LinearLayout>
