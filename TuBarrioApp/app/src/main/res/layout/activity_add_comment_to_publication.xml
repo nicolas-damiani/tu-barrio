@@ -11,51 +11,53 @@
         android:layout_height="match_parent"
         android:background="#343A52"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="17dp"
             android:text="Agregar Comentario"
             android:textColor="@android:color/white"
-            android:textSize="35dp"
-            android:gravity="center_vertical"
-            android:paddingLeft="17dp"/>
+            android:textSize="35dp" />
 
         <EditText
             android:id="@+id/comment_text"
             android:layout_width="match_parent"
-            android:layout_height="470dp"
+            android:layout_height="fill_parent"
             android:layout_marginLeft="17dp"
             android:layout_marginRight="17dp"
+            android:layout_marginBottom="90dp"
+            android:focusableInTouchMode="true"
+            android:layout_marginTop="10dp"
             android:background="@drawable/rounded_edit_text"
             android:gravity="top|left"
-            android:padding="10dp"
             android:inputType="textMultiLine"
-            android:overScrollMode="always"
-            android:layout_marginTop="10dp"
-            android:scrollbarStyle="insideInset"
-            android:scrollbars="vertical"
-            android:lines="6"
-            android:textColor="@android:color/white"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:scrollHorizontally="false" />
+            android:padding="10dp"
+            android:textColor="@android:color/white" />
 
-        <Button
-            android:id="@+id/continue_btn"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rounded_button"
-            android:paddingBottom="10dp"
-            android:paddingTop="14dp"
-            android:layout_marginBottom="20dp"
-            android:text="Agregar"
-            android:textColor="@android:color/white"
-            android:textSize="15dp"
-            android:onClick="onClickAddComment"/>
+
+
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/continue_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_button"
+        android:onClick="onClickAddComment"
+        android:paddingBottom="10dp"
+        android:gravity="center_horizontal"
+        android:paddingTop="14dp"
+        android:text="Agregar"
+        android:textColor="@android:color/white"
+        android:textSize="15dp" />
+
 </RelativeLayout>

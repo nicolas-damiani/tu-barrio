@@ -194,7 +194,7 @@ namespace TuBarrio.Web.Api.Controllers
         }
 
         [HttpPost]
-        [Route("api/Publication/AddComment")]
+        [Route("api/Publication/Comment")]
         public IHttpActionResult AddCommentToPublication([FromBody]CommentModel commentModel, int publicationId)
         {
             try
@@ -257,6 +257,7 @@ namespace TuBarrio.Web.Api.Controllers
             {
                 return Content(HttpStatusCode.InternalServerError, ex.Message);
             }
+
         }
 
         [HttpPost]
@@ -313,4 +314,9 @@ namespace TuBarrio.Web.Api.Controllers
 
 
     }
-}
+
+        }
+
+
+
+       

@@ -34,17 +34,16 @@ public class AddCommentToPublication {
     public Comment comment;
 
 
-    public AddCommentToPublication(final Activity activity, Publication publication, Comment comment) {
+    public AddCommentToPublication(final Activity activity, final Publication publication, Comment comment) {
         this.activity = activity;
         this.comment = comment;
         this.publication = publication;
         this.context = activity.getApplicationContext();
         params = new HashMap<String, String>();
 
-        String url = Constants.URL + "api/Publication/Comment";
+        String url = Constants.URL + "api/Publication/Comment?publicationId="+publication.getId();
         params.put("Text", comment.getText());
         params.put("CreatedOn", comment.getCreatedOn().toString());
-        params.put("PublicationId", publication.getId()+"");
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -52,6 +51,7 @@ public class AddCommentToPublication {
                     public void onResponse(String response) {
 
                         Intent publicationIntent = new Intent(activity, ViewPublicationActivity.class);
+                        publicationIntent.putExtra("publication", publication);
                         activity.startActivity(publicationIntent);
                         activity.finish();
                     }

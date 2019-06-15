@@ -33,10 +33,11 @@ public class ViewPublicationCommentsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_publication_comments);
         initializeView();
-        InitializeButtons();
-        setComments();
-        publication = (Publication) getIntent().getSerializableExtra("publication");
         addComment = (Button)findViewById(R.id.add_comment_btn);
+        InitializeButtons();
+        publication = (Publication) getIntent().getSerializableExtra("publication");
+        activity = this;
+        setComments();
     }
 
     private void initializeView(){

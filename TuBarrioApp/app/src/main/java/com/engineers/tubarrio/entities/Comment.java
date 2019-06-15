@@ -15,7 +15,7 @@ public class Comment {
         try {
             this.text = jsonObj.has("Text")?jsonObj.getString("Text"):"";
             //  this.createdOn= jsonObj.has("CreatedOn")?jsonObj.getString("Title"):"";
-            this.creator = new User(new JSONObject(jsonObj.getString("User")));
+            this.creator = new User(new JSONObject(jsonObj.getString("Creator")));
 
         } catch (JSONException e) {
             e.printStackTrace();
