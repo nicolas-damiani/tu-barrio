@@ -16,6 +16,9 @@ public class Publication implements Serializable{
     private Double latitude;
     private Date updatedOn;
     private String username;
+    private String creatorFirstName;
+
+    private String creatorLastName;
     private String userPhone;
     private String publicationImage;
 
@@ -100,5 +103,29 @@ public class Publication implements Serializable{
 
     public void setImage(String image) {
         this.publicationImage = image;
+    }
+
+    public String getCreatorFirstName() {
+        return creatorFirstName;
+    }
+
+    public void setCreatorFirstName(String creatorFirstName) {
+        this.creatorFirstName = creatorFirstName;
+    }
+
+    public String getCreatorLastName() {
+        return creatorLastName;
+    }
+
+    public void setCreatorLastName(String creatorLastName) {
+        this.creatorLastName = creatorLastName;
+    }
+
+    public String getPublicationImage() {
+        return publicationImage;
+    }
+
+    public void setPublicationImage(String publicationImage) {
+        this.publicationImage = publicationImage;
     }
 }
