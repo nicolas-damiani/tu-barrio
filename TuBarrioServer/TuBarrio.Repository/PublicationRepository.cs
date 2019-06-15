@@ -90,11 +90,17 @@ namespace TuBarrio.Repository
         public List<Comment> GetCommentsFromPublication(Publication publication)
         {
             List<Comment> returnList = new List<Comment>();
-            using(TuBarrioDbContext context = new TuBarrioDbContext())
+            List<Comment> comments = new List<Comment>();
+            using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
                 returnList = context.Publications.Include(p => p.Comments).Where(p => p.Id == publication.Id).FirstOrDefault().Comments;
+                foreach (Comment comment in returnList)
+                {
+                    Comment comment2 = context.Comments.Include(c => c.Creator).FirstOrDefault();
+                    comments.Add(comment2);
+                }
             }
-            return returnList;
+            return comments;
         }
 
 
@@ -113,7 +119,15 @@ namespace TuBarrio.Repository
         {
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                Publication toUpdate = context.Publications.Include(p => p.Comments).Where(p => p.Id == publicationToUpdate.Id).FirstOrDefault();
+                User user =  context.Users.Where(u => u.Email == newComment.Creator.Email).FirstOrDefault();
+                Publication toUpdate = context.Publications.Include(p => p.Author).Include(p => p.Comments).Where(p => p.Id == publicationToUpdate.Id).FirstOrDefault();
+                context.Users.Attach(user);
+                context.Entry(user).State = EntityState.Modified;
+                newComment.Creator = user;
+                newComment =  context.Comments.Add(newComment);
+
+               
+
                 toUpdate.Comments.Add(newComment);
                 context.SaveChanges();
             }

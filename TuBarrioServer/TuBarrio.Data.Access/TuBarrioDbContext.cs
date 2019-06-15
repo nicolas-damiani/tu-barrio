@@ -20,7 +20,11 @@ namespace TuBarrio.Data.Access
         public DbSet<EncodedImage> EncodedImages { get; set; }
 
 
-
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Publication>().HasMany(m => m.Comments).WithMany();
+            modelBuilder.Entity<Publication>().HasMany(m => m.Subsrcibers).WithMany();
+        }
 
 
     }

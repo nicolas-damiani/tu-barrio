@@ -67,11 +67,12 @@ namespace TuBarrio.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/Publications/AllFromUser")]
-        public IHttpActionResult GetAllPublicationsFromUser(string token)
+        public IHttpActionResult GetAllPublicationsFromUser()
         {
             try
             {
-                List<Publication> publications = publicationLogic.GetAllPublicationsFromUser(token);
+                User user = GetUserFromToken();
+                List<Publication> publications = publicationLogic.GetAllPublicationsFromUser(user.Token);
                 return Ok(publications);
             }
             catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
@@ -86,11 +87,12 @@ namespace TuBarrio.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/Publication/{id}")]
-        public IHttpActionResult GetPublicationById(int id, string token)
+        public IHttpActionResult GetPublicationById(int id)
         {
             try
             {
-                Publication result = publicationLogic.GetPublicationById(id, token);
+                User user = GetUserFromToken();
+                Publication result = publicationLogic.GetPublicationById(id, user.Token);
                 return Ok(result);
             }
             catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
@@ -152,12 +154,13 @@ namespace TuBarrio.Web.Api.Controllers
 
         [HttpPut]
         [Route("api/Publication")]
-        public IHttpActionResult UpdatePublication(string token, int id, [FromBody]PublicationModel model)
+        public IHttpActionResult UpdatePublication([FromBody]PublicationModel model, int id)
         {
             try
             {
+                User user = GetUserFromToken();
                 Publication publicationToUpdate = publicationLogic.GetPublicationFromModel(model);
-                publicationLogic.UpdatePublication(publicationToUpdate, id, token);
+                publicationLogic.UpdatePublication(publicationToUpdate, id, user.Token);
                 return Ok("Publicacion modificada exitosamente");
             }
             catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
@@ -172,11 +175,12 @@ namespace TuBarrio.Web.Api.Controllers
 
         [HttpDelete]
         [Route("api/Publication")]
-        public IHttpActionResult DeletePublication(int id, string token)
+        public IHttpActionResult DeletePublication(int id)
         {
             try
             {
-                publicationLogic.RemovePublication(id, token);
+                User user = GetUserFromToken();       
+               publicationLogic.RemovePublication(id, user.Token);
                 return Ok("Publicacion eliminada exitosamente");
             }
             catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
@@ -190,13 +194,15 @@ namespace TuBarrio.Web.Api.Controllers
         }
 
         [HttpPost]
-        [Route("api/Publication/{publicationId}/Comment")]
-        public IHttpActionResult AddCommentToPublication(string token, [FromBody]CommentModel commentModel, int publicationId)
+        [Route("api/Publication/AddComment")]
+        public IHttpActionResult AddCommentToPublication([FromBody]CommentModel commentModel, int publicationId)
         {
             try
             {
-                Publication publicationToModify = publicationLogic.GetPublicationById(publicationId, token);
+                User user = GetUserFromToken();
+                Publication publicationToModify = publicationLogic.GetPublicationById(publicationId, user.Token);
                 Comment commentToAdd = publicationLogic.GetCommentFromModel(commentModel);
+                commentToAdd.Creator = user;
                 publicationLogic.AddCommentToPublication(commentToAdd, publicationToModify);
                 return Ok("Comentario agregado a publicacion exitosamente");
             }
@@ -213,11 +219,12 @@ namespace TuBarrio.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/Publication/GetComments")]
-        public IHttpActionResult GetCommentsFromPublication(string token, int publicationId)
+        public IHttpActionResult GetCommentsFromPublication(int publicationId)
         {
             try
             {
-                Publication publicationToGet = publicationLogic.GetPublicationById(publicationId, token);
+                User user = GetUserFromToken();
+                Publication publicationToGet = publicationLogic.GetPublicationById(publicationId, user.Token);
                 List<Comment> comments = publicationLogic.GetCommentsFromPublication(publicationToGet);
                 return Ok(comments);
             }
@@ -234,7 +241,7 @@ namespace TuBarrio.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/Publication/GetFollowedPublications")]
-        public IHttpActionResult GetFollowedPublication(string token)
+        public IHttpActionResult GetFollowedPublication()
         {
             try
             {

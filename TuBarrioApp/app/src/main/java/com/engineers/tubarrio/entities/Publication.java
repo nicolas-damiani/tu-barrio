@@ -17,7 +17,7 @@ public class Publication implements Serializable{
     private Date updatedOn;
     private String username;
     private String userPhone;
-    private ArrayList<EncodedImage> images;
+    private String publicationImage;
 
     public Publication(JSONObject jsonObj) {
         try {
@@ -27,7 +27,7 @@ public class Publication implements Serializable{
             this.description = jsonObj.has("Description")?jsonObj.getString("Description"):"";
             this.longitude= jsonObj.has("Longitude")?jsonObj.getDouble("Longitude"):0;
             this.latitude= jsonObj.has("Latitude")?jsonObj.getDouble("Latitude"):0;
-          //  this.updatedOn= jsonObj.has("Title")?jsonObj.getString("Title"):"";
+            this.publicationImage= jsonObj.has("PublicationImage")?jsonObj.getString("PublicationImage"):"";
             this.username = jsonObj.has("AuthorEmail")?jsonObj.getString("AuthorEmail"):"";
         } catch (JSONException e) {
             e.printStackTrace();
@@ -94,11 +94,11 @@ public class Publication implements Serializable{
         this.username = username;
     }
 
-    public ArrayList<EncodedImage> getImages() {
-        return images;
+    public String getImage() {
+        return publicationImage;
     }
 
-    public void setImages(ArrayList<EncodedImage> images) {
-        this.images = images;
+    public void setImage(String image) {
+        this.publicationImage = image;
     }
 }
