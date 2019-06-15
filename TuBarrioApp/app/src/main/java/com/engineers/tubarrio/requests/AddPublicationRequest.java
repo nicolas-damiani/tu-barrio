@@ -12,23 +12,18 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.engineers.tubarrio.activities.MapsActivity;
+import com.engineers.tubarrio.activities.ViewPublicationActivity;
 import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.config.Constants;
 import com.engineers.tubarrio.entities.Publication;
 import com.engineers.tubarrio.entities.User;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SaveUser {
-
+public class AddPublicationRequest {
 
     Activity activity;
     Context context;
@@ -37,24 +32,28 @@ public class SaveUser {
     Notification pendingNotification;
 
 
-    public SaveUser(final Activity activity, User user) {
+    public AddPublicationRequest(final Activity activity, final Publication publication, boolean isEdit) {
         this.activity = activity;
         this.context = activity.getApplicationContext();
         params = new HashMap<String, String>();
 
-        String url = Constants.URL + "api/User";
-        params.put("Name", user.getFirstName());
-        params.put("Surname", user.getLastName());
-        params.put("Email", user.getEmail());
-        params.put("ProfileImage", user.getProfileImage());
-        params.put("Phone", user.getPhone());
+        String url = Constants.URL + "api/Publication";
+        params.put("Title", publication.getTitle());
+        params.put("Description", publication.getDescription());
+        params.put("Latitude", publication.getLatitude()+"");
+        params.put("Longitude", publication.getLongitude()+"");
+        params.put("PublicationImage", publication.getImage());
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+
+        int request = isEdit ? Request.Method.PUT : Request.Method.POST;
+
+        StringRequest postRequest = new StringRequest(request, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-                        Intent loginIntent = new Intent(activity, MapsActivity.class);
+                        Intent loginIntent = new Intent(activity, ViewPublicationActivity.class);
+                        loginIntent.putExtra("publication", publication);
                         activity.startActivity(loginIntent);
                         activity.finish();
                     }

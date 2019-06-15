@@ -32,15 +32,15 @@ namespace TuBarrio.Entities
 
 
 
-        public User(string name, string surname, string email, string token, string phone)
+        public User(string name, string surname, string email, string profileImage, string phone)
         {
             Name = name;
             Surname = surname;
             Email = email;
-            Token = token;
+            Token = "";
             Phone = phone;
             DeviceNotificationToken = "";
-            ProfileImage = "";
+            ProfileImage = profileImage;
             CreatedOn = DateTime.Now;
         }
 

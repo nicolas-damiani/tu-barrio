@@ -84,7 +84,7 @@ public class ExtraFunctions {
     public String convertBitmapToBase64(Bitmap image){
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            image.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+            image.compress(Bitmap.CompressFormat.JPEG, 30, baos); //bm is the bitmap object
             byte[] byteArrayImage = baos.toByteArray();
             return Base64.encodeToString(byteArrayImage, Base64.DEFAULT);
         }catch(Exception e){

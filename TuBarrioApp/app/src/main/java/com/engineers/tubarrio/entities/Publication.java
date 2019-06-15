@@ -34,6 +34,17 @@ public class Publication implements Serializable{
         }
     }
 
+    public Publication(){
+        this.id = 0;
+        this.title = "";
+        this.description = "";
+        this.latitude = 0.0;
+        this.longitude = 0.0;
+        this.publicationImage = "";
+        this.username = "";
+        this.userPhone = "";
+    }
+
 
 
     public int getId() { return id; }

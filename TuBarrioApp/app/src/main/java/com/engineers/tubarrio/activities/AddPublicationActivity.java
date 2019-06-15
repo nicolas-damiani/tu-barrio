@@ -25,10 +25,12 @@ import android.widget.Toast;
 
 import com.engineers.tubarrio.R;
 import com.engineers.tubarrio.config.Config;
+import com.engineers.tubarrio.entities.Publication;
 import com.engineers.tubarrio.entities.User;
 import com.engineers.tubarrio.helpers.ExtraFunctions;
 import com.engineers.tubarrio.dialogs.PhotoDialog;
 import com.engineers.tubarrio.requests.SendUserInformation;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
@@ -52,14 +54,39 @@ public class AddPublicationActivity extends AppCompatActivity implements OnMapRe
     private final AddPublicationActivity activity = this;
     static int CAMERA_REQUEST = 1;
     static int GALLERY_REQUEST = 2;
+    Publication publication;
+    private boolean isEditing;
+    EditText publicationNameEditText;
+    EditText descriptionEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_publication);
+        publication = (Publication) getIntent().getSerializableExtra("publication");
+        if (publication == null){
+            publication = new Publication();
+            isEditing = false;
+        }else{
+            isEditing = true;
+        }
         latLngSet = false;
         ((ScrollableMapFragment)getSupportFragmentManager().findFragmentById(R.id.map)).getMapAsync(this);
 
+        initializeViews();
+        if (isEditing)
+            setViews();
+
+    }
+
+    private void setViews() {
+        publicationNameEditText.setText(publication.getTitle());
+        descriptionEditText.setText(publication.getDescription());
+    }
+
+    private void initializeViews() {
+        publicationNameEditText = (EditText) findViewById(R.id.name_publication);
+        descriptionEditText = (EditText) findViewById(R.id.description_publication);
     }
 
 
@@ -93,14 +120,18 @@ public class AddPublicationActivity extends AppCompatActivity implements OnMapRe
                         .title("Ubicacion Evento"));
             }
         });
+        if (isEditing){
+            LatLng latLng= new LatLng(publication.getLatitude(),
+                    publication.getLongitude());
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.0f));
+
+            googleMap.addMarker(new MarkerOptions()
+                    .position(latLng));
+        }
     }
 
     public void onClickAdd(View view) {
 
-        EditText publicationNameEditText = (EditText) findViewById(R.id.name_publication);
-        EditText descriptionEditText = (EditText) findViewById(R.id.description_publication);
-        //ImageView image = (ImageView) findViewById(R.id.add_image_button);
-        //Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
         String publicationName = publicationNameEditText.getText().toString();
         String description = descriptionEditText.getText().toString();
         boolean cancel = false;
@@ -127,13 +158,16 @@ public class AddPublicationActivity extends AppCompatActivity implements OnMapRe
 //        }
 
         if (!cancel) {
-            Intent intent = new Intent(this, ViewPublicationActivity.class);
-            intent.putExtra("EVENT_NAME", publicationName);
-            intent.putExtra("EVENT_DESCRIPTION", description);
-            intent.putExtra("EVENT_LATITUDE", latitude);
-            intent.putExtra("EVENT_LONGITUDE", longitude);
+            publication.setLongitude(longitude);
+            publication.setLatitude(latitude);
+            publication.setTitle(publicationName);
+            publication.setDescription(description);
+            User user = Config.getLoggedUserInfo(this);
+            publication.setUsername(user.email);
+            publication.setUserPhone(user.getPhone());
+
             //intent.putExtra("EVENT_IMAGE", filename);
-            startActivity(intent);
+
         }
     }
 
@@ -193,6 +227,9 @@ public class AddPublicationActivity extends AppCompatActivity implements OnMapRe
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 ImageView imageView = (ImageView) findViewById(R.id.add_image_button);
                 imageView.setImageBitmap(selectedImage);
+
+                publication.setImage(extraFunctions.convertBitmapToBase64(selectedImage));
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 Toast.makeText(this, "Error al cargar la foto", Toast.LENGTH_LONG).show();
