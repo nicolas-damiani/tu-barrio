@@ -16,6 +16,7 @@ import com.engineers.tubarrio.R;
 import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.entities.Publication;
 import com.engineers.tubarrio.entities.User;
+import com.engineers.tubarrio.widgets.MenuBar;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.engineers.tubarrio.requests.FollowPublication;
 import com.engineers.tubarrio.requests.UnfollowPublication;
@@ -47,6 +48,7 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
         setContentView(R.layout.activity_view_publication);
         user  = Config.getLoggedUserInfo(this);
         activity = this;
+        MenuBar menuBar = new MenuBar(this);
         publication = (Publication) getIntent().getSerializableExtra("publication");
         if(user.getEmail().equals(publication.getCreator().getEmail())){
             isAuthor = true;

@@ -16,6 +16,7 @@ import com.engineers.tubarrio.config.Constants;
 import com.engineers.tubarrio.entities.User;
 import com.engineers.tubarrio.requests.GetStatisticsFromUser;
 import com.engineers.tubarrio.requests.SendUserInformation;
+import com.engineers.tubarrio.widgets.MenuBar;
 
 public class ProfileActivity extends Activity {
 
@@ -35,6 +36,7 @@ public class ProfileActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         activity = this;
+        MenuBar menuBar = new MenuBar(this);
         initializeViews();
         initializeButtons();
         getStatistics();

@@ -1,53 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#292E45"
+    android:orientation="vertical"
     tools:context=".activities.ViewPublicationCommentsActivity">
 
-    <LinearLayout
+    <include layout="@layout/menu_bar_layout" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="90dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:text="Comentarios"
-            android:textColor="@android:color/white"
-            android:textSize="40dp" />
-
-        <ListView
-            android:id="@+id/comments_list"
-            android:scrollbars="vertical"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="90dp"
+            android:orientation="vertical">
 
-            />
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Comentarios"
+                android:textColor="@android:color/white"
+                android:textSize="40dp" />
+
+            <ListView
+                android:id="@+id/comments_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+
+                />
 
 
-    </LinearLayout>
+        </LinearLayout>
 
 
-    <Button
-        android:id="@+id/add_comment_btn"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/rounded_button"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:text="Agregar comentario"
-        android:textColor="@android:color/white"
-        android:textSize="15dp" />
+        <Button
+            android:id="@+id/add_comment_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rounded_button"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="Agregar comentario"
+            android:textColor="@android:color/white"
+            android:textSize="15dp" />
+    </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>
