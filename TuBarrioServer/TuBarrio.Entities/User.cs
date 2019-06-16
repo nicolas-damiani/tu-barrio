@@ -14,6 +14,7 @@ namespace TuBarrio.Entities
         private string name;
         private string surname;
         private string email;
+      
         public string Surname { get { return surname; } set { if (IsNotEmptySurname(value)) surname = value; } }
         public string Name { get { return name; } set { if (IsNotEmptyName(value)) name = value; } }
 
@@ -88,5 +89,7 @@ namespace TuBarrio.Entities
                 return true;
             }
         }
+
+       
     }
 }

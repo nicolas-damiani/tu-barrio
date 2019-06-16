@@ -17,6 +17,9 @@ namespace TuBarrio.Repository
         void UpdateUser(User user);
         User GetUserByEmail(string username);
         void SetDeviceNotificationToken(User user, string deviceToken);
+        int GetCantPublications(User user);
+        int GetCantFollowed(User user);
+        int GetCantComments(User user);
 
     }
 }

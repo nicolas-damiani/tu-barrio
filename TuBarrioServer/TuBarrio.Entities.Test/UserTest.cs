@@ -13,13 +13,11 @@ namespace TuBarrio.Entities.Test
     public class UserTest
     {
         private User user;
-        private EncodedImage image;
-
+        
         [TestInitialize]
         public void SetUp()
         {
-            image = new EncodedImage("asd");
-            user = new User("Felipe", "Diaz", "felipe@hotmail.com","token","099112233" ,image);
+            user = new User("Felipe", "Diaz", "felipe@hotmail.com","token","099112233" );
         }
 
         [TestMethod]
@@ -101,11 +99,7 @@ namespace TuBarrio.Entities.Test
             Assert.AreEqual(user.DeviceNotificationToken, "");
         }
 
-        [TestMethod]
-        public void UserConstructorProfileImageTest()
-        {
-            Assert.AreEqual(user.ProfileImage.Image, "asd");
-        }
+      
 
         [TestMethod]
         public void UserEqualsWithAnotherObjectTest()
@@ -124,14 +118,14 @@ namespace TuBarrio.Entities.Test
         [TestMethod]
         public void UserEqualsTest()
         {
-            User sameUser = new User("Felipe", "Diaz", "felipe@hotmail.com","token","099112233", image);
+            User sameUser = new User("Felipe", "Diaz", "felipe@hotmail.com","token","099112233");
             Assert.AreEqual(user, sameUser);
         }
 
         [TestMethod]
         public void UserNotEqualsTest()
         {
-            User differentUser = new User("Felipe", "Diaz", "guille@hotmail.com", "token", "099112233", image);
+            User differentUser = new User("Felipe", "Diaz", "guille@hotmail.com", "token", "099112233");
             Assert.AreNotEqual(user, differentUser);
         }
 

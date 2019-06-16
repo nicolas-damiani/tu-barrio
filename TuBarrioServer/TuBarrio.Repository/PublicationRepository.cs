@@ -80,7 +80,7 @@ namespace TuBarrio.Repository
             List<Publication> returnList = new List<Publication>();
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                returnList = context.Publications.Include(p => p.PublicationImage).Include(p => p.Author).Where(p => p.Author.Id == user.Id).ToList();
+                returnList = context.Publications.Include(p => p.Comments).Include(p => p.Author).Where(p => p.Author.Id == user.Id).ToList();
 
             }
             return returnList;
@@ -130,16 +130,6 @@ namespace TuBarrio.Repository
             }
         }
 
-        public void DeleteCommentFromPublication(Comment commentToDelete, Publication publicationToUpdate)
-        {
-            using (TuBarrioDbContext context = new TuBarrioDbContext())
-            {
-                publicationToUpdate = context.Publications.Include(p => p.Comments).Where(p => p.Id == publicationToUpdate.Id).FirstOrDefault();
-                publicationToUpdate.Comments.Remove(commentToDelete);
-                context.SaveChanges();
-            }
-        }
-
         public Comment GetCommentById(Publication publicationToSearch,int id)
         {
             using(TuBarrioDbContext context = new TuBarrioDbContext())
@@ -185,7 +175,20 @@ namespace TuBarrio.Repository
 
             }
         }
-      
+
+        public void DeleteCommentFromPublication(int commentToDeleteId, int publicationToUpdateId)
+        {
+            using (TuBarrioDbContext context = new TuBarrioDbContext())
+            {
+                Publication publicationToupdate = context.Publications.Include(p => p.Comments).Where(p => p.Id == publicationToUpdateId).FirstOrDefault();
+                Comment commentToDelete = context.Comments.Where(c => c.Id == commentToDeleteId).FirstOrDefault();
+                context.Comments.Attach(commentToDelete);
+                context.Entry(commentToDelete).State = EntityState.Modified;
+                publicationToupdate.Comments.Remove(commentToDelete);
+                context.SaveChanges();
+            }
+        }
+
 
 
     }

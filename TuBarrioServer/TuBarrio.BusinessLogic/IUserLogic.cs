@@ -15,5 +15,8 @@ namespace TuBarrio.BusinessLogic
         bool IsUserAlreadyExisting(User user);
         User GetUserFromModel(UserModel user);
         void SetDeviceNotificationToken(string token, string deviceToken);
+        int GetCantPublications(User user);
+        int GetCantFollowed(User user);
+        int GetCantComments(User user);
     }
 }

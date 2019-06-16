@@ -101,6 +101,43 @@ namespace TuBarrio.Repository
             }
         }
 
+        public int GetCantComments(User user)
+        {
+            int cantComments;
+            using (TuBarrioDbContext context = new TuBarrioDbContext())
+            {
+                User userToGet = context.Users.Find(user.Email);
+                List<Comment> comments = context.Comments.Where(c => c.Creator.Email == user.Email).ToList();
+                cantComments = comments.Count();
+            }
+            return cantComments;
+            
+        }
+
+        public int GetCantPublications(User user)
+        {
+            int cantPublications;
+            using (TuBarrioDbContext context = new TuBarrioDbContext())
+            {
+                User userToGet = context.Users.Find(user.Email);
+                List<Publication> publications = context.Publications.Where(p => p.Author.Email == user.Email).ToList();
+                cantPublications = publications.Count();
+            }
+            return cantPublications;
+       
+        }
+
+        public int GetCantFollowed(User user)
+        {
+            int cantFollowed;
+            using (TuBarrioDbContext context = new TuBarrioDbContext())
+            {
+                User userToGet = context.Users.Find(user.Email);
+                List<Publication> publications = context.Publications.Include(p => p.Subsrcibers).Where(p => p.Subsrcibers.Any(s => s.Email == user.Email)).ToList();
+                cantFollowed = publications.Count();
+            }
+            return cantFollowed;
+        }
 
 
     }

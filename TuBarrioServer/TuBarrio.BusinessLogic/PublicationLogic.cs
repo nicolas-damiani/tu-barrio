@@ -97,12 +97,13 @@ namespace TuBarrio.BusinessLogic
             publicationRepository.AddCommentToPublication(newComment, publicationToUpdate);   
         }
 
-        public void DeleteCommentFromPublication(Comment commentToDelete, Publication publicationToUpdate, string token)
+        public void DeleteCommentFromPublication(int commentToDeleteId, int publicationToUpdateId, string token)
         {
             User author = authenticationLogic.GetUserWithToken(token);
+            Publication publicationToUpdate = this.GetPublicationById(publicationToUpdateId, token);
             if (author.Equals(publicationToUpdate.Author))
             {
-                publicationRepository.DeleteCommentFromPublication(commentToDelete, publicationToUpdate);
+                publicationRepository.DeleteCommentFromPublication(commentToDeleteId, publicationToUpdateId);
             }
             else
             {
@@ -116,10 +117,7 @@ namespace TuBarrio.BusinessLogic
             return new Publication(author, model.CreatedOn, model.Deleted, model.Description, model.Latitude, model.Longitude, model.Title, model.UpdatedOn, model.PublicationImage);
         }
 
-        public void DeleteCommentFromPublication(int id, Publication publicationToUpdate, string token)
-        {
-            throw new NotImplementedException();
-        }
+    
 
         public Comment GetCommentFromModel(CommentModel model)
         {

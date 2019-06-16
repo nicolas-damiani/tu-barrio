@@ -32,9 +32,7 @@ namespace TuBarrio.Web.Api.Controllers
         {
             IPublicationRepository publicationRepository = new PublicationRepository();
             IUserRepository userRepository = new UserRepository();
-
             this.authenticationLogic = new AuthenticationLogic(userRepository);
-
             this.publicationLogic = new PublicationLogic(publicationRepository, authenticationLogic);
             this.imageLogic = new EncodedImageLogic();
             this.userLogic = new UserLogic(userRepository);
@@ -128,30 +126,6 @@ namespace TuBarrio.Web.Api.Controllers
         }
 
 
-
-
-        //[HttpPost]
-        //[Route("api/Publication/{publicationId}/Images")]
-        //public IHttpActionResult AddImagesToPublication(int publicationId, string token, [FromBody]EncodedImageModel[] images)
-        //{
-        //    try
-        //    {
-        //        Publication publicationToModify = publicationLogic.GetPublicationById(publicationId, token);
-          
-        //        publicationLogic.AddImageToPublication(imagesToAdd, publicationToModify, id ,token);
-        //        return Ok("Imagen/es agregada/s exitosamente a la publicacion");
-        //    }
-        //    catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
-        //    {
-        //        return Content(HttpStatusCode.BadRequest, ex.Message);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return Content(HttpStatusCode.InternalServerError, ex.Message);
-        //    }
-        //}
-
-
         [HttpPut]
         [Route("api/Publication")]
         public IHttpActionResult UpdatePublication([FromBody]PublicationModel model, int id)
@@ -179,8 +153,8 @@ namespace TuBarrio.Web.Api.Controllers
         {
             try
             {
-                User user = GetUserFromToken();       
-               publicationLogic.RemovePublication(id, user.Token);
+                User user = GetUserFromToken();
+                publicationLogic.RemovePublication(id, user.Token);
                 return Ok("Publicacion eliminada exitosamente");
             }
             catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
@@ -309,10 +283,30 @@ namespace TuBarrio.Web.Api.Controllers
         }
 
 
-    }
 
+        [HttpDelete]
+        [Route("api/Publication/DeleteComment")]
+        public IHttpActionResult DeleteComment(int commentId, int publicationId)
+        {
+            try
+            {
+                User user = GetUserFromToken();
+                publicationLogic.DeleteCommentFromPublication(commentId, publicationId, user.Token);
+                return Ok("Comentario eliminado con exito");
+            }
+            catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
+            {
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.InternalServerError, ex.Message);
+            }
         }
 
+    }
+
+}
 
 
-       
+

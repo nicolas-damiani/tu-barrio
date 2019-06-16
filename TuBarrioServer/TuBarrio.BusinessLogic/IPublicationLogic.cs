@@ -19,7 +19,7 @@ namespace TuBarrio.BusinessLogic
         void UpdatePublication(Publication publicationToUpdate, int id, string token);
         void AddImageToPublication(string image, Publication publicationToUpdate,int id,string token);
         void AddCommentToPublication(Comment newComment, Publication publicationToUpdate);
-        void DeleteCommentFromPublication(Comment commentToDelete, Publication publicationToUpdate,string token);
+        void DeleteCommentFromPublication(int commentToDeleteId, int publicationToUpdateId,string token);
         Publication GetPublicationFromModel(PublicationModel model);
         Comment GetCommentFromModel(CommentModel model);
         List<Comment> GetCommentsFromPublication(Publication publicationToGetComments);
