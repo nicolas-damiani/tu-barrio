@@ -57,6 +57,12 @@ public class ViewPublicationCommentsActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setComments();
+    }
+
     private void InitializeButtons(){
         addComment.setOnClickListener(new View.OnClickListener() {
             @Override
