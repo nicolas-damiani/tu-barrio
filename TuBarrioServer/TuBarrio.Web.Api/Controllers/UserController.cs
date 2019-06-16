@@ -29,11 +29,11 @@ namespace TuBarrio.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/User/GetByToken")]
-        public IHttpActionResult GetUserByToken(string token)
+        public IHttpActionResult GetUserByToken()
         {
             try
             {
-                User user = authenticationLogic.GetUserWithToken(token);
+                User user = GetUserFromToken();
                 return Ok(user);
             }
             catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is UserException)
