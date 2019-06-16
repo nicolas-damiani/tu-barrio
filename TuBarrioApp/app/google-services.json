@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "879686178659",
+    "firebase_url": "https://tu-barrio-1556995528600.firebaseio.com",
+    "project_id": "tu-barrio-1556995528600",
+    "storage_bucket": "tu-barrio-1556995528600.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879686178659:android:387d8151c3668454",
+        "android_client_info": {
+          "package_name": "com.engineers.tubarrio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "879686178659-spnr3nhsngud4elttger3oolkme5go5g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.engineers.tubarrio",
+            "certificate_hash": "098c7b458c2dde54fff1c809bb59fbca5478f1f7"
+          }
+        },
+        {
+          "client_id": "879686178659-8jltmmpu2m4njctfff769eth058kdqk6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPbbEQQfKytf3n0UUZTnrBbSQoAHF78-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "879686178659-8jltmmpu2m4njctfff769eth058kdqk6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

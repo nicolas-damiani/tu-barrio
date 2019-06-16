@@ -33,14 +33,14 @@ namespace TuBarrio.Entities
 
 
 
-        public User(string name, string surname, string email, string profileImage, string phone)
+        public User(string name, string surname, string email, string profileImage, string phone, string fcmToken)
         {
             Name = name;
             Surname = surname;
             Email = email;
             Token = "";
             Phone = phone;
-            DeviceNotificationToken = "";
+            DeviceNotificationToken = fcmToken;
             ProfileImage = profileImage;
             CreatedOn = DateTime.Now;
         }

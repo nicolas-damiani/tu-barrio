@@ -90,11 +90,11 @@ namespace TuBarrio.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/User/LoginUserGoogle")]
-        public IHttpActionResult LogInGoogle(string googleToken)
+        public IHttpActionResult LogInGoogle(string googleToken, string fcmToken)
         {
             try
             {
-                String token = GetTokenInfo(googleToken);
+                String token = GetTokenInfo(googleToken, fcmToken);
                 User user =  authenticationLogic.GetUserWithToken(token);
                 UserModel userModel = new UserModel(user);
                 TokenModel tokenModel = new TokenModel(token, userModel);
@@ -138,7 +138,7 @@ namespace TuBarrio.Web.Api.Controllers
 
 
 
-        public string GetTokenInfo(String googleToken)
+        public string GetTokenInfo(String googleToken, string fcmToken)
         {
             String URL = "https://www.googleapis.com/oauth2/v3/tokeninfo";
             String urlParameters = "?id_token=" + googleToken;
@@ -153,7 +153,7 @@ namespace TuBarrio.Web.Api.Controllers
                 String email = dataObjects.email;
                 String name = dataObjects.given_name;
                 String surname = dataObjects.family_name;
-                return authenticationLogic.HandleGoogleSignIn(email, name, surname);
+                return authenticationLogic.HandleGoogleSignIn(email, name, surname, fcmToken);
             }
             throw new Exception("Error obteniendo datos de Google");
         }

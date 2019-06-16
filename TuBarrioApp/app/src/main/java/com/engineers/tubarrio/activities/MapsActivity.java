@@ -169,8 +169,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void setMarkers(){
-        int height = 20;
-        int width = 20;
+        int height = 200;
+        int width = 200;
         BitmapDrawable bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.pin);
         Bitmap b=bitmapdraw.getBitmap();
         Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);

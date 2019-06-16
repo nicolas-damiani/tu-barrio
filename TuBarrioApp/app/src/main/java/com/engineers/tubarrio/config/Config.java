@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.engineers.tubarrio.entities.User;
+import com.engineers.tubarrio.firebase.MyFirebaseMessagingService;
 
 import org.json.JSONObject;
 
@@ -24,6 +25,12 @@ public class Config {
     public static String getToken(Activity activity) {
         return activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("token", "");
     }
+
+    public static String getFCMToken(Activity activity) {
+        return activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("deviceToken", "");
+    }
+
+
 
     public static void setLoggedUserInfo(Activity activity, User user){
         assignSharedPreferences(activity, "userId", user.id+"");

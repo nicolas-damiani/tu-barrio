@@ -26,6 +26,7 @@ namespace TuBarrio.Repository
         {
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
+                user.Token = Guid.NewGuid().ToString();
                 context.Users.Add(user);
                 context.SaveChanges();
             }
