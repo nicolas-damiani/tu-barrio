@@ -26,14 +26,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".activities.ViewPublicationCommentsActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".activities.AddPublicationActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".activities.ViewPublicationCommentsActivity"></activity>
+        <activity android:name=".activities.AddPublicationActivity"></activity>
         <activity
             android:name=".activities.AddCommentToPublicationActivity"
-            android:label="@string/title_activity_add_comment_to_publication"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_activity_add_comment_to_publication"></activity>
         <activity android:name=".LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,10 +38,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.EditProfileActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.EditProfileActivity"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -79,12 +74,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
-        <activity android:name=".activities.ProfileActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.PublicationsActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.ViewPublicationActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 
