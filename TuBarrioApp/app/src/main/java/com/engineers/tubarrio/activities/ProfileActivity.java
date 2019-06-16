@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import com.engineers.tubarrio.R;
 import com.engineers.tubarrio.config.Config;
+import com.engineers.tubarrio.config.Constants;
 import com.engineers.tubarrio.entities.User;
+import com.engineers.tubarrio.requests.GetStatisticsFromUser;
 import com.engineers.tubarrio.requests.SendUserInformation;
 
 public class ProfileActivity extends Activity {
@@ -35,6 +37,18 @@ public class ProfileActivity extends Activity {
         activity = this;
         initializeViews();
         initializeButtons();
+        getStatistics();
+    }
+
+    private void getStatistics() {
+        new GetStatisticsFromUser(this) {
+            @Override
+            public void onFinished() {
+                publicationsTV.setText(this.statisticsUser.getCantPublications()+"");
+                commentsTV.setText(this.statisticsUser.getCantComments()+"");
+                followedTV.setText(this.statisticsUser.getCantFollowedPublications()+"");
+            }
+        };
     }
 
 
@@ -50,6 +64,8 @@ public class ProfileActivity extends Activity {
 
         user = Config.getLoggedUserInfo(this);
         nameTV.setText(user.firstName + " " + user.lastName);
+        emailTV.setText(user.getEmail());
+
 //        publicationsTV.setText(user.cantPublications);
 //        commentsTV.setText(user.cantComments);
 //        followedTV.setText(user.cantFollowed);
@@ -66,7 +82,7 @@ public class ProfileActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent goToNextActivity = new Intent(activity, PublicationsActivity.class);
-                goToNextActivity.putExtra("allPublications", false);
+                goToNextActivity.putExtra("allPublications", Constants.MY_PUBLICACTIONS);
                 activity.startActivity(goToNextActivity);
                 activity.finish();
             }
@@ -82,4 +98,9 @@ public class ProfileActivity extends Activity {
         });
     }
 
+    public void editProfileClick(View view) {
+        Intent goToNextActivity = new Intent(activity, EditProfileActivity.class);
+        goToNextActivity.putExtra("initial", false);
+        activity.startActivity(goToNextActivity);
+    }
 }

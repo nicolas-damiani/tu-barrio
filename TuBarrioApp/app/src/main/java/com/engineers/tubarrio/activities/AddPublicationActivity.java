@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -170,7 +171,8 @@ public class AddPublicationActivity extends AppCompatActivity implements OnMapRe
             publication.setLatitude(latitude);
             publication.setTitle(publicationName);
             publication.setDescription(description);
-            new AddPublicationRequest(this, publication, true);
+            publication.setCreator(Config.getLoggedUserInfo(activity));
+            new AddPublicationRequest(this, publication, isEditing);
             //intent.putExtra("EVENT_IMAGE", filename);
 
         }
@@ -188,6 +190,8 @@ public class AddPublicationActivity extends AppCompatActivity implements OnMapRe
 
     @Override
     public void onDialogCameraClick(DialogFragment dialog) {
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
         CameraImage();
     }
 
@@ -225,6 +229,7 @@ public class AddPublicationActivity extends AppCompatActivity implements OnMapRe
             Bitmap imageBitmap = BitmapFactory.decodeFile(extraFunctions.mCurrentPhotoPath);
             ImageView imageView = (ImageView) findViewById(R.id.user_image_profile);
             imageView.setImageBitmap(imageBitmap);
+            publication.setImage(extraFunctions.convertBitmapToBase64(imageBitmap));
         } else if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK) {
             try {
                 final Uri imageUri = data.getData();

@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import com.engineers.tubarrio.R;
 import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.entities.Publication;
 import com.engineers.tubarrio.entities.User;
+import com.engineers.tubarrio.helpers.LoadImageThread;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.engineers.tubarrio.requests.SubscribeUserToPublication;
 import com.engineers.tubarrio.requests.UnsubscribeUserToPublication;
@@ -87,13 +89,11 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
         }
 
         //TODO: Poner la primer imagen como fondo del cosito
-        final InputStream imageStream;
-        try {
-            imageStream = activity.getContentResolver().openInputStream(Uri.parse(publication.getImage()));
-            final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-            publicationImage.setImageBitmap(selectedImage);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+
+        if (!publication.getPublicationImage().isEmpty()) {
+            byte[] decodedString = Base64.decode( publication.getPublicationImage(), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            publicationImage.setImageBitmap(decodedByte);
         }
 
 
@@ -129,11 +129,14 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
             }
         });
 
+
+        //TODO
+        /*
         if(isSubscribed){
             new UnsubscribeUserToPublication(activity, publication);
         }else{
             new SubscribeUserToPublication(activity, publication);
-        }
+        }*/
 
     }
 

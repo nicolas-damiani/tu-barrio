@@ -1,5 +1,6 @@
 package com.engineers.tubarrio.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -39,12 +40,16 @@ public class EditProfileActivity extends AppCompatActivity implements PhotoDialo
     EditText phoneET;
     private ExtraFunctions extraFunctions;
     String imageString;
+    boolean initialActivity;
+    Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         extraFunctions = new ExtraFunctions(this);
+        initialActivity = getIntent().getBooleanExtra("initial", true);
+        activity = this;
         initializeViews();
     }
 
@@ -71,7 +76,19 @@ public class EditProfileActivity extends AppCompatActivity implements PhotoDialo
     private void continueActions(){
         if (hasValidateFields()){
             User user = getUserFromFields();
-            new SaveUser(this, user);
+            new SaveUser(this, user) {
+                @Override
+                public void onFinished() {
+                    if (initialActivity){
+
+                        Intent loginIntent = new Intent(activity, EditProfileActivity.class);
+                        activity.startActivity(loginIntent);
+                        activity.finish();
+                    }else{
+                        finish();
+                    }
+                }
+            };
         }
     }
 

@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SaveUser {
+public abstract class SaveUser {
 
 
     Activity activity;
@@ -46,7 +46,8 @@ public class SaveUser {
         params.put("Name", user.getFirstName());
         params.put("Surname", user.getLastName());
         params.put("Email", user.getEmail());
-        params.put("ProfileImage", user.getProfileImage());
+        if (user.getProfileImage() != null)
+            params.put("ProfileImage", user.getProfileImage());
         params.put("Phone", user.getPhone());
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
@@ -54,9 +55,7 @@ public class SaveUser {
                     @Override
                     public void onResponse(String response) {
 
-                        Intent loginIntent = new Intent(activity, MapsActivity.class);
-                        activity.startActivity(loginIntent);
-                        activity.finish();
+                        onFinished();
                     }
                 },
                 new Response.ErrorListener() {
@@ -98,4 +97,5 @@ public class SaveUser {
         };
         MySingleton.getInstance(context).addToRequestQueue(postRequest);
     }
+    public abstract void onFinished();
 }

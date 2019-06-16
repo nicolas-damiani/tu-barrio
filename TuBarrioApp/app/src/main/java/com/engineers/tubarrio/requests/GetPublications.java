@@ -33,15 +33,17 @@ public abstract class GetPublications {
     Notification pendingNotification;
 
 
-    public GetPublications(final Activity activity, boolean allPublications) {
+    public GetPublications(final Activity activity, int publicationFilter) {
         this.activity = activity;
         this.context = activity.getApplicationContext();
         params = new HashMap<String, String>();
 
         String url = "";
-        if (allPublications) {
+        if (publicationFilter == Constants.ALL_PUBLICATIONS) {
             url = Constants.URL + "api/Publications";
-        } else {
+        } else if (publicationFilter == Constants.FOLLOWED_PUBLICATIONS){
+            url = Constants.URL + "api/Publications/GetFollowedPublications";
+        }else{
             url = Constants.URL + "api/Publications/AllFromUser";
         }
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,

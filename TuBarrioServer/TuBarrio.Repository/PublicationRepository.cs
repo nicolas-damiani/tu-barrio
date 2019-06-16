@@ -61,6 +61,7 @@ namespace TuBarrio.Repository
                 olderPublication.Longitude = publicationToUpdate.Longitude;
                 olderPublication.Latitude = publicationToUpdate.Latitude;
                 olderPublication.UpdatedOn = publicationToUpdate.UpdatedOn;
+                olderPublication.PublicationImage = publicationToUpdate.PublicationImage;
                 context.SaveChanges();
             }
         }
@@ -80,7 +81,7 @@ namespace TuBarrio.Repository
             List<Publication> returnList = new List<Publication>();
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                returnList = context.Publications.Include(p => p.Comments).Include(p => p.Author).Where(p => p.Author.Id == user.Id).ToList();
+                returnList = context.Publications.Include(p => p.Author).Where(p => p.Author.Id == user.Id).ToList();
 
             }
             return returnList;

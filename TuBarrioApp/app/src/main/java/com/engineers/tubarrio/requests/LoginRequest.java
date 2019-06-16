@@ -54,6 +54,7 @@ public class LoginRequest {
                             User user = Config.getLoggedUserInfo(activity);
                             if (user.getPhone().isEmpty()){
                                 Intent loginIntent = new Intent(activity, EditProfileActivity.class);
+                                loginIntent.putExtra("initial", true);
                                 activity.startActivity(loginIntent);
                                 activity.finish();
                             }else{

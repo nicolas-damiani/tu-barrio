@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.engineers.tubarrio.R;
+import com.engineers.tubarrio.config.Constants;
 import com.engineers.tubarrio.entities.Publication;
 import com.engineers.tubarrio.requests.GetPublications;
 import com.engineers.tubarrio.widgets.MenuBar;
@@ -122,7 +123,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        boolean allPublications = true;
+        int allPublications = Constants.ALL_PUBLICATIONS;
         new GetPublications(this, allPublications) {
             @Override
             public void onFinished() {

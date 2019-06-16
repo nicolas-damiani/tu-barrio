@@ -35,7 +35,7 @@ public class Publication implements Serializable{
             this.description = jsonObj.has("Description")?jsonObj.getString("Description"):"";
             this.longitude= jsonObj.has("Longitude")?jsonObj.getDouble("Longitude"):0;
             this.latitude= jsonObj.has("Latitude")?jsonObj.getDouble("Latitude"):0;
-            this.publicationImage= jsonObj.has("PublicationImage")?jsonObj.getString("PublicationImage"):"";
+            this.publicationImage= jsonObj.has("PublicationImage") && !jsonObj.getString("PublicationImage").equals("null")?jsonObj.getString("PublicationImage"):"";
             this.creator = new User(new JSONObject(jsonObj.getString("Creator")));
         } catch (JSONException e) {
             e.printStackTrace();

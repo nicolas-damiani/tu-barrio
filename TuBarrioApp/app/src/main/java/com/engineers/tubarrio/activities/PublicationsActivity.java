@@ -21,14 +21,14 @@ public class PublicationsActivity extends Activity {
     List<Publication> mListPublications;
     ListView publicationsListView;
     Activity activity;
-    boolean allPublications;
+    int allPublications;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publications);
         activity = this;
-        allPublications = (boolean) getIntent().getSerializableExtra("allPublications");
+        allPublications = getIntent().getIntExtra("allPublications", 0);
         initializeView();
         setPublications();
     }

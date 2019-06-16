@@ -71,7 +71,13 @@ namespace TuBarrio.Web.Api.Controllers
             {
                 User user = GetUserFromToken();
                 List<Publication> publications = publicationLogic.GetAllPublicationsFromUser(user.Token);
-                return Ok(publications);
+                List<PublicationModel> publicationModels = new List<PublicationModel>();
+                foreach (Publication publication in publications)
+                {
+                    PublicationModel publicationModel = new PublicationModel(publication);
+                    publicationModels.Add(publicationModel);
+                }
+                return Ok(publicationModels);
             }
             catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
             {
@@ -91,7 +97,8 @@ namespace TuBarrio.Web.Api.Controllers
             {
                 User user = GetUserFromToken();
                 Publication result = publicationLogic.GetPublicationById(id, user.Token);
-                return Ok(result);
+                PublicationModel pubModel = new PublicationModel(result);
+                return Ok(pubModel);
             }
             catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
             {
@@ -133,6 +140,7 @@ namespace TuBarrio.Web.Api.Controllers
             try
             {
                 User user = GetUserFromToken();
+                model.Creator = new UserModel(user);
                 Publication publicationToUpdate = publicationLogic.GetPublicationFromModel(model);
                 publicationLogic.UpdatePublication(publicationToUpdate, id, user.Token);
                 return Ok("Publicacion modificada exitosamente");

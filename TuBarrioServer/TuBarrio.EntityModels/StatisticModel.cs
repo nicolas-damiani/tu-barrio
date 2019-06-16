@@ -9,13 +9,13 @@ namespace TuBarrio.EntityModels
    public class StatisticModel
     {
         public int CantPublications { get; set; }
-        public int CantFollowedPublicatios { get; set; }
+        public int CantFollowedPublications { get; set; }
         public int CantComments { get; set; }
 
         public StatisticModel(int publications, int followed, int comments)
         {
             CantComments = comments;
-            CantFollowedPublicatios = followed;
+            CantFollowedPublications = followed;
             CantPublications = publications;
         }
 

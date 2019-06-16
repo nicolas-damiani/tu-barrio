@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#292E45"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".activities.ProfileActivity">
@@ -15,7 +16,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#292E45"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -24,6 +24,7 @@
                 android:id="@+id/edit_profile"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:onClick="editProfileClick"
                 android:layout_marginLeft="150dp"
                 android:layout_marginTop="50dp"
                 android:src="@drawable/edit_publication" />
@@ -49,6 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:layout_marginBottom="15dp"
                 android:text="maria@snow.com"
                 android:textSize="17dp" />
 
@@ -72,13 +74,15 @@
                         android:id="@+id/publications"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="150"
+                        android:text="0"
+                        android:textColor="#292E45"
                         android:textSize="15dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Publicaciones"
+                        android:textColor="#292E45"
                         android:textSize="15dp" />
 
                 </LinearLayout>
@@ -94,12 +98,14 @@
                         android:id="@+id/followed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="125"
+                        android:text="0"
+                        android:textColor="#292E45"
                         android:textSize="15dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="#292E45"
                         android:text="Seguidas"
                         android:textSize="15dp" />
 
@@ -116,13 +122,15 @@
                         android:id="@+id/comments"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="251"
+                        android:text="0"
+                        android:textColor="#292E45"
                         android:textSize="15dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Comentarios"
+                        android:textColor="#292E45"
                         android:textSize="15dp" />
 
                 </LinearLayout>
@@ -130,30 +138,30 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                android:text="Ver publicaciones:"
-                android:textSize="15dp" />
 
             <Button
                 android:id="@+id/btn_publications"
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/rounded_button"
-                android:text="Publicaciones"
+                android:text="Ver Publicaciones"
                 android:textColor="@android:color/white" />
 
 
             <Button
                 android:id="@+id/btn_new_publication"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/rounded_button"
                 android:text="Nueva publicación"
+                android:layout_marginBottom="15dp"
                 android:textColor="@android:color/white"
                 android:textSize="15dp" />
         </LinearLayout>
