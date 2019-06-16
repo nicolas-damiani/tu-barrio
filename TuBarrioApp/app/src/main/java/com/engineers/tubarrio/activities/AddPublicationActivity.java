@@ -29,6 +29,7 @@ import com.engineers.tubarrio.entities.Publication;
 import com.engineers.tubarrio.entities.User;
 import com.engineers.tubarrio.helpers.ExtraFunctions;
 import com.engineers.tubarrio.dialogs.PhotoDialog;
+import com.engineers.tubarrio.requests.AddPublicationRequest;
 import com.engineers.tubarrio.requests.SendUserInformation;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -36,6 +37,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.engineers.tubarrio.fragments.ScrollableMapFragment;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -64,6 +67,7 @@ public class AddPublicationActivity extends AppCompatActivity implements OnMapRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_publication);
         publication = (Publication) getIntent().getSerializableExtra("publication");
+        extraFunctions = new ExtraFunctions(this);
         if (publication == null){
             publication = new Publication();
             isEditing = false;
@@ -82,6 +86,10 @@ public class AddPublicationActivity extends AppCompatActivity implements OnMapRe
     private void setViews() {
         publicationNameEditText.setText(publication.getTitle());
         descriptionEditText.setText(publication.getDescription());
+        if (!publication.getImage().isEmpty()){
+            TextView addImageTextView= (TextView) findViewById(R.id.add_image_tv);
+            addImageTextView.setVisibility(View.GONE);
+        }
     }
 
     private void initializeViews() {
@@ -162,10 +170,7 @@ public class AddPublicationActivity extends AppCompatActivity implements OnMapRe
             publication.setLatitude(latitude);
             publication.setTitle(publicationName);
             publication.setDescription(description);
-            User user = Config.getLoggedUserInfo(this);
-            publication.setUsername(user.email);
-            publication.setUserPhone(user.getPhone());
-
+            new AddPublicationRequest(this, publication, true);
             //intent.putExtra("EVENT_IMAGE", filename);
 
         }
@@ -218,14 +223,14 @@ public class AddPublicationActivity extends AppCompatActivity implements OnMapRe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             Bitmap imageBitmap = BitmapFactory.decodeFile(extraFunctions.mCurrentPhotoPath);
-            ImageView imageView = (ImageView) findViewById(R.id.add_image_button);
+            ImageView imageView = (ImageView) findViewById(R.id.user_image_profile);
             imageView.setImageBitmap(imageBitmap);
         } else if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK) {
             try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                ImageView imageView = (ImageView) findViewById(R.id.add_image_button);
+                ImageView imageView = (ImageView) findViewById(R.id.user_image_profile);
                 imageView.setImageBitmap(selectedImage);
 
                 publication.setImage(extraFunctions.convertBitmapToBase64(selectedImage));

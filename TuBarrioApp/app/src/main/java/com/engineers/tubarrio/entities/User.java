@@ -5,7 +5,9 @@ import android.util.JsonReader;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     public String firstName;
     public String lastName;

@@ -136,4 +136,10 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
         }
 
     }
+
+    public void onClickEditPublication(View view) {
+        Intent goToNextActivity = new Intent(activity, AddPublicationActivity.class);
+        goToNextActivity.putExtra("publication", publication);
+        activity.startActivity(goToNextActivity);
+    }
 }

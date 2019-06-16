@@ -49,8 +49,6 @@ public class Publication implements Serializable{
         this.latitude = 0.0;
         this.longitude = 0.0;
         this.publicationImage = "";
-        this.username = "";
-        this.userPhone = "";
     }
 
 

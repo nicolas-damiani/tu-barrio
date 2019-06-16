@@ -112,7 +112,7 @@ namespace TuBarrio.BusinessLogic
 
         public Publication GetPublicationFromModel(PublicationModel model)
         {
-            User author = authenticationLogic.GetUserByEmail(model.AuthorEmail);
+            User author = authenticationLogic.GetUserByEmail(model.Creator.Email);
             return new Publication(author, model.CreatedOn, model.Deleted, model.Description, model.Latitude, model.Longitude, model.Title, model.UpdatedOn, model.PublicationImage);
         }
 

@@ -30,7 +30,7 @@ public class LoadImageThread extends AsyncTask<Bundle, Void, Bitmap> {
         Bitmap bm =null;
         byte[] decodedString = Base64.decode(b[0].getString("imageBit"), Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        bm = getResizedBitmap(decodedByte, imageViewReference.get().getMaxWidth(), imageViewReference.get().getMaxHeight());
+        bm = getResizedBitmap(decodedByte, 100, 100);
 
         return bm;
     }

@@ -21,7 +21,7 @@ namespace TuBarrio.BusinessLogic.Test
         private User userSebastian;
         private User userFederico;
         private string tokenFederico;
-
+        /*
         [TestInitialize]
         public void SetUp()
         {
@@ -34,7 +34,7 @@ namespace TuBarrio.BusinessLogic.Test
             userFederico = new User("federico", "engel", "federico@hotmail.com", "123", "123", null);
             userRepository.AddUser(userFederico);
            
-        }
+        }*/
 
         [TestMethod]
         public void AddOneUserTest()
@@ -56,13 +56,13 @@ namespace TuBarrio.BusinessLogic.Test
         {
             Assert.IsTrue(userLogic.IsUserAlreadyExisting(userFederico));
         }
-
+/*
         [TestMethod]
         public void IsUserAlreadyExistingFalseTest()
         {
             User notExistingUser = new User("Juan", "Perez", "jp@gmail.com", "123", "123", new EncodedImage("image"));
             Assert.IsFalse(userLogic.IsUserAlreadyExisting(notExistingUser));
-        }
+        }*/
 
         [TestMethod]
         public void ModifyUserTest()
@@ -73,7 +73,7 @@ namespace TuBarrio.BusinessLogic.Test
             User userModified = users[0];
             Assert.AreEqual("Martin", userModified.Name);
         }
-
+        /*
         [TestMethod]
         public void GetUserFromModelTest()
         {
@@ -87,7 +87,7 @@ namespace TuBarrio.BusinessLogic.Test
             User userFromModel = new User(model.Name, model.Surname, model.Email,"",model.Phone, new EncodedImage(model.ProfileImage));
             User userResult = userLogic.GetUserFromModel(model);
             Assert.AreEqual(userFromModel, userResult);
-        }
+        }*/
 
         [TestMethod]
         public void SetDeviceNotificationTest()

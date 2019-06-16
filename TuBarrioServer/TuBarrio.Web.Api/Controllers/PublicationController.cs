@@ -112,7 +112,7 @@ namespace TuBarrio.Web.Api.Controllers
             try
             {
                 User user = GetUserFromToken();
-                model.AuthorEmail = user.Email;
+                model.Creator = new UserModel(user);
                 Publication publicationToAdd = publicationLogic.GetPublicationFromModel(model);
                 publicationLogic.AddPublication(publicationToAdd);
                 return Ok("Publicacion agregada exitosamente");
