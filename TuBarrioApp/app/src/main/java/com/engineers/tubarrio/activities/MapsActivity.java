@@ -1,6 +1,8 @@
 package com.engineers.tubarrio.activities;
 
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -167,13 +169,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void setMarkers(){
+        int height = 200;
+        int width = 200;
+        BitmapDrawable bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.pin);
+        Bitmap b=bitmapdraw.getBitmap();
+        Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
         for (int i = 0; i<mPublications.size(); i++) {
             Publication publication = mPublications.get(i);
             mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(publication.getLatitude(), publication.getLongitude()))
                     .title(publication.getTitle())
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
+                    .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
         }
+
+
     }
 
 }

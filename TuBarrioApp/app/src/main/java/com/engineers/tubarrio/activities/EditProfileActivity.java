@@ -81,7 +81,7 @@ public class EditProfileActivity extends AppCompatActivity implements PhotoDialo
                 public void onFinished() {
                     if (initialActivity){
 
-                        Intent loginIntent = new Intent(activity, EditProfileActivity.class);
+                        Intent loginIntent = new Intent(activity, MapsActivity.class);
                         activity.startActivity(loginIntent);
                         activity.finish();
                     }else{

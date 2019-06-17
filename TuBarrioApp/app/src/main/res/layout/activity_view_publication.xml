@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ViewPublicationActivity">
+    tools:context=".activities.ViewPublicationActivity"
+    android:orientation="vertical">
 
+    <include layout="@layout/menu_bar_layout"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -148,4 +150,4 @@
                 </LinearLayout>
         </LinearLayout>
     </ScrollView>
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

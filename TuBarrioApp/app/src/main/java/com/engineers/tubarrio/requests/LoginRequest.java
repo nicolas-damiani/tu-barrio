@@ -40,7 +40,7 @@ public class LoginRequest {
         this.context = activity.getApplicationContext();
         params = new HashMap<String, String>();
 
-        String url = Constants.URL + "api/User/LoginUserGoogle?googleToken="+token;
+        String url = Constants.URL + "api/User/LoginUserGoogle?googleToken="+token+"&fcmToken="+Config.getFCMToken(activity);
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override

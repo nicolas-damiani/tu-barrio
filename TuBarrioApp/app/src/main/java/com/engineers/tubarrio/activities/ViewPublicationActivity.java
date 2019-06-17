@@ -4,9 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
@@ -18,20 +16,15 @@ import com.engineers.tubarrio.R;
 import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.entities.Publication;
 import com.engineers.tubarrio.entities.User;
-import com.engineers.tubarrio.helpers.LoadImageThread;
+import com.engineers.tubarrio.widgets.MenuBar;
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.engineers.tubarrio.requests.SubscribeUserToPublication;
-import com.engineers.tubarrio.requests.UnsubscribeUserToPublication;
+import com.engineers.tubarrio.requests.FollowPublication;
+import com.engineers.tubarrio.requests.UnfollowPublication;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import org.w3c.dom.Text;
-
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 
 public class ViewPublicationActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -42,7 +35,7 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
     TextView pubUserPhone;
     User user;
     Boolean isAuthor = false;
-    Boolean isSubscribed = false;
+    Boolean isFollowing = false;
     ImageView editIcon;
     ImageView publicationImage;
     Button viewComments;
@@ -55,14 +48,14 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
         setContentView(R.layout.activity_view_publication);
         user  = Config.getLoggedUserInfo(this);
         activity = this;
+        MenuBar menuBar = new MenuBar(this);
         publication = (Publication) getIntent().getSerializableExtra("publication");
         if(user.getEmail().equals(publication.getCreator().getEmail())){
             isAuthor = true;
         }
 
-        //TODO ver si esta subscribed a la publicacion
-        if(false){
-            isSubscribed = true;
+        if(publication.getFollowers().contains(user)){
+            isFollowing = true;
         }
 
         initializeViews();
@@ -88,8 +81,6 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
             editIcon.setVisibility(View.GONE);
         }
 
-        //TODO: Poner la primer imagen como fondo del cosito
-
         if (!publication.getPublicationImage().isEmpty()) {
             byte[] decodedString = Base64.decode( publication.getPublicationImage(), Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
@@ -97,7 +88,7 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
         }
 
 
-        if(isSubscribed){
+        if(isFollowing){
             followPublication.setText("Dejar de seguir");
         }
     }
@@ -130,13 +121,16 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
         });
 
 
-        //TODO
-        /*
-        if(isSubscribed){
-            new UnsubscribeUserToPublication(activity, publication);
-        }else{
-            new SubscribeUserToPublication(activity, publication);
-        }*/
+        followPublication.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isFollowing){
+                    new UnfollowPublication(activity, publication);
+                }else{
+                    new FollowPublication(activity, publication);
+                }
+            }
+        });
 
     }
 
@@ -144,5 +138,6 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
         Intent goToNextActivity = new Intent(activity, AddPublicationActivity.class);
         goToNextActivity.putExtra("publication", publication);
         activity.startActivity(goToNextActivity);
+        activity.finish();
     }
 }

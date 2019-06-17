@@ -42,12 +42,12 @@ namespace TuBarrio.BusinessLogic
                 throw new InvalidCredentialException();
         }
 
-        public string HandleGoogleSignIn(string email, string name, string surname)
+        public string HandleGoogleSignIn(string email, string name, string surname, string fcmToken)
         {
             User user = userRepository.GetUserByEmail(email);
             if (user == null)
             {
-                user = new User(name, surname, email, new Guid().ToString(), "");
+                user = new User(name, surname, email, "", "", fcmToken);
                 userRepository.AddUser(user);
             }
             return LogIn(user.Email);

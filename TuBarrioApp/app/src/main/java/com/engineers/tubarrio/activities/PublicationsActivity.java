@@ -12,6 +12,7 @@ import com.engineers.tubarrio.adapters.PublicationsAdapter;
 import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.entities.Publication;
 import com.engineers.tubarrio.requests.GetPublications;
+import com.engineers.tubarrio.widgets.MenuBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public class PublicationsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publications);
+        MenuBar menuBar = new MenuBar(this);
         activity = this;
         allPublications = getIntent().getIntExtra("allPublications", 0);
         initializeView();
