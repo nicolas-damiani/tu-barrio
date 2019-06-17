@@ -14,12 +14,13 @@ import com.engineers.tubarrio.activities.ViewPublicationActivity;
 import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.config.Constants;
 import com.engineers.tubarrio.entities.Publication;
+import com.engineers.tubarrio.widgets.Loader;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UnfollowPublication {
+public abstract class UnfollowPublication {
 
 
     Activity activity;
@@ -29,31 +30,28 @@ public class UnfollowPublication {
 
 
     public UnfollowPublication(final Activity activity, Publication publication) {
+        final Loader loader = new Loader(activity);
+        loader.showLoader();
         this.activity = activity;
         this.publication = publication;
         this.context = activity.getApplicationContext();
         params = new HashMap<String, String>();
 
-        //TODO no se si esa es la ruta
-        String url = Constants.URL + "api/Publication/Unfollow";
-        params.put("PublicationId", publication.getId()+"");
+        String url = Constants.URL + "api/Publication/Unfollow?publicationId="+publication.getId();
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
-                        Intent publicationIntent = new Intent(activity, ViewPublicationActivity.class);
-                        activity.startActivity(publicationIntent);
-                        activity.finish();
+                        loader.hideLoader();
+                        onFinished();
                     }
                 },
                 new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-//                        Loader loader = new Loader(activity);
-//                        loader.hideLoader();
+                        loader.hideLoader();
                         if (error != null) {
                             if (error.networkResponse != null) {
                                 byte[] data = error.networkResponse.data;
@@ -87,4 +85,6 @@ public class UnfollowPublication {
         };
         MySingleton.getInstance(context).addToRequestQueue(postRequest);
     }
+
+    public abstract void onFinished();
 }

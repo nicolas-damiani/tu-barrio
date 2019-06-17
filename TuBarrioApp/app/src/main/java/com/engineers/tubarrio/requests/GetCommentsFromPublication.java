@@ -14,6 +14,7 @@ import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.config.Constants;
 import com.engineers.tubarrio.entities.Comment;
 import com.engineers.tubarrio.entities.Publication;
+import com.engineers.tubarrio.widgets.Loader;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,15 +36,20 @@ public abstract class GetCommentsFromPublication {
 
 
     public GetCommentsFromPublication(final Activity activity, Publication publication) {
+        final Loader loader = new Loader(activity);
+        loader.showLoader();
         this.activity = activity;
         this.context = activity.getApplicationContext();
         params = new HashMap<String, String>();
+
+        comments = new ArrayList<>();
 
         String url = Constants.URL + "api/Publication/GetComments?publicationId="+publication.getId();
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        loader.hideLoader();
 
 
                         try {
@@ -57,8 +63,8 @@ public abstract class GetCommentsFromPublication {
                                     commentsList.add(navigationMenuOption);
                                 }
                                 comments = commentsList;
-                                onFinished();
                             }
+                            onFinished();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -69,6 +75,7 @@ public abstract class GetCommentsFromPublication {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        loader.hideLoader();
 //                        Loader loader = new Loader(activity);
 //                        loader.hideLoader();
                         if (error != null) {

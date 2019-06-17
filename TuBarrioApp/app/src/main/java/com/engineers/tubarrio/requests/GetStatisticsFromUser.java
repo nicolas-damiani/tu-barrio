@@ -14,6 +14,7 @@ import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.config.Constants;
 import com.engineers.tubarrio.entities.Publication;
 import com.engineers.tubarrio.entities.StatisticsUser;
+import com.engineers.tubarrio.widgets.Loader;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +35,8 @@ public abstract class GetStatisticsFromUser {
 
 
     public GetStatisticsFromUser(final Activity activity) {
+        final Loader loader = new Loader(activity);
+        loader.showLoader();
         this.activity = activity;
         this.context = activity.getApplicationContext();
         params = new HashMap<String, String>();
@@ -44,6 +47,7 @@ public abstract class GetStatisticsFromUser {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        loader.hideLoader();
 
 
                         try {
@@ -61,6 +65,7 @@ public abstract class GetStatisticsFromUser {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        loader.hideLoader();
 //                        Loader loader = new Loader(activity);
 //                        loader.hideLoader();
                         if (error != null) {

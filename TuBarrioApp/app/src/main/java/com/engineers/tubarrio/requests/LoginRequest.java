@@ -19,6 +19,7 @@ import com.engineers.tubarrio.activities.MapsActivity;
 import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.config.Constants;
 import com.engineers.tubarrio.entities.User;
+import com.engineers.tubarrio.widgets.Loader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +37,8 @@ public class LoginRequest {
 
 
     public LoginRequest(final Activity activity, String token) {
+        final Loader loader = new Loader(activity);
+        loader.showLoader();
         this.activity = activity;
         this.context = activity.getApplicationContext();
         params = new HashMap<String, String>();
@@ -45,6 +48,7 @@ public class LoginRequest {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        loader.hideLoader();
 
                         try {
                             JSONObject jsonObject = new JSONObject(response);
@@ -73,6 +77,7 @@ public class LoginRequest {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        loader.hideLoader();
 //                        Loader loader = new Loader(activity);
 //                        loader.hideLoader();
                         if (error != null) {

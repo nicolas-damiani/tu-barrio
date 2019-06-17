@@ -104,9 +104,13 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         android:layout_marginBottom="20dp"
+        android:stateListAnimator="@null"
         android:text="Continuar"
         android:textColor="@android:color/white"
         android:textSize="15dp" />
+
+
+    <include layout="@layout/loader" />
 
 
     <!--

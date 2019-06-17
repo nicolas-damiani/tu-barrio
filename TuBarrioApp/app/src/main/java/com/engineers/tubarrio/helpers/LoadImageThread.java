@@ -20,14 +20,14 @@ public class LoadImageThread extends AsyncTask<Bundle, Void, Bitmap> {
 
 
     public LoadImageThread(Context context, ImageView view) {
-        this.context=context;
+        this.context = context;
         imageViewReference = new WeakReference<ImageView>(view);
     }
 
     @Override
     protected Bitmap doInBackground(Bundle... b) {
 
-        Bitmap bm =null;
+        Bitmap bm = null;
         byte[] decodedString = Base64.decode(b[0].getString("imageBit"), Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         bm = getResizedBitmap(decodedByte, 100, 100);
@@ -38,13 +38,14 @@ public class LoadImageThread extends AsyncTask<Bundle, Void, Bitmap> {
     @Override
     protected void onPostExecute(final Bitmap bm) {
         super.onPostExecute(bm);
-        if (bm != null){ //if bitmap exists...
+        if (bm != null) { //if bitmap exists...
             view = imageViewReference.get();
-            view.setImageBitmap(bm);
+            if (view != null)
+                view.setImageBitmap(bm);
             // Fade out
 
 
-        }else{ //if not picture, display the default ressource
+        } else { //if not picture, display the default ressource
         }
 
     }
@@ -63,6 +64,7 @@ public class LoadImageThread extends AsyncTask<Bundle, Void, Bitmap> {
         Bitmap resizedBitmap = Bitmap.createBitmap(
                 bm, 0, 0, width, height, matrix, false);
         bm.recycle();
+        resizedBitmap = ImageHelper.getRoundedCornerBitmap(resizedBitmap);
         return resizedBitmap;
     }
 

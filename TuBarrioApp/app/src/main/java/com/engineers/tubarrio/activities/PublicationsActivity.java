@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.engineers.tubarrio.R;
 import com.engineers.tubarrio.adapters.PublicationsAdapter;
 import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.entities.Publication;
+import com.engineers.tubarrio.entities.User;
 import com.engineers.tubarrio.requests.GetPublications;
 import com.engineers.tubarrio.widgets.MenuBar;
 
@@ -40,14 +42,28 @@ public class PublicationsActivity extends Activity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setPublications();
+    }
+
     private void setPublications(){
         mListPublications = new ArrayList<>();
         new GetPublications(this, allPublications) {
             @Override
             public void onFinished() {
                 mListPublications = this.publications;
-                PublicationsAdapter publicationsAdapter = new PublicationsAdapter(activity, mListPublications);
-                publicationsListView.setAdapter(publicationsAdapter);
+
+                TextView noPublicationsTv = (TextView) findViewById(R.id.noPublicationsText);
+                noPublicationsTv.setVisibility(View.GONE);
+                if (mListPublications.size()>0) {
+                    PublicationsAdapter publicationsAdapter = new PublicationsAdapter(activity, mListPublications);
+                    publicationsListView.setAdapter(publicationsAdapter);
+                }
+                else{
+                    noPublicationsTv.setVisibility(View.VISIBLE);
+                }
             }
         };
         publicationsListView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
@@ -56,7 +72,14 @@ public class PublicationsActivity extends Activity {
                 Publication publication = (Publication) publicationsListView.getItemAtPosition(position);
 
                 Intent goToNextActivity = new Intent(activity, ViewPublicationActivity.class);
+
+                if (publication.getFollowers().contains(Config.getLoggedUserInfo(activity)))
+                    goToNextActivity.putExtra("isSuscribed", true);
+                else
+                    goToNextActivity.putExtra("isSuscribed", false);
+                publication.setFollowers(new ArrayList<User>());
                 goToNextActivity.putExtra("publication", publication);
+
                 activity.startActivity(goToNextActivity);
             }
         });

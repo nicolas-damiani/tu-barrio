@@ -168,9 +168,7 @@ public class EditProfileActivity extends AppCompatActivity implements PhotoDialo
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             Bitmap imageBitmap = BitmapFactory.decodeFile(extraFunctions.mCurrentPhotoPath);
-
             imageBitmap = extraFunctions.rotateImage(imageBitmap);
-
             imageView.setImageBitmap(ImageHelper.getRoundedCornerBitmap(imageBitmap));
             imageString = extraFunctions.convertBitmapToBase64(imageBitmap);
 

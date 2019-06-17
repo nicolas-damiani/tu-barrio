@@ -16,7 +16,7 @@ namespace TuBarrio.Repository
             List<Publication> returnList = new List<Publication>();
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                returnList = context.Publications.Include(r => r.Author).ToList();
+                returnList = context.Publications.Include(r => r.Author).Include(p => p.Subsrcibers).ToList();
             }
             return returnList;
         }
@@ -81,7 +81,7 @@ namespace TuBarrio.Repository
             List<Publication> returnList = new List<Publication>();
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                returnList = context.Publications.Include(p => p.Author).Where(p => p.Author.Id == user.Id).ToList();
+                returnList = context.Publications.Include(p => p.Author).Include(p => p.Subsrcibers).Where(p => p.Author.Id == user.Id).ToList();
 
             }
             return returnList;
@@ -110,7 +110,7 @@ namespace TuBarrio.Repository
             List<Publication> returnList = new List<Publication>();
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                returnList = context.Publications.Include(p => p.Subsrcibers).Where(p => p.Subsrcibers.Any(s => s.Email == user.Email)).ToList();
+                returnList = context.Publications.Include(p => p.Author).Include(p => p.Subsrcibers).Where(p => p.Subsrcibers.Any(s => s.Email == user.Email)).ToList();
             }
             return returnList;
         }

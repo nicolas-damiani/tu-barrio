@@ -20,6 +20,7 @@ namespace TuBarrio.EntityModels
         public int Deleted { get; set; }
         public UserModel Creator { get; set; }
         public string PublicationImage { get; set; }
+        public List<UserModel> Followers { get; set; }
 
 
         public PublicationModel()
@@ -35,6 +36,7 @@ namespace TuBarrio.EntityModels
             Deleted = 0;
             Creator = null;
             PublicationImage = "";
+            Followers = new List<UserModel>();
         }
 
 
@@ -51,6 +53,11 @@ namespace TuBarrio.EntityModels
             Deleted = publication.Deleted;
             Creator = new UserModel(publication.Author);
             PublicationImage = publication.PublicationImage;
+            Followers = new List<UserModel>();
+            foreach (User user in publication.Subsrcibers)
+            {
+                Followers.Add(new UserModel(user));
+            }
         }
     }
 }

@@ -13,6 +13,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.config.Constants;
 import com.engineers.tubarrio.entities.Publication;
+import com.engineers.tubarrio.widgets.Loader;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +35,8 @@ public abstract class GetPublications {
 
 
     public GetPublications(final Activity activity, int publicationFilter) {
+        final Loader loader = new Loader(activity);
+        loader.showLoader();
         this.activity = activity;
         this.context = activity.getApplicationContext();
         params = new HashMap<String, String>();
@@ -42,7 +45,7 @@ public abstract class GetPublications {
         if (publicationFilter == Constants.ALL_PUBLICATIONS) {
             url = Constants.URL + "api/Publications";
         } else if (publicationFilter == Constants.FOLLOWED_PUBLICATIONS){
-            url = Constants.URL + "api/Publications/GetFollowedPublications";
+            url = Constants.URL + "api/Publication/GetFollowedPublications";
         }else{
             url = Constants.URL + "api/Publications/AllFromUser";
         }
@@ -51,6 +54,7 @@ public abstract class GetPublications {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        loader.hideLoader();
 
 
                         try {
@@ -76,6 +80,7 @@ public abstract class GetPublications {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        loader.hideLoader();
 //                        Loader loader = new Loader(activity);
 //                        loader.hideLoader();
                         if (error != null) {

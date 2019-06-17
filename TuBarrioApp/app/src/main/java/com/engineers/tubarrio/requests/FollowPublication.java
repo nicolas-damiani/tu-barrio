@@ -15,12 +15,13 @@ import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.config.Constants;
 import com.engineers.tubarrio.entities.Comment;
 import com.engineers.tubarrio.entities.Publication;
+import com.engineers.tubarrio.widgets.Loader;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FollowPublication {
+public abstract class FollowPublication {
 
 
     Activity activity;
@@ -30,29 +31,28 @@ public class FollowPublication {
 
 
     public FollowPublication(final Activity activity, Publication publication) {
+        final Loader loader = new Loader(activity);
+        loader.showLoader();
         this.activity = activity;
         this.publication = publication;
         this.context = activity.getApplicationContext();
         params = new HashMap<String, String>();
 
-        //TODO no se si esa es la ruta
-        String url = Constants.URL + "api/Publication/Follow";
-        params.put("PublicationId", publication.getId()+"");
+        String url = Constants.URL + "api/Publication/Follow?publicationId="+publication.getId();
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
-                        Intent publicationIntent = new Intent(activity, ViewPublicationActivity.class);
-                        activity.startActivity(publicationIntent);
-                        activity.finish();
+                        loader.hideLoader();
+                        onFinished();
                     }
                 },
                 new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        loader.hideLoader();
 //                        Loader loader = new Loader(activity);
 //                        loader.hideLoader();
                         if (error != null) {
@@ -88,4 +88,6 @@ public class FollowPublication {
         };
         MySingleton.getInstance(context).addToRequestQueue(postRequest);
     }
+
+    public abstract void onFinished();
 }

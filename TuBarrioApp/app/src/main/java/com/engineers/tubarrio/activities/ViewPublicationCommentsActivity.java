@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.engineers.tubarrio.R;
 import com.engineers.tubarrio.adapters.CommentsAdapter;
@@ -35,25 +36,33 @@ public class ViewPublicationCommentsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_publication_comments);
         initializeView();
         MenuBar menuBar = new MenuBar(this);
-        addComment = (Button)findViewById(R.id.add_comment_btn);
+        addComment = (Button) findViewById(R.id.add_comment_btn);
         InitializeButtons();
         publication = (Publication) getIntent().getSerializableExtra("publication");
         activity = this;
         setComments();
     }
 
-    private void initializeView(){
+    private void initializeView() {
         commentsListView = (ListView) findViewById(R.id.comments_list);
     }
 
-    private void setComments(){
+    private void setComments() {
         mListComments = new ArrayList<>();
         new GetCommentsFromPublication(this, publication) {
             @Override
             public void onFinished() {
+
                 mListComments = this.comments;
-                CommentsAdapter commentsAdapter = new CommentsAdapter(activity, mListComments);
-                commentsListView.setAdapter(commentsAdapter);
+                TextView noCommentsTv = (TextView) findViewById(R.id.noCommentsText);
+                noCommentsTv.setVisibility(View.GONE);
+
+                if (mListComments.size() > 0) {
+                    CommentsAdapter commentsAdapter = new CommentsAdapter(activity, mListComments);
+                    commentsListView.setAdapter(commentsAdapter);
+                } else {
+                    noCommentsTv.setVisibility(View.VISIBLE);
+                }
             }
         };
 
@@ -65,7 +74,7 @@ public class ViewPublicationCommentsActivity extends AppCompatActivity {
         setComments();
     }
 
-    private void InitializeButtons(){
+    private void InitializeButtons() {
         addComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

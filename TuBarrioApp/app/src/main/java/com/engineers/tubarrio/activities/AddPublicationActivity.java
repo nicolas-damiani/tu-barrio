@@ -1,14 +1,9 @@
 package com.engineers.tubarrio.activities;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Bundle;
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.MediaStore;
@@ -16,8 +11,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
-import android.support.v4.app.FragmentManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -27,11 +20,9 @@ import android.widget.Toast;
 import com.engineers.tubarrio.R;
 import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.entities.Publication;
-import com.engineers.tubarrio.entities.User;
 import com.engineers.tubarrio.helpers.ExtraFunctions;
 import com.engineers.tubarrio.dialogs.PhotoDialog;
 import com.engineers.tubarrio.requests.AddPublicationRequest;
-import com.engineers.tubarrio.requests.SendUserInformation;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -39,11 +30,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.engineers.tubarrio.fragments.ScrollableMapFragment;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -157,14 +145,6 @@ public class AddPublicationActivity extends AppCompatActivity implements OnMapRe
             cancel = true;
             Toast.makeText(this, "Seleccione un lugar para el evento manteniendo presionado sobre el mapa", Toast.LENGTH_LONG).show();
         }
-//        String filename = "bitmap.png";
-//        try{
-//            FileOutputStream stream = this.openFileOutput(filename, Context.MODE_PRIVATE);
-//            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-//        }catch (FileNotFoundException ex){
-//            Toast.makeText(this, "Error manejando imagen", Toast.LENGTH_LONG).show();
-//            cancel = true;
-//        }
 
         if (!cancel) {
             publication.setLongitude(longitude);

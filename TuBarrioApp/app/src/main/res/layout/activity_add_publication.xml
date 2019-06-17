@@ -1,151 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/scroll_view"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2A2E45"
+    android:orientation="vertical"
     tools:context="com.engineers.tubarrio.activities.AddPublicationActivity">
 
 
-    <LinearLayout
+    <include layout="@layout/menu_bar_layout" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="#2A2E45"
-        android:gravity="left"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-
-        <RelativeLayout
-            android:id="@+id/add_image_button"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:onClick="onClickAddImageButton"
-            android:layout_marginBottom="15dp">
+            android:id="@+id/scroll_view"
+            android:layout_height="fill_parent">
 
-            <ImageView
-                android:id="@+id/user_image_profile"
-                android:layout_width="match_parent"
-                android:background="#252c55"
-                android:scaleType="centerCrop"
-                android:layout_height="match_parent" />
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/add_image_tv"
-                android:text="Agregar Imagen"
-                android:gravity="center"/>
-
-        </RelativeLayout>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nombre de la publicacion:"
-            android:textColor="#727272"
-            android:layout_marginTop="10dp" />
-
-        <EditText
-            android:id="@+id/name_publication"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/rounded_edit_text"
-            android:focusableInTouchMode="true"
-            android:hint="Nombre"
-            android:paddingBottom="10dp"
-            android:paddingLeft="12dp"
-            android:paddingTop="10dp"
-            android:textColor="#727272"
-            android:textColorHint="#737E91"
-            android:textSize="15dp" />
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="#2A2E45"
+                android:gravity="left"
+                android:orientation="vertical">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Descripcion de la publicacion:"
-            android:textColor="#727272"
-            android:layout_marginTop="20dp" />
+                <RelativeLayout
+                    android:id="@+id/add_image_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="15dp"
+                    android:onClick="onClickAddImageButton">
 
-        <EditText
-            android:id="@+id/description_publication"
-            android:layout_width="fill_parent"
-            android:layout_height="70dp"
-            android:background="@drawable/rounded_edit_text"
-            android:focusableInTouchMode="true"
-            android:hint="Descripcion...."
-            android:paddingBottom="10dp"
-            android:gravity="top"
-            android:paddingLeft="12dp"
-            android:paddingTop="10dp"
-            android:textColor="#727272"
-            android:textColorHint="#737E91"
-            android:textSize="15dp" />
+                    <ImageView
+                        android:id="@+id/user_image_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#252c55"
+                        android:scaleType="centerCrop" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ubicacion:"
-            android:textColor="#727272"
-            android:layout_marginTop="20dp" />
+                    <TextView
+                        android:id="@+id/add_image_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Agregar Imagen" />
 
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/map"
-            class="com.engineers.tubarrio.fragments.ScrollableMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"/>
+                </RelativeLayout>
 
 
-        <Button
-            android:id="@+id/continue_btn"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rounded_button"
-            android:paddingBottom="10dp"
-            android:paddingTop="14dp"
-            android:layout_marginBottom="20dp"
-            android:text="Agregar"
-            android:textColor="@android:color/white"
-            android:textSize="15dp"
-            android:onClick="onClickAdd"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Nombre de la publicacion:"
+                    android:textColor="#727272" />
+
+                <EditText
+                    android:id="@+id/name_publication"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_edit_text"
+                    android:focusableInTouchMode="true"
+                    android:hint="Nombre"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="10dp"
+                    android:textColor="#727272"
+                    android:textColorHint="#737E91"
+                    android:textSize="15dp" />
 
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Descripcion de la publicacion:"
+                    android:textColor="#727272" />
+
+                <EditText
+                    android:id="@+id/description_publication"
+                    android:layout_width="fill_parent"
+                    android:layout_height="70dp"
+                    android:background="@drawable/rounded_edit_text"
+                    android:focusableInTouchMode="true"
+                    android:gravity="top"
+                    android:hint="Descripcion...."
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="10dp"
+                    android:textColor="#727272"
+                    android:textColorHint="#737E91"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Ubicacion:"
+                    android:textColor="#727272" />
+
+                <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/map"
+                    class="com.engineers.tubarrio.fragments.ScrollableMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+
+
+                <Button
+                    android:id="@+id/continue_btn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    android:stateListAnimator="@null"
+                    android:background="@drawable/rounded_button"
+                    android:onClick="onClickAdd"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="14dp"
+                    android:text="Agregar"
+                    android:textColor="@android:color/white"
+                    android:textSize="15dp" />
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <include layout="@layout/loader" />
+
+    </RelativeLayout>
+
+</LinearLayout>
 
 
 
-    <!--
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/main_bar"
-            android:layout_marginTop="-22dp">
-
-            <RelativeLayout
-                android:id="@+id/white_background"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="0.5"
-                android:background="@android:color/white"
-                android:visibility="gone">
-
-
-            </RelativeLayout>
-
-
-        </RelativeLayout>
-        -->
-
-
-</ScrollView>

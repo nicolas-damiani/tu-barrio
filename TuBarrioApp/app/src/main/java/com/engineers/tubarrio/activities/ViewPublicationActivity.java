@@ -50,12 +50,9 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
         activity = this;
         MenuBar menuBar = new MenuBar(this);
         publication = (Publication) getIntent().getSerializableExtra("publication");
+        isFollowing = getIntent().getBooleanExtra("isSuscribed",false);
         if(user.getEmail().equals(publication.getCreator().getEmail())){
             isAuthor = true;
-        }
-
-        if(publication.getFollowers().contains(user)){
-            isFollowing = true;
         }
 
         initializeViews();
@@ -89,7 +86,9 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
 
 
         if(isFollowing){
-            followPublication.setText("Dejar de seguir");
+            followPublication.setText("Dejar de Seguir");
+            followPublication.setBackground(activity.getResources().getDrawable(R.drawable.rounded_button_selected));
+
         }
     }
 
@@ -125,9 +124,23 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
             @Override
             public void onClick(View view) {
                 if(isFollowing){
-                    new UnfollowPublication(activity, publication);
+                    new UnfollowPublication(activity, publication) {
+                        @Override
+                        public void onFinished() {
+                            isFollowing = false;
+                            followPublication.setText("Seguir");
+                            followPublication.setBackground(activity.getResources().getDrawable(R.drawable.rounded_button));
+                        }
+                    };
                 }else{
-                    new FollowPublication(activity, publication);
+                    new FollowPublication(activity, publication) {
+                        @Override
+                        public void onFinished() {
+                            isFollowing = true;
+                            followPublication.setText("Dejar de Seguir");
+                            followPublication.setBackground(activity.getResources().getDrawable(R.drawable.rounded_button_selected));
+                        }
+                    };
                 }
             }
         });

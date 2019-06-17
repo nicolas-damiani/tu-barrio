@@ -42,7 +42,7 @@ namespace TuBarrio.BusinessLogic
 
         public int GetCantFollowed(User user)
         {
-             return userRepository.GetCantComments(user);
+             return userRepository.GetCantFollowed(user);
         }
 
         public int GetCantComments(User user)

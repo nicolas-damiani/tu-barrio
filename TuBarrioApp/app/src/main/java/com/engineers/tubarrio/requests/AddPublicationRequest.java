@@ -17,6 +17,7 @@ import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.config.Constants;
 import com.engineers.tubarrio.entities.Publication;
 import com.engineers.tubarrio.entities.User;
+import com.engineers.tubarrio.widgets.Loader;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -33,6 +34,8 @@ public class AddPublicationRequest {
 
 
     public AddPublicationRequest(final Activity activity, final Publication publication, final boolean isEdit) {
+        final Loader loader = new Loader(activity);
+        loader.showLoader();
         this.activity = activity;
         this.context = activity.getApplicationContext();
         params = new HashMap<String, String>();
@@ -53,6 +56,7 @@ public class AddPublicationRequest {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        loader.hideLoader();
                         if (!isEdit) {
                             Intent loginIntent = new Intent(activity, ViewPublicationActivity.class);
                             loginIntent.putExtra("publication", publication);
@@ -65,6 +69,7 @@ public class AddPublicationRequest {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        loader.hideLoader();
 //                        Loader loader = new Loader(activity);
 //                        loader.hideLoader();
                         if (error != null) {

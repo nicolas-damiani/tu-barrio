@@ -57,8 +57,8 @@ public class MenuBar {
                 }else {
                     Intent goToNextActivity = new Intent(activity, MapsActivity.class);
                     goToNextActivity.putExtra("allPublications", Constants.ALL_PUBLICATIONS);
-                    activity.startActivity(goToNextActivity);
                     goToNextActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    activity.startActivity(goToNextActivity);
                 }
             }
         });

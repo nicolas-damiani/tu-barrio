@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,9 +7,10 @@
     tools:context=".activities.ViewPublicationActivity"
     android:orientation="vertical">
 
-    <include layout="@layout/menu_bar_layout"/>
+    <include layout="@layout/menu_bar_layout" android:id="@+id/menu"/>
     <ScrollView
         android:layout_width="match_parent"
+        android:layout_below="@id/menu"
         android:layout_height="match_parent">
 
         <LinearLayout
@@ -124,6 +125,7 @@
                         android:layout_marginLeft="17dp"
                         android:layout_marginRight="17dp"
                         android:layout_marginTop="20dp"
+                        android:stateListAnimator="@null"
                         android:background="@drawable/rounded_button"
                         android:paddingBottom="10dp"
                         android:paddingTop="10dp"
@@ -140,6 +142,7 @@
                         android:layout_marginLeft="17dp"
                         android:layout_marginRight="17dp"
                         android:layout_marginTop="20dp"
+                        android:stateListAnimator="@null"
                         android:background="@drawable/rounded_button"
                         android:paddingBottom="10dp"
                         android:paddingTop="10dp"
@@ -150,4 +153,6 @@
                 </LinearLayout>
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+
+    <include layout="@layout/loader"  />
+</RelativeLayout>

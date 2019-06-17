@@ -1,11 +1,13 @@
 package com.engineers.tubarrio.activities;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.content.Intent;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,8 +16,8 @@ import com.engineers.tubarrio.R;
 import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.config.Constants;
 import com.engineers.tubarrio.entities.User;
+import com.engineers.tubarrio.helpers.ImageHelper;
 import com.engineers.tubarrio.requests.GetStatisticsFromUser;
-import com.engineers.tubarrio.requests.SendUserInformation;
 import com.engineers.tubarrio.widgets.MenuBar;
 
 public class ProfileActivity extends Activity {
@@ -67,6 +69,13 @@ public class ProfileActivity extends Activity {
         user = Config.getLoggedUserInfo(this);
         nameTV.setText(user.firstName + " " + user.lastName);
         emailTV.setText(user.getEmail());
+
+        if (!user.getProfileImage().isEmpty()) {
+            byte[] decodedString = Base64.decode( user.getProfileImage(), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            decodedByte = ImageHelper.getRoundedCornerBitmap(decodedByte);
+            userPicIV.setImageBitmap(decodedByte);
+        }
 
 //        publicationsTV.setText(user.cantPublications);
 //        commentsTV.setText(user.cantComments);

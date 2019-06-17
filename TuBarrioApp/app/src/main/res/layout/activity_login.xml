@@ -11,12 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center">
 
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_marginTop="150dp"
             android:src="@drawable/logo"/>
 
         <TextView
@@ -32,14 +31,19 @@
             android:text="Inicia sesión con Google para continuar"
             android:textSize="15dp"
             android:gravity="center"/>
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/sign_in_button"
-            android:layout_width="300dp"
-            android:layout_marginTop="50dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"/>
+
     </LinearLayout>
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"/>
+
+
+    <include layout="@layout/loader" />
 
 
 

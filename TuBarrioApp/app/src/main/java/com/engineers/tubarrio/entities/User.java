@@ -76,4 +76,8 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return ((User)obj).getEmail().equals(this.getEmail());
+    }
 }

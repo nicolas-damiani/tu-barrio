@@ -229,7 +229,13 @@ namespace TuBarrio.Web.Api.Controllers
             {
                 User user = GetUserFromToken();
                 List<Publication> toReturn = publicationLogic.GetFollowedPublications(user);
-                return Ok(toReturn);
+                List<PublicationModel> publicationModels = new List<PublicationModel>();
+                foreach (Publication publication in toReturn)
+                {
+                    PublicationModel publicationModel = new PublicationModel(publication);
+                    publicationModels.Add(publicationModel);
+                }
+                return Ok(publicationModels);
             }
             catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException || ex is PublicationException)
             {
@@ -243,7 +249,7 @@ namespace TuBarrio.Web.Api.Controllers
         }
 
         [HttpPost]
-        [Route("api/Publication/FollowPublication")]
+        [Route("api/Publication/Follow")]
         public IHttpActionResult FollowPublication(int publicationId)
         {
             try
@@ -262,8 +268,8 @@ namespace TuBarrio.Web.Api.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route("api/Publication/UnfollowPublication")]
+        [HttpPost]
+        [Route("api/Publication/Unfollow")]
         public IHttpActionResult UnfollowPublication(int publicationId)
         {
             try

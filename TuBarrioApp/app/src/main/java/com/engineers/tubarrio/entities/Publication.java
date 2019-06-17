@@ -41,13 +41,14 @@ public class Publication implements Serializable{
             this.latitude= jsonObj.has("Latitude")?jsonObj.getDouble("Latitude"):0;
             this.publicationImage= jsonObj.has("PublicationImage") && !jsonObj.getString("PublicationImage").equals("null")?jsonObj.getString("PublicationImage"):"";
             this.creator = new User(new JSONObject(jsonObj.getString("Creator")));
-
+            this.followers = new ArrayList<>();
             JSONArray jsonArray = new JSONArray(jsonObj.getString("Followers"));
+
             if (jsonArray.length() != 0) {
                 ArrayList<User> userList = new ArrayList<>();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject userObj = jsonArray.getJSONObject(i);
-                    User user = new User(jsonObj);
+                    User user = new User(userObj);
                     userList.add(user);
                 }
                 this.followers = userList;

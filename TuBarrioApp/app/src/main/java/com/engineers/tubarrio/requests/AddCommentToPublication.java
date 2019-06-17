@@ -18,6 +18,7 @@ import com.engineers.tubarrio.config.Constants;
 import com.engineers.tubarrio.entities.Comment;
 import com.engineers.tubarrio.entities.Publication;
 import com.engineers.tubarrio.entities.User;
+import com.engineers.tubarrio.widgets.Loader;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -35,6 +36,8 @@ public class AddCommentToPublication {
 
 
     public AddCommentToPublication(final Activity activity, final Publication publication, Comment comment) {
+        final Loader loader = new Loader(activity);
+        loader.showLoader();
         this.activity = activity;
         this.comment = comment;
         this.publication = publication;
@@ -50,16 +53,15 @@ public class AddCommentToPublication {
                     @Override
                     public void onResponse(String response) {
 
-                        Intent publicationIntent = new Intent(activity, ViewPublicationActivity.class);
-                        publicationIntent.putExtra("publication", publication);
-                        activity.startActivity(publicationIntent);
                         activity.finish();
+                        loader.hideLoader();
                     }
                 },
                 new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        loader.hideLoader();
 //                        Loader loader = new Loader(activity);
 //                        loader.hideLoader();
                         if (error != null) {
