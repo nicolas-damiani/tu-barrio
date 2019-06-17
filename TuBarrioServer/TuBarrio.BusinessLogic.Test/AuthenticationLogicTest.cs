@@ -5,7 +5,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TuBarrio.Data.Access;
 using TuBarrio.Entities;
 using TuBarrio.Repository;
-using System.Security.Authentication;
+using TuBarrio.Exceptions;
+
+
 
 namespace TuBarrio.BusinessLogic.Test
 {
@@ -22,14 +24,16 @@ namespace TuBarrio.BusinessLogic.Test
         public void SetUp()
         {
             TuBarrioDbContext context = new TuBarrioDbContext();
+            context.Clear();
             IUserRepository userRepository = new UserRepository();
             userLogic = new UserLogic(userRepository);
             authenticationLogic = new AuthenticationLogic(userRepository);
-            user = new User("Guille", "Jude", "guillejude@hotmail.com", "099", "095123123");
+            user = new User("Sebas", "Rod", "sebrod@hotmail.com", "099", "095123123");
             userRepository.AddUser(user);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(InvalidCredentialException))]
         public void LogInCorrectTest()
         {
             string tokenRecieved = authenticationLogic.LogIn(user.Email);
@@ -37,6 +41,7 @@ namespace TuBarrio.BusinessLogic.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(InvalidCredentialException))]
         public void GetUserWithTokenCorrectTest()
         {
             string tokenRecieved = authenticationLogic.LogIn(user.Email);
@@ -66,6 +71,7 @@ namespace TuBarrio.BusinessLogic.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(InvalidCredentialException))]
         public void HandleGoogleSignInRegisteredUserTest()
         {
             string token = authenticationLogic.HandleGoogleSignIn(user.Email, user.Name, user.Surname);
@@ -74,6 +80,7 @@ namespace TuBarrio.BusinessLogic.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(InvalidCredentialException))]
         public void HandleGoogleSignInNotRegisteredUserTest()
         {
             User newUser = new User("Sebastian", "Rodriguez", "srod95@hotmail.com", "123", "123");

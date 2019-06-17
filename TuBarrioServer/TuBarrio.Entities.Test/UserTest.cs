@@ -79,19 +79,8 @@ namespace TuBarrio.Entities.Test
             user.Email = "felipegmail.com";
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(UserException))]
-        public void UserSetPhoneInvalidEmptyTest()
-        {
-            user.Phone = "";
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(UserException))]
-        public void UserSetPhoneInvalidNotNumberTest()
-        {
-            user.Phone = "My phone";
-        }
+        
+        
 
         [TestMethod]
         public void UserConstructorTokenTest()
