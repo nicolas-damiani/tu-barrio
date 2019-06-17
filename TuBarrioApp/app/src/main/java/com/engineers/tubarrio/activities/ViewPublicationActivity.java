@@ -11,11 +11,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.engineers.tubarrio.R;
 import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.entities.Publication;
 import com.engineers.tubarrio.entities.User;
+import com.engineers.tubarrio.helpers.ExtraFunctions;
 import com.engineers.tubarrio.widgets.MenuBar;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.engineers.tubarrio.requests.FollowPublication;
@@ -41,6 +43,7 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
     Button viewComments;
     Button followPublication;
     Activity activity;
+    Bitmap publicationImageBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +83,8 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
 
         if (!publication.getPublicationImage().isEmpty()) {
             byte[] decodedString = Base64.decode( publication.getPublicationImage(), Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            publicationImage.setImageBitmap(decodedByte);
+            publicationImageBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            publicationImage.setImageBitmap(publicationImageBitmap);
         }
 
 
@@ -152,5 +155,15 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
         goToNextActivity.putExtra("publication", publication);
         activity.startActivity(goToNextActivity);
         activity.finish();
+    }
+
+    public void exportImage(View view) {
+        if (publicationImageBitmap!=null) {
+            String path = ExtraFunctions.saveToInternalStorage(publicationImageBitmap, this);
+
+            Toast.makeText(this, "Imagen exportada correctamente: "+ path, Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "No hay imagen para exportar", Toast.LENGTH_SHORT).show();
+        }
     }
 }

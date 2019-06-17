@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -197,6 +198,8 @@ public class AddPublicationActivity extends AppCompatActivity implements OnMapRe
         }
     }
 
+
+
     private void GalleryImage() {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
@@ -207,18 +210,22 @@ public class AddPublicationActivity extends AppCompatActivity implements OnMapRe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             Bitmap imageBitmap = BitmapFactory.decodeFile(extraFunctions.mCurrentPhotoPath);
+            publication.setImage(extraFunctions.convertBitmapToBase64(imageBitmap));
+            byte[] decodedString = Base64.decode( publication.getPublicationImage(), Base64.DEFAULT);
+            imageBitmap  = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             ImageView imageView = (ImageView) findViewById(R.id.user_image_profile);
             imageView.setImageBitmap(imageBitmap);
-            publication.setImage(extraFunctions.convertBitmapToBase64(imageBitmap));
         } else if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK) {
             try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                publication.setImage(extraFunctions.convertBitmapToBase64(selectedImage));
+                byte[] decodedString = Base64.decode( publication.getPublicationImage(), Base64.DEFAULT);
+                selectedImage  = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                 ImageView imageView = (ImageView) findViewById(R.id.user_image_profile);
                 imageView.setImageBitmap(selectedImage);
 
-                publication.setImage(extraFunctions.convertBitmapToBase64(selectedImage));
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

@@ -56,11 +56,10 @@ public class ViewPublicationCommentsActivity extends AppCompatActivity {
                 mListComments = this.comments;
                 TextView noCommentsTv = (TextView) findViewById(R.id.noCommentsText);
                 noCommentsTv.setVisibility(View.GONE);
+                CommentsAdapter commentsAdapter = new CommentsAdapter(activity, mListComments);
+                commentsListView.setAdapter(commentsAdapter);
 
-                if (mListComments.size() > 0) {
-                    CommentsAdapter commentsAdapter = new CommentsAdapter(activity, mListComments);
-                    commentsListView.setAdapter(commentsAdapter);
-                } else {
+                if (mListComments.size() == 0) {
                     noCommentsTv.setVisibility(View.VISIBLE);
                 }
             }

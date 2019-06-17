@@ -57,11 +57,9 @@ public class PublicationsActivity extends Activity {
 
                 TextView noPublicationsTv = (TextView) findViewById(R.id.noPublicationsText);
                 noPublicationsTv.setVisibility(View.GONE);
-                if (mListPublications.size()>0) {
-                    PublicationsAdapter publicationsAdapter = new PublicationsAdapter(activity, mListPublications);
-                    publicationsListView.setAdapter(publicationsAdapter);
-                }
-                else{
+                PublicationsAdapter publicationsAdapter = new PublicationsAdapter(activity, mListPublications);
+                publicationsListView.setAdapter(publicationsAdapter);
+                if (mListPublications.size() == 0) {
                     noPublicationsTv.setVisibility(View.VISIBLE);
                 }
             }
@@ -77,7 +75,7 @@ public class PublicationsActivity extends Activity {
                     goToNextActivity.putExtra("isSuscribed", true);
                 else
                     goToNextActivity.putExtra("isSuscribed", false);
-                publication.setFollowers(new ArrayList<User>());
+                publication.setFollowers(null);
                 goToNextActivity.putExtra("publication", publication);
 
                 activity.startActivity(goToNextActivity);

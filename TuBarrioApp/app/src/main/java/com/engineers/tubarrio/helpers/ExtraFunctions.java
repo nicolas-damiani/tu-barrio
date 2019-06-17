@@ -1,6 +1,8 @@
 package com.engineers.tubarrio.helpers;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -8,6 +10,7 @@ import android.media.ExifInterface;
 import android.os.Environment;
 import android.text.format.DateFormat;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
@@ -15,6 +18,7 @@ import android.widget.ListView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,7 +31,7 @@ public class ExtraFunctions {
     public String mCurrentPhotoPath;
     private Activity activity;
 
-    public ExtraFunctions(Activity activity){
+    public ExtraFunctions(Activity activity) {
         this.activity = activity;
         this.mCurrentPhotoPath = "";
     }
@@ -58,49 +62,48 @@ public class ExtraFunctions {
     }
 
 
-
-    public String convertBitmapToBase64(Bitmap image){
+    public String convertBitmapToBase64(Bitmap image) {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             image.compress(Bitmap.CompressFormat.JPEG, 30, baos); //bm is the bitmap object
             byte[] byteArrayImage = baos.toByteArray();
             return Base64.encodeToString(byteArrayImage, Base64.DEFAULT);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return "";
         }
     }
 
-    public Bitmap convertBase64ToBitmap(String imageString){
+    public Bitmap convertBase64ToBitmap(String imageString) {
         try {
             byte[] decodedString = Base64.decode(imageString, Base64.DEFAULT);
             return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
         }
     }
 
-    public String getSpanishDate(Date date){
+    public String getSpanishDate(Date date) {
         SimpleDateFormat formato =
-                new SimpleDateFormat("EEEE d 'de' MMMM ',' yyyy '.' ", new Locale("es","UY"));
+                new SimpleDateFormat("EEEE d 'de' MMMM ',' yyyy '.' ", new Locale("es", "UY"));
         return formato.format(date);
     }
 
-    public String getTimeFromDate(Date date){
+    public String getTimeFromDate(Date date) {
         SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
         return localDateFormat.format(date);
     }
 
-    public String getSpanishDateTime(Date date){
+    public String getSpanishDateTime(Date date) {
         SimpleDateFormat formato =
-                new SimpleDateFormat("EEEE d 'de' MMMM ',' yyyy '.' ", new Locale("es","UY"));
-        String sDate =  formato.format(date);
+                new SimpleDateFormat("EEEE d 'de' MMMM ',' yyyy '.' ", new Locale("es", "UY"));
+        String sDate = formato.format(date);
         String time = getTimeFromDate(date);
         return (sDate + time);
     }
 
-    public Date getNumberDate(Date date){
+    public Date getNumberDate(Date date) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             return format.parse(date.toString());
@@ -110,31 +113,33 @@ public class ExtraFunctions {
         }
     }
 
-    public int getDayFromDate(Date date){
-        String day = (String) DateFormat.format("dd",   date);
+    public int getDayFromDate(Date date) {
+        String day = (String) DateFormat.format("dd", date);
         return Integer.parseInt(day);
     }
-    public int getMonthFromDate(Date date){
-        String month = (String) DateFormat.format("MM",   date);
+
+    public int getMonthFromDate(Date date) {
+        String month = (String) DateFormat.format("MM", date);
         return Integer.parseInt(month);
     }
-    public int getYearFromDate(Date date){
+
+    public int getYearFromDate(Date date) {
         String year = (String) DateFormat.format("yyyy", date);
         return Integer.parseInt(year);
     }
 
-    public GregorianCalendar getGregorianDateTimeFromDate(Date date){
-        GregorianCalendar gc = new GregorianCalendar(getYearFromDate(date), getMonthFromDate(date), getDayFromDate(date),getHoursFromDate(date),getMinutesFromDate(date));
+    public GregorianCalendar getGregorianDateTimeFromDate(Date date) {
+        GregorianCalendar gc = new GregorianCalendar(getYearFromDate(date), getMonthFromDate(date), getDayFromDate(date), getHoursFromDate(date), getMinutesFromDate(date));
         return gc;
     }
 
-    public int getHoursFromDate (Date date){
+    public int getHoursFromDate(Date date) {
         String time = getTimeFromDate(date);
         String[] timeArray = time.split(":");
         return Integer.parseInt(timeArray[0]);
     }
 
-    public int getMinutesFromDate (Date date){
+    public int getMinutesFromDate(Date date) {
         String time = getTimeFromDate(date);
         String[] timeArray = time.split(":");
         return Integer.parseInt(timeArray[1]);
@@ -159,6 +164,43 @@ public class ExtraFunctions {
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
+    }
+
+    public static String saveToInternalStorage(Bitmap bitmapImage, Activity activity) {
+        try {
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            String imageFileName = "JPEG_" + timeStamp + "_";
+            File storageDir = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+            File mypath = File.createTempFile(
+                    imageFileName,
+                    ".jpg",
+                    storageDir
+            );
+
+
+
+            FileOutputStream fos = null;
+            try {
+                fos = new FileOutputStream(mypath);
+                // Use the compress method on the BitMap object to write image to the OutputStream
+                bitmapImage.compress(Bitmap.CompressFormat.JPEG, 30, fos);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    fos.close();
+
+                    Log.e("imagePath", storageDir.getAbsolutePath());
+                    return storageDir.getAbsolutePath();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
