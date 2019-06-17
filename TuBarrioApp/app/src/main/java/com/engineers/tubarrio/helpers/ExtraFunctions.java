@@ -45,31 +45,9 @@ public class ExtraFunctions {
         return image;
     }
 
-    public Bitmap rotateImage(Bitmap bitmap) throws IOException {
-        ExifInterface ei = new ExifInterface(mCurrentPhotoPath);
-        int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
-                ExifInterface.ORIENTATION_UNDEFINED);
+    public Bitmap rotateImage(Bitmap bitmap) {
 
-        Bitmap rotatedBitmap = null;
-        switch(orientation) {
-
-            case ExifInterface.ORIENTATION_ROTATE_90:
-                rotatedBitmap = rotateImage(bitmap, 90);
-                break;
-
-            case ExifInterface.ORIENTATION_ROTATE_180:
-                rotatedBitmap = rotateImage(bitmap, 180);
-                break;
-
-            case ExifInterface.ORIENTATION_ROTATE_270:
-                rotatedBitmap = rotateImage(bitmap, 270);
-                break;
-
-            case ExifInterface.ORIENTATION_NORMAL:
-            default:
-                rotatedBitmap = bitmap;
-        }
-        return  rotatedBitmap;
+        return rotateImage(bitmap, 270);
     }
 
     public static Bitmap rotateImage(Bitmap source, float angle) {

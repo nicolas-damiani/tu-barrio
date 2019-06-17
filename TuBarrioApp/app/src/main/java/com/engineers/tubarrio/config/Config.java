@@ -37,6 +37,9 @@ public class Config {
         assignSharedPreferences(activity, "userFirstName", user.firstName);
         assignSharedPreferences(activity, "userLastName", user.lastName);
         assignSharedPreferences(activity, "userEmail", user.email);
+        assignSharedPreferences(activity, "userPhone", user.getPhone());
+        assignSharedPreferences(activity, "userImage", user.getProfileImage());
+
     }
 
 
@@ -47,6 +50,8 @@ public class Config {
         user.firstName = activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userFirstName", "");
         user.lastName= activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userFirstName", "");
         user.email = activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userEmail", "");
+        user.phone = activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userPhone", "");
+        user.profileImage = activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userImage", "");
         return user;
 
     }

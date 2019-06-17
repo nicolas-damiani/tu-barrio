@@ -37,7 +37,7 @@ public abstract class SaveUser {
     Notification pendingNotification;
 
 
-    public SaveUser(final Activity activity, User user) {
+    public SaveUser(final Activity activity, final User user) {
         this.activity = activity;
         this.context = activity.getApplicationContext();
         params = new HashMap<String, String>();
@@ -54,7 +54,7 @@ public abstract class SaveUser {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
+                        Config.setLoggedUserInfo(activity, user);
                         onFinished();
                     }
                 },

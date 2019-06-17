@@ -46,6 +46,7 @@ public abstract class GetPublications {
         }else{
             url = Constants.URL + "api/Publications/AllFromUser";
         }
+        publications = new ArrayList<>();
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -63,8 +64,8 @@ public abstract class GetPublications {
                                     publicationsList.add(navigationMenuOption);
                                 }
                                 publications = publicationsList;
-                                onFinished();
                             }
+                            onFinished();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

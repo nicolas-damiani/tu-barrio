@@ -13,8 +13,8 @@ public class User implements Serializable {
     public String lastName;
     public String email;
     public int id;
-    private String profileImage;
-    private String phone;
+    public String profileImage;
+    public String phone;
 
 
     public User (){

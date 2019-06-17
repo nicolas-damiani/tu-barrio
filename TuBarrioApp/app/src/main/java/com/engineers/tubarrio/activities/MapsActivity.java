@@ -131,7 +131,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onFinished() {
                 mPublications = this.publications;
                 updateLocationUI();
-                // Add a marker in Sydney and move the camera
                 getDeviceLocation();
             }
         };

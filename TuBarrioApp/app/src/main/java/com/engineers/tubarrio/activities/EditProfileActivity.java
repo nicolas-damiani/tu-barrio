@@ -11,6 +11,7 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +39,7 @@ public class EditProfileActivity extends AppCompatActivity implements PhotoDialo
     EditText firstNameET;
     EditText lastNameET;
     EditText phoneET;
+    ImageView imageView;
     private ExtraFunctions extraFunctions;
     String imageString;
     boolean initialActivity;
@@ -53,10 +55,11 @@ public class EditProfileActivity extends AppCompatActivity implements PhotoDialo
         initializeViews();
     }
 
-    private void initializeViews(){
+    private void initializeViews() {
         firstNameET = (EditText) findViewById(R.id.name_profile);
         lastNameET = (EditText) findViewById(R.id.surname_profile);
         phoneET = (EditText) findViewById(R.id.phone_profile);
+        imageView = (ImageView) findViewById(R.id.user_image_profile);
         Button continueBtn = (Button) findViewById(R.id.continue_btn);
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,20 +74,30 @@ public class EditProfileActivity extends AppCompatActivity implements PhotoDialo
             lastNameET.setText(user.getLastName());
         if (!user.getPhone().isEmpty())
             phoneET.setText(user.getPhone());
+        if (!user.getProfileImage().isEmpty()) {
+            byte[] decodedString = Base64.decode(user.getProfileImage(), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            Bitmap imageBitmap = null;
+            imageBitmap = extraFunctions.rotateImage(decodedByte);
+            decodedByte.recycle();
+            imageView.setImageBitmap(ImageHelper.getRoundedCornerBitmap(imageBitmap));
+            imageString = user.getProfileImage();
+
+        }
     }
 
-    private void continueActions(){
-        if (hasValidateFields()){
+    private void continueActions() {
+        if (hasValidateFields()) {
             User user = getUserFromFields();
             new SaveUser(this, user) {
                 @Override
                 public void onFinished() {
-                    if (initialActivity){
+                    if (initialActivity) {
 
                         Intent loginIntent = new Intent(activity, MapsActivity.class);
                         activity.startActivity(loginIntent);
                         activity.finish();
-                    }else{
+                    } else {
                         finish();
                     }
                 }
@@ -93,13 +106,13 @@ public class EditProfileActivity extends AppCompatActivity implements PhotoDialo
     }
 
     // TODO hacer validaciones de usuario
-    private boolean hasValidateFields(){
+    private boolean hasValidateFields() {
         return true;
     }
 
-    private User getUserFromFields(){
+    private User getUserFromFields() {
         User user = Config.getLoggedUserInfo(this);
-        user.setFirstName( firstNameET.getText().toString());
+        user.setFirstName(firstNameET.getText().toString());
         user.setLastName(lastNameET.getText().toString());
         user.setPhone(phoneET.getText().toString());
         user.setProfileImage(imageString);
@@ -115,7 +128,7 @@ public class EditProfileActivity extends AppCompatActivity implements PhotoDialo
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         PhotoDialog dialog = new PhotoDialog();
-        dialog.show(getSupportFragmentManager(),"PhotoDialog");
+        dialog.show(getSupportFragmentManager(), "PhotoDialog");
     }
 
     @Override
@@ -155,20 +168,18 @@ public class EditProfileActivity extends AppCompatActivity implements PhotoDialo
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             Bitmap imageBitmap = BitmapFactory.decodeFile(extraFunctions.mCurrentPhotoPath);
-            try {
-                imageBitmap = extraFunctions.rotateImage(imageBitmap);
-                ImageView imageView = (ImageView) findViewById(R.id.user_image_profile);
-                imageView.setImageBitmap(ImageHelper.getRoundedCornerBitmap(imageBitmap));
-                imageString = extraFunctions.convertBitmapToBase64(imageBitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+            imageBitmap = extraFunctions.rotateImage(imageBitmap);
+
+            imageView.setImageBitmap(ImageHelper.getRoundedCornerBitmap(imageBitmap));
+            imageString = extraFunctions.convertBitmapToBase64(imageBitmap);
+
         } else if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK) {
             try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                ImageView imageView = (ImageView) findViewById(R.id.user_image_profile);
+                Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                selectedImage = extraFunctions.rotateImage(selectedImage);
                 imageView.setImageBitmap(ImageHelper.getRoundedCornerBitmap(selectedImage));
                 imageString = extraFunctions.convertBitmapToBase64(selectedImage);
             } catch (FileNotFoundException e) {

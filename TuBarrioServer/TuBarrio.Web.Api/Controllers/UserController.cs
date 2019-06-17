@@ -11,6 +11,7 @@ using TuBarrio.EntityModels;
 using System.Net.Http.Headers;
 using System.Dynamic;
 using TuBarrio.Repository;
+using FirebaseAdmin.Messaging;
 
 namespace TuBarrio.Web.Api.Controllers
 {
@@ -18,13 +19,14 @@ namespace TuBarrio.Web.Api.Controllers
     {
         private IAuthenticationLogic authenticationLogic;
         private IUserLogic userLogic;
-        
+
 
         public UserController()
         {
             IUserRepository userRepository = new UserRepository();
             this.authenticationLogic = new AuthenticationLogic(userRepository);
             this.userLogic = new UserLogic(userRepository);
+       //     SendNotification();
         }
 
         [HttpGet]
@@ -95,7 +97,7 @@ namespace TuBarrio.Web.Api.Controllers
             try
             {
                 String token = GetTokenInfo(googleToken, fcmToken);
-                User user =  authenticationLogic.GetUserWithToken(token);
+                User user = authenticationLogic.GetUserWithToken(token);
                 UserModel userModel = new UserModel(user);
                 TokenModel tokenModel = new TokenModel(token, userModel);
                 return Ok(tokenModel);
@@ -122,7 +124,7 @@ namespace TuBarrio.Web.Api.Controllers
                 int cantFollowedPublications = userLogic.GetCantFollowed(user);
                 StatisticModel statModel = new StatisticModel(cantPublications, cantFollowedPublications, cantComments);
                 return Ok(statModel);
-                   
+
             }
             catch (Exception ex) when (ex is System.Data.Entity.Core.EntityException)
             {
@@ -133,7 +135,7 @@ namespace TuBarrio.Web.Api.Controllers
                 return Content(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-        } 
+        }
 
 
 
@@ -164,6 +166,28 @@ namespace TuBarrio.Web.Api.Controllers
             string token = ActionContext.Request.Headers.GetValues("Token").First();
             User user = authenticationLogic.GetUserWithToken(token);
             return user;
+        }
+
+        public async void SendNotification()
+        {
+            var registrationToken = "fGzhfCYExKo:APA91bECeI59LLZZ780-DrSYrrjpkY0WwC5rl2DDBB0JvytxsYJbiDjpXmX3xUfPATPcNdig5m1sk5DJrAF-fng82YqSHCv4N0xG9sIp89yFMpOmNpaUU8mb8AwlvrQcwT9JWx-51bCt";
+
+            // See documentation on defining a message payload.
+            var message = new Message()
+            {
+                Data = new Dictionary<string, string>()
+                    {
+                        { "title", "850" },
+                        { "message", "2:45" },
+                    },
+                Token = registrationToken,
+            };
+
+            // Send a message to the device corresponding to the provided
+            // registration token.
+            string response = await FirebaseMessaging.DefaultInstance.SendAsync(message);
+            // Response is a message ID string.
+            Console.WriteLine("Successfully sent message: " + response);
         }
 
 
