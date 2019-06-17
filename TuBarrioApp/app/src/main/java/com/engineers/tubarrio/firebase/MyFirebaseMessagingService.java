@@ -36,8 +36,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setSound(sound)
                 .setContentInfo("ANY")
                 .setLargeIcon(icon)
-                .setColor(Color.RED)
-                .setSmallIcon(R.mipmap.ic_launcher);
+                .setColor(Color.BLUE)
+                .setSmallIcon(R.drawable.logo);
 
 
         notificationBuilder.setDefaults(Notification.DEFAULT_VIBRATE);

@@ -22,8 +22,8 @@ namespace TuBarrio.Web.Api
             FirebaseApp.Create(new AppOptions()
             {
                 Credential = GoogleCredential.FromFile($"D:\\Facultad\\2019\\Ingenieria en la practica\\TuBarrio\\TuBarrioServer\\TuBarrio.Web.Api\\fcmcredentials.json"),
-            });
-            */
+            });*/
+            
             config.MapHttpAttributeRoutes();
 
             IPublicationRepository publicationRepository = new PublicationRepository();

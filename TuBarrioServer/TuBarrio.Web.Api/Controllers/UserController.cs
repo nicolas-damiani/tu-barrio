@@ -168,6 +168,7 @@ namespace TuBarrio.Web.Api.Controllers
             return user;
         }
 
+        /*
         public async void SendNotification()
         {
             var registrationToken = "fGzhfCYExKo:APA91bECeI59LLZZ780-DrSYrrjpkY0WwC5rl2DDBB0JvytxsYJbiDjpXmX3xUfPATPcNdig5m1sk5DJrAF-fng82YqSHCv4N0xG9sIp89yFMpOmNpaUU8mb8AwlvrQcwT9JWx-51bCt";
@@ -189,7 +190,7 @@ namespace TuBarrio.Web.Api.Controllers
             // Response is a message ID string.
             Console.WriteLine("Successfully sent message: " + response);
         }
-
+        */
 
     }
 }

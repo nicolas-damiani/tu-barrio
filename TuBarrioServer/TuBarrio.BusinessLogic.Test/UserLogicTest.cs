@@ -21,7 +21,7 @@ namespace TuBarrio.BusinessLogic.Test
         private User userSebastian;
         private User userFederico;
         private string tokenFederico;
-        
+        /*
         [TestInitialize]
         public void SetUp()
         {
@@ -90,7 +90,7 @@ namespace TuBarrio.BusinessLogic.Test
             Assert.AreEqual(userFromModel, userResult);
         }
 
-        
+        */
 
 
     }
