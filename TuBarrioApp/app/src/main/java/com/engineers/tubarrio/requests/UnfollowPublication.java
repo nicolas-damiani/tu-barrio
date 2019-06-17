@@ -13,14 +13,13 @@ import com.android.volley.toolbox.StringRequest;
 import com.engineers.tubarrio.activities.ViewPublicationActivity;
 import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.config.Constants;
-import com.engineers.tubarrio.entities.Comment;
 import com.engineers.tubarrio.entities.Publication;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SubscribeUserToPublication {
+public class UnfollowPublication {
 
 
     Activity activity;
@@ -29,14 +28,14 @@ public class SubscribeUserToPublication {
     public Publication publication;
 
 
-    public SubscribeUserToPublication(final Activity activity, Publication publication) {
+    public UnfollowPublication(final Activity activity, Publication publication) {
         this.activity = activity;
         this.publication = publication;
         this.context = activity.getApplicationContext();
         params = new HashMap<String, String>();
 
         //TODO no se si esa es la ruta
-        String url = Constants.URL + "api/Publication/Follow";
+        String url = Constants.URL + "api/Publication/Unfollow";
         params.put("PublicationId", publication.getId()+"");
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,

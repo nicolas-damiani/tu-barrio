@@ -16,9 +16,18 @@ namespace TuBarrio.Data.Access
         public DbSet<User> Users { get; set; }
         public DbSet<Publication> Publications { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<File> Files { get; set; }
-        public DbSet<EncodedImage> EncodedImages { get; set; }
 
+
+        public void Clear()
+        {
+            foreach (var user in Users)
+                Users.Remove(user);
+            foreach (var publication in Publications)
+                Publications.Remove(publication);
+            foreach (var comment in Comments)
+                Comments.Remove(comment);
+            SaveChanges();
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

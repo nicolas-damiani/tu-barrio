@@ -30,8 +30,7 @@
         <activity android:name=".activities.AddPublicationActivity"></activity>
         <activity
             android:name=".activities.AddCommentToPublicationActivity"
-            android:label="@string/title_activity_add_comment_to_publication"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_activity_add_comment_to_publication"></activity>
         <activity android:name=".LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,7 +39,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.EditProfileActivity" />
+        <activity android:name=".activities.EditProfileActivity"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -75,7 +74,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
-
     </application>
 
 

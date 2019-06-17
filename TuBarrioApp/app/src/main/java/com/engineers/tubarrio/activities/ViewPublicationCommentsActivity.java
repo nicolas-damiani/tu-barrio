@@ -16,6 +16,7 @@ import com.engineers.tubarrio.entities.Comment;
 import com.engineers.tubarrio.entities.Publication;
 import com.engineers.tubarrio.requests.GetCommentsFromPublication;
 import com.engineers.tubarrio.requests.GetPublications;
+import com.engineers.tubarrio.widgets.MenuBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ public class ViewPublicationCommentsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_publication_comments);
         initializeView();
+        MenuBar menuBar = new MenuBar(this);
         addComment = (Button)findViewById(R.id.add_comment_btn);
         InitializeButtons();
         publication = (Publication) getIntent().getSerializableExtra("publication");
@@ -55,6 +57,12 @@ public class ViewPublicationCommentsActivity extends AppCompatActivity {
             }
         };
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setComments();
     }
 
     private void InitializeButtons(){
