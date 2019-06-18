@@ -81,7 +81,7 @@ namespace TuBarrio.Repository
             List<Publication> returnList = new List<Publication>();
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                returnList = context.Publications.Include(p => p.Author).Include(p => p.Subsrcibers).Where(p => p.Author.Id == user.Id).ToList();
+                returnList = context.Publications.Include(p => p.Author).Include(p => p.Subsrcibers).Where(p => p.Author.Email == user.Email).ToList();
 
             }
             return returnList;
@@ -152,7 +152,7 @@ namespace TuBarrio.Repository
         {
             using(TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                User userToAdd = context.Users.Where(u => u.Id == user.Id).FirstOrDefault();
+                User userToAdd = context.Users.Where(u => u.Email == user.Email).FirstOrDefault();
                 Publication toUpdate = context.Publications.Include(p => p.Author).Include(p => p.Comments).Where(p => p.Id == publication.Id).FirstOrDefault();
                 context.Users.Attach(userToAdd);
                 context.Entry(userToAdd).State = EntityState.Modified;
@@ -166,7 +166,7 @@ namespace TuBarrio.Repository
         {
             using (TuBarrioDbContext context = new TuBarrioDbContext())
             {
-                user = context.Users.Where(u => u.Id == user.Id).FirstOrDefault();
+                user = context.Users.Where(u => u.Email == user.Email).FirstOrDefault();
                 Publication publicationToUnf = context.Publications.Include(u => u.Author).Include(u => u.Subsrcibers).Where(u => u.Id == publicationId).FirstOrDefault();
                 context.Users.Attach(user);
                 context.Entry(user).State = EntityState.Modified;
