@@ -21,7 +21,7 @@ namespace TuBarrio.BusinessLogic.Test
         private User userSebastian;
         private User userFederico;
         private string tokenFederico;
-        /*
+        
         [TestInitialize]
         public void SetUp()
         {
@@ -30,9 +30,9 @@ namespace TuBarrio.BusinessLogic.Test
             userRepository = new UserRepository();
             userLogic = new UserLogic(userRepository);
             authLogic = new AuthenticationLogic(userRepository);
-            userSebastian = new User("sebastian", "rodriguez", "seba@hotmail.com", "123", "123");
+            userSebastian = new User("sebastian", "rodriguez", "seba@hotmail.com", "123", "123","");
             userRepository.AddUser(userSebastian);
-            userFederico = new User("federico", "engel", "federico@hotmail.com", "123", "123");
+            userFederico = new User("federico", "engel", "federico@hotmail.com", "123", "123","");
             userRepository.AddUser(userFederico);
            
         }
@@ -61,7 +61,7 @@ namespace TuBarrio.BusinessLogic.Test
         [TestMethod]
         public void IsUserAlreadyExistingFalseTest()
         {
-            User notExistingUser = new User("Juan", "Perez", "jp@gmail.com", "123", "123");
+            User notExistingUser = new User("Juan", "Perez", "jp@gmail.com", "123", "123","");
             Assert.IsFalse(userLogic.IsUserAlreadyExisting(notExistingUser));
         }
 
@@ -85,12 +85,12 @@ namespace TuBarrio.BusinessLogic.Test
             model.Email = userSebastian.Email;
             model.ProfileImage = userSebastian.ProfileImage;
 
-            User userFromModel = new User(model.Name, model.Surname, model.Email,"",model.Phone);
+            User userFromModel = new User(model.Name, model.Surname, model.Email,"",model.Phone,"");
             User userResult = userLogic.GetUserFromModel(model);
             Assert.AreEqual(userFromModel, userResult);
         }
 
-        */
+        
 
 
     }

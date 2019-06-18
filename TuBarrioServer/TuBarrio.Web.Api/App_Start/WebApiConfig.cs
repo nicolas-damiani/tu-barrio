@@ -32,12 +32,12 @@ namespace TuBarrio.Web.Api
             IAuthenticationLogic authenticationLogic = new AuthenticationLogic(userRepository);
             
             IPublicationLogic publicationLogic = new PublicationLogic(publicationRepository, authenticationLogic);
-            IEncodedImageLogic encodedImageLogic = new EncodedImageLogic();
+            
             IUserLogic userLogic = new UserLogic(userRepository);
 
 
 
-            PublicationController publicationController = new PublicationController(authenticationLogic, publicationLogic, userLogic, encodedImageLogic);
+            PublicationController publicationController = new PublicationController(authenticationLogic, publicationLogic, userLogic);
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

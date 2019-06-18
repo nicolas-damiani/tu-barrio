@@ -17,15 +17,15 @@ namespace TuBarrio.Web.Api.Controllers
         private IAuthenticationLogic authenticationLogic;
         private IPublicationLogic publicationLogic;
         private IUserLogic userLogic;
-        private IEncodedImageLogic imageLogic;
+        
 
 
-        public PublicationController(IAuthenticationLogic authLogic, IPublicationLogic pubLogic, IUserLogic usLogic, IEncodedImageLogic imLogic)
+        public PublicationController(IAuthenticationLogic authLogic, IPublicationLogic pubLogic, IUserLogic usLogic)
         {
             authenticationLogic = authLogic;
             publicationLogic = pubLogic;
             userLogic = usLogic;
-            imageLogic = imLogic;
+            
         }
 
         public PublicationController()
@@ -34,7 +34,6 @@ namespace TuBarrio.Web.Api.Controllers
             IUserRepository userRepository = new UserRepository();
             this.authenticationLogic = new AuthenticationLogic(userRepository);
             this.publicationLogic = new PublicationLogic(publicationRepository, authenticationLogic);
-            this.imageLogic = new EncodedImageLogic();
             this.userLogic = new UserLogic(userRepository);
         }
 
