@@ -18,6 +18,7 @@ import com.engineers.tubarrio.config.Config;
 import com.engineers.tubarrio.entities.Publication;
 import com.engineers.tubarrio.entities.User;
 import com.engineers.tubarrio.helpers.ExtraFunctions;
+import com.engineers.tubarrio.requests.DeletePublicationRequest;
 import com.engineers.tubarrio.widgets.MenuBar;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.engineers.tubarrio.requests.FollowPublication;
@@ -42,6 +43,7 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
     ImageView publicationImage;
     Button viewComments;
     Button followPublication;
+    Button deletePublication;
     Activity activity;
     Bitmap publicationImageBitmap;
 
@@ -76,9 +78,11 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
         pubUserPhone.setText(publication.getCreator().getPhone());
         viewComments = (Button) findViewById(R.id.view_comments_btn);
         followPublication = (Button) findViewById(R.id.follow_publication_btn);
+        deletePublication = (Button) findViewById(R.id.deletePublication);
 
         if(!isAuthor){
             editIcon.setVisibility(View.GONE);
+            deletePublication.setVisibility(View.GONE);
         }
 
         if (!publication.getPublicationImage().isEmpty()) {
@@ -165,5 +169,14 @@ public class ViewPublicationActivity extends FragmentActivity implements OnMapRe
         }else{
             Toast.makeText(this, "No hay imagen para exportar", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void deletePublication(View view) {
+        new DeletePublicationRequest(this, publication) {
+            @Override
+            public void onFinished() {
+                finish();
+            }
+        };
     }
 }

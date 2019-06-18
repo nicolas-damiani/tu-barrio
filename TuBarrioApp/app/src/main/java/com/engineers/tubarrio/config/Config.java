@@ -33,10 +33,10 @@ public class Config {
 
 
     public static void setLoggedUserInfo(Activity activity, User user){
-        assignSharedPreferences(activity, "userId", user.id+"");
-        assignSharedPreferences(activity, "userFirstName", user.firstName);
-        assignSharedPreferences(activity, "userLastName", user.lastName);
-        assignSharedPreferences(activity, "userEmail", user.email);
+        assignSharedPreferences(activity, "userId", user.getId()+"");
+        assignSharedPreferences(activity, "userFirstName", user.getFirstName());
+        assignSharedPreferences(activity, "userLastName", user.getLastName());
+        assignSharedPreferences(activity, "userEmail", user.getEmail());
         assignSharedPreferences(activity, "userPhone", user.getPhone());
         assignSharedPreferences(activity, "userImage", user.getProfileImage());
 
@@ -46,12 +46,12 @@ public class Config {
 
     public static User getLoggedUserInfo (Activity activity){
         User user = new User();
-        user.id = Integer.parseInt(activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userId",""));
-        user.firstName = activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userFirstName", "");
-        user.lastName= activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userFirstName", "");
-        user.email = activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userEmail", "");
-        user.phone = activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userPhone", "");
-        user.profileImage = activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userImage", "");
+        user.setId(Integer.parseInt(activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userId","")));
+        user.setFirstName(activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userFirstName", ""));
+        user.setLastName(activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userLastName", ""));
+        user.setEmail(activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userEmail", ""));
+        user.setPhone(activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userPhone", ""));
+        user.setProfileImage(activity.getSharedPreferences(Constants.MY_PREFERENCES, Context.MODE_PRIVATE).getString("userImage", ""));
         return user;
 
     }

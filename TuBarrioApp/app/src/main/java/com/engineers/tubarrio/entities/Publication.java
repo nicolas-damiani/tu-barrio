@@ -33,7 +33,6 @@ public class Publication implements Serializable{
 
     public Publication(JSONObject jsonObj) {
         try {
-            //TODO
             this.id = jsonObj.has("Id")?jsonObj.getInt("Id"):0;
             this.title = jsonObj.has("Title")?jsonObj.getString("Title"):"";
             this.description = jsonObj.has("Description")?jsonObj.getString("Description"):"";

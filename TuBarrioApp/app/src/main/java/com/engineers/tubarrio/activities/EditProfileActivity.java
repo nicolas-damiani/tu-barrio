@@ -105,8 +105,17 @@ public class EditProfileActivity extends AppCompatActivity implements PhotoDialo
         }
     }
 
-    // TODO hacer validaciones de usuario
     private boolean hasValidateFields() {
+        if (firstNameET.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Debe ingresar un nombre", Toast.LENGTH_SHORT).show();
+            return false;
+        }if (lastNameET.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Debe ingresar un apellido", Toast.LENGTH_SHORT).show();
+            return false;
+        }if (phoneET.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Debe ingresar un teléfono", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         return true;
     }
 

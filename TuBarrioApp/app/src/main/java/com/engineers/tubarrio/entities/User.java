@@ -9,12 +9,12 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-    public String firstName;
-    public String lastName;
-    public String email;
-    public int id;
-    public String profileImage;
-    public String phone;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private int id;
+    private String profileImage;
+    private String phone;
 
 
     public User (){
@@ -50,6 +50,14 @@ public class User implements Serializable {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {

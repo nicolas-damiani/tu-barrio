@@ -67,7 +67,7 @@ public class ProfileActivity extends Activity {
         newPublication = (Button) findViewById(R.id.btn_new_publication);
 
         user = Config.getLoggedUserInfo(this);
-        nameTV.setText(user.firstName + " " + user.lastName);
+        nameTV.setText(user.getFirstName() + " " + user.getLastName());
         emailTV.setText(user.getEmail());
 
         if (!user.getProfileImage().isEmpty()) {
