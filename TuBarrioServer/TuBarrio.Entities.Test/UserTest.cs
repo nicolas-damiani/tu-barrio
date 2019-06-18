@@ -17,7 +17,7 @@ namespace TuBarrio.Entities.Test
         [TestInitialize]
         public void SetUp()
         {
-            user = new User("Felipe", "Diaz", "felipe@hotmail.com","token","099112233" );
+            user = new User("Felipe", "Diaz", "felipe@hotmail.com","token","099112233","" );
         }
 
         [TestMethod]
@@ -27,9 +27,21 @@ namespace TuBarrio.Entities.Test
         }
 
         [TestMethod]
+        public void UserConstructorNameFlaseTest()
+        {
+            Assert.AreNotEqual(user.Name, "Franco");
+        }
+
+        [TestMethod]
         public void UserConstructorSurnameTest()
         {
             Assert.AreEqual(user.Surname, "Diaz");
+        }
+
+        [TestMethod]
+        public void UserConstructorSurnameFalseTest()
+        {
+            Assert.AreNotEqual(user.Surname, "Rodriguez");
         }
 
         [TestMethod]
@@ -39,23 +51,49 @@ namespace TuBarrio.Entities.Test
         }
 
         [TestMethod]
+        public void UserConstructorUserEmailFlaseTest()
+        {
+            Assert.AreNotEqual(user.Email, "felipe@gmail.com");
+        }
+
+        [TestMethod]
         public void UserConstructorPhoneTest()
         {
             Assert.AreEqual(user.Phone, "099112233");
         }
 
         [TestMethod]
+        public void UserConstructorPhoneFalseTest()
+        {
+            Assert.AreNotEqual(user.Phone, "039112232");
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(UserException))]
-        public void UserSetNameInvalidTest()
+        public void UserSetNameInvalidEmptyTest()
         {
             user.Name = "";
         }
 
         [TestMethod]
         [ExpectedException(typeof(UserException))]
-        public void UserSetSurnameInvalidTest()
+        public void UserSetNameInvalidSpaceTest()
+        {
+            user.Name = " ";
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UserException))]
+        public void UserSetSurnameInvalidEmptyTest()
         {
             user.Surname = "";
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UserException))]
+        public void UserSetSurnameInvalidSpaceTest()
+        {
+            user.Surname = " ";
         }
 
         [TestMethod]
@@ -79,8 +117,21 @@ namespace TuBarrio.Entities.Test
             user.Email = "felipegmail.com";
         }
 
-        
-        
+        [TestMethod]
+        [ExpectedException(typeof(UserException))]
+        public void UserSetUserEmailInvalidEmptyTest()
+        {
+            user.Email = "";
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UserException))]
+        public void UserSetUserEmailInvalidSpaceTest()
+        {
+            user.Email = " ";
+        }
+
+
 
         [TestMethod]
         public void UserConstructorTokenTest()
@@ -107,14 +158,14 @@ namespace TuBarrio.Entities.Test
         [TestMethod]
         public void UserEqualsTest()
         {
-            User sameUser = new User("Felipe", "Diaz", "felipe@hotmail.com","token","099112233");
+            User sameUser = new User("Felipe", "Diaz", "felipe@hotmail.com","token","099112233","");
             Assert.AreEqual(user, sameUser);
         }
 
         [TestMethod]
         public void UserNotEqualsTest()
         {
-            User differentUser = new User("Felipe", "Diaz", "guille@hotmail.com", "token", "099112233");
+            User differentUser = new User("Felipe", "Diaz", "guille@hotmail.com", "token", "099112233","");
             Assert.AreNotEqual(user, differentUser);
         }
 

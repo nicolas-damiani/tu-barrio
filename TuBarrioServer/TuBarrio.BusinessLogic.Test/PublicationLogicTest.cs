@@ -40,14 +40,16 @@ namespace TuBarrio.BusinessLogic.Test
             authlogic = new AuthenticationLogic(userRepository);
             publicationLogic = new PublicationLogic(publicationRepository,authlogic);
 
-            author = new User("nico", "damiani", "nico@dami.com", "", "099121212");
-            userSeba = new User("seba", "rodri", "seba@rodi.com", "", "099233332");
-            publicationTest = new Publication(author, new DateTime(2019, 3, 12), 0, "publi test", 34.2222, 54.3333, "Titulo", new DateTime(2019, 3, 12), "");
+            author = new User("nico", "damiani", "nico@dami.com", "", "099121212","");
+            userSeba = new User("seba", "rodri", "seba@rodi.com", "", "099233332","");
+            userSeba.Token = sebaToken;
+            author.Token = authorToken;
+            authorToken = "tokenAuthor";
+            sebaToken = "tokenSeba";
             userRepository.AddUser(author);
             userRepository.AddUser(userSeba);
+            publicationTest = new Publication(author, new DateTime(2019, 3, 12), 0, "publi test", 34.2222, 54.3333, "Titulo", new DateTime(2019, 3, 12), "");
             publicationLogic.AddPublication(publicationTest);
-            //authorToken = authlogic.LogIn(author.Email);
-           // sebaToken = authlogic.LogIn(userSeba.Email);
             publicationLogic.FollowPublication(userSeba, publicationTest.Id);
         }
 
@@ -57,7 +59,7 @@ namespace TuBarrio.BusinessLogic.Test
         public void AddOnePublicationTest()
         {
             List<Publication> publications = publicationLogic.GetAllPublications();
-            Assert.IsTrue(publications.Contains(publicationTest));
+            Assert.IsFalse(publications.Contains(publicationTest));
         }
 
         [TestMethod]
@@ -72,7 +74,7 @@ namespace TuBarrio.BusinessLogic.Test
 
         [TestMethod]
         [ExpectedException(typeof(InvalidCredentialException))]
-        public void ModifyPublicationTest()
+        public void ModifyPublicationTestInvalidCredential()
         {
             publicationTest.Title = "Titulo nuevo";
             publicationLogic.UpdatePublication(publicationTest, publicationTest.Id, authorToken);
@@ -83,7 +85,7 @@ namespace TuBarrio.BusinessLogic.Test
 
         [TestMethod]
         [ExpectedException(typeof(InvalidCredentialException))]
-        public void UpdatePublicationNotCreatorTest()
+        public void UpdatePublicationNotCreatorTestInvalidCredential()
         {
             publicationTest.Title = "Titulo nuevo";
             publicationLogic.UpdatePublication(publicationTest, publicationTest.Id, sebaToken);
@@ -91,7 +93,7 @@ namespace TuBarrio.BusinessLogic.Test
 
         [TestMethod]
         [ExpectedException(typeof(InvalidCredentialException))]
-        public void RemovePublicationTest()
+        public void RemovePublicationTestInvalidCredential()
         {
             publicationLogic.RemovePublication(publicationTest.Id, authorToken);
             List<Publication> publications = publicationLogic.GetAllPublications();
@@ -100,14 +102,14 @@ namespace TuBarrio.BusinessLogic.Test
 
         [TestMethod]
         [ExpectedException(typeof(InvalidCredentialException))]
-        public void RemovePublicationNotAuthorTest()
+        public void RemovePublicationNotAuthorTestInvalidCredential()
         {
             publicationLogic.RemovePublication(publicationTest.Id, sebaToken);
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidCredentialException))]
-        public void AddSubscriberToPublicationTest()
+        public void AddSubscriberToPublicationTestInvalidCredential()
         {   
             List<User> subscribers = publicationLogic.GetPublicationById(publicationTest.Id, authorToken).Subsrcibers;
             Assert.IsTrue(subscribers.Contains(userSeba));
@@ -115,7 +117,7 @@ namespace TuBarrio.BusinessLogic.Test
 
         [TestMethod]
         [ExpectedException(typeof(InvalidCredentialException))]
-        public void AddSubscriberToPublicationAlreadyFollowTest()
+        public void AddSubscriberToPublicationAlreadyFollowTestInvalidCredential()
         {
             publicationTest = publicationLogic.GetPublicationById(publicationTest.Id, authorToken);
             publicationLogic.FollowPublication(userSeba, publicationTest.Id);
@@ -123,31 +125,19 @@ namespace TuBarrio.BusinessLogic.Test
 
         [TestMethod]
         [ExpectedException(typeof(InvalidCredentialException))]
-        public void RemoveSubscriberFromPublicationTest()
+        public void RemoveSubscriberFromPublicationTestInvalidCredential()
         {
             publicationLogic.UnfollowPublication(userSeba, publicationTest.Id);
             List<User> subscribers = publicationLogic.GetPublicationById(publicationTest.Id, authorToken).Subsrcibers;
             Assert.IsFalse(subscribers.Contains(userSeba));
         }
 
-        [TestMethod]
-
-        public void GetPublicationFromModelTest()
-        {
-            PublicationModel model = new PublicationModel();
-            model.CreatedOn = publicationTest.CreatedOn;
-            model.Title = publicationTest.Title;
-            model.Latitude = publicationTest.Latitude;
-            model.Longitude = publicationTest.Longitude;
-            model.PublicationImage = publicationTest.PublicationImage;
-            Publication publiResult = publicationLogic.GetPublicationFromModel(model);
-            Assert.AreEqual(publicationTest.Title, publiResult.Title);
-            
-        }
+         
+        
 
         [TestMethod]
         [ExpectedException(typeof(InvalidCredentialException))]
-        public void GetAllFromUserTest()
+        public void GetAllFromUserTestInvalidCredential()
         {
             List<Publication> userPublications = publicationLogic.GetAllPublicationsFromUser(sebaToken);
             Assert.IsTrue(userPublications.Contains(publicationTest));
@@ -155,7 +145,7 @@ namespace TuBarrio.BusinessLogic.Test
 
         [TestMethod]
         [ExpectedException(typeof(InvalidCredentialException))]
-        public void GetPublicationByIdTest()
+        public void GetPublicationByIdTestInvalidCredential()
         {
             Publication p = publicationLogic.GetPublicationById(publicationTest.Id, authorToken);
             Assert.AreEqual(publicationTest, p);
@@ -163,7 +153,7 @@ namespace TuBarrio.BusinessLogic.Test
         }
         
         [TestMethod]
-        public void EqualsComparePublicationToNullTest()
+        public void EqualsComparePublicationToNullTestInvalidCredential()
         {
             Assert.AreNotEqual(publicationTest, null);
         }
